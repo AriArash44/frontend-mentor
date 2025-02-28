@@ -1,57 +1,3 @@
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-100.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-200.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-300.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-400.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-500.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-600.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-700.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-800.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-900.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-}
 .p-0px {
   padding: 0px;
 }
@@ -102,6 +48,10 @@
 
 .h-0px {
   height: 0px;
+}
+
+.gap-0px {
+  gap: 0px;
 }
 
 .p-1px {
@@ -156,6 +106,10 @@
   height: 1px;
 }
 
+.gap-1px {
+  gap: 1px;
+}
+
 .p-2px {
   padding: 2px;
 }
@@ -206,6 +160,10 @@
 
 .h-2px {
   height: 2px;
+}
+
+.gap-2px {
+  gap: 2px;
 }
 
 .p-3px {
@@ -260,6 +218,10 @@
   height: 3px;
 }
 
+.gap-3px {
+  gap: 3px;
+}
+
 .p-4px {
   padding: 4px;
 }
@@ -310,6 +272,10 @@
 
 .h-4px {
   height: 4px;
+}
+
+.gap-4px {
+  gap: 4px;
 }
 
 .p-5px {
@@ -364,6 +330,10 @@
   height: 5px;
 }
 
+.gap-5px {
+  gap: 5px;
+}
+
 .p-6px {
   padding: 6px;
 }
@@ -414,6 +384,10 @@
 
 .h-6px {
   height: 6px;
+}
+
+.gap-6px {
+  gap: 6px;
 }
 
 .p-7px {
@@ -468,6 +442,10 @@
   height: 7px;
 }
 
+.gap-7px {
+  gap: 7px;
+}
+
 .p-8px {
   padding: 8px;
 }
@@ -518,6 +496,10 @@
 
 .h-8px {
   height: 8px;
+}
+
+.gap-8px {
+  gap: 8px;
 }
 
 .p-9px {
@@ -572,6 +554,10 @@
   height: 9px;
 }
 
+.gap-9px {
+  gap: 9px;
+}
+
 .p-10px {
   padding: 10px;
 }
@@ -622,6 +608,10 @@
 
 .h-10px {
   height: 10px;
+}
+
+.gap-10px {
+  gap: 10px;
 }
 
 .p-11px {
@@ -676,6 +666,10 @@
   height: 11px;
 }
 
+.gap-11px {
+  gap: 11px;
+}
+
 .p-12px {
   padding: 12px;
 }
@@ -726,6 +720,10 @@
 
 .h-12px {
   height: 12px;
+}
+
+.gap-12px {
+  gap: 12px;
 }
 
 .p-13px {
@@ -780,6 +778,10 @@
   height: 13px;
 }
 
+.gap-13px {
+  gap: 13px;
+}
+
 .p-14px {
   padding: 14px;
 }
@@ -830,6 +832,10 @@
 
 .h-14px {
   height: 14px;
+}
+
+.gap-14px {
+  gap: 14px;
 }
 
 .p-15px {
@@ -884,6 +890,10 @@
   height: 15px;
 }
 
+.gap-15px {
+  gap: 15px;
+}
+
 .p-16px {
   padding: 16px;
 }
@@ -934,6 +944,10 @@
 
 .h-16px {
   height: 16px;
+}
+
+.gap-16px {
+  gap: 16px;
 }
 
 .p-17px {
@@ -988,6 +1002,10 @@
   height: 17px;
 }
 
+.gap-17px {
+  gap: 17px;
+}
+
 .p-18px {
   padding: 18px;
 }
@@ -1038,6 +1056,10 @@
 
 .h-18px {
   height: 18px;
+}
+
+.gap-18px {
+  gap: 18px;
 }
 
 .p-19px {
@@ -1092,6 +1114,10 @@
   height: 19px;
 }
 
+.gap-19px {
+  gap: 19px;
+}
+
 .p-20px {
   padding: 20px;
 }
@@ -1142,6 +1168,10 @@
 
 .h-20px {
   height: 20px;
+}
+
+.gap-20px {
+  gap: 20px;
 }
 
 .p-21px {
@@ -1196,6 +1226,10 @@
   height: 21px;
 }
 
+.gap-21px {
+  gap: 21px;
+}
+
 .p-22px {
   padding: 22px;
 }
@@ -1246,6 +1280,10 @@
 
 .h-22px {
   height: 22px;
+}
+
+.gap-22px {
+  gap: 22px;
 }
 
 .p-23px {
@@ -1300,6 +1338,10 @@
   height: 23px;
 }
 
+.gap-23px {
+  gap: 23px;
+}
+
 .p-24px {
   padding: 24px;
 }
@@ -1350,6 +1392,10 @@
 
 .h-24px {
   height: 24px;
+}
+
+.gap-24px {
+  gap: 24px;
 }
 
 .p-25px {
@@ -1404,6 +1450,10 @@
   height: 25px;
 }
 
+.gap-25px {
+  gap: 25px;
+}
+
 .p-26px {
   padding: 26px;
 }
@@ -1454,6 +1504,10 @@
 
 .h-26px {
   height: 26px;
+}
+
+.gap-26px {
+  gap: 26px;
 }
 
 .p-27px {
@@ -1508,6 +1562,10 @@
   height: 27px;
 }
 
+.gap-27px {
+  gap: 27px;
+}
+
 .p-28px {
   padding: 28px;
 }
@@ -1558,6 +1616,10 @@
 
 .h-28px {
   height: 28px;
+}
+
+.gap-28px {
+  gap: 28px;
 }
 
 .p-29px {
@@ -1612,6 +1674,10 @@
   height: 29px;
 }
 
+.gap-29px {
+  gap: 29px;
+}
+
 .p-30px {
   padding: 30px;
 }
@@ -1662,6 +1728,10 @@
 
 .h-30px {
   height: 30px;
+}
+
+.gap-30px {
+  gap: 30px;
 }
 
 .p-31px {
@@ -1716,6 +1786,10 @@
   height: 31px;
 }
 
+.gap-31px {
+  gap: 31px;
+}
+
 .p-32px {
   padding: 32px;
 }
@@ -1766,6 +1840,10 @@
 
 .h-32px {
   height: 32px;
+}
+
+.gap-32px {
+  gap: 32px;
 }
 
 .p-33px {
@@ -1820,6 +1898,10 @@
   height: 33px;
 }
 
+.gap-33px {
+  gap: 33px;
+}
+
 .p-34px {
   padding: 34px;
 }
@@ -1870,6 +1952,10 @@
 
 .h-34px {
   height: 34px;
+}
+
+.gap-34px {
+  gap: 34px;
 }
 
 .p-35px {
@@ -1924,6 +2010,10 @@
   height: 35px;
 }
 
+.gap-35px {
+  gap: 35px;
+}
+
 .p-36px {
   padding: 36px;
 }
@@ -1974,6 +2064,10 @@
 
 .h-36px {
   height: 36px;
+}
+
+.gap-36px {
+  gap: 36px;
 }
 
 .p-37px {
@@ -2028,6 +2122,10 @@
   height: 37px;
 }
 
+.gap-37px {
+  gap: 37px;
+}
+
 .p-38px {
   padding: 38px;
 }
@@ -2078,6 +2176,10 @@
 
 .h-38px {
   height: 38px;
+}
+
+.gap-38px {
+  gap: 38px;
 }
 
 .p-39px {
@@ -2132,6 +2234,10 @@
   height: 39px;
 }
 
+.gap-39px {
+  gap: 39px;
+}
+
 .p-40px {
   padding: 40px;
 }
@@ -2182,6 +2288,10 @@
 
 .h-40px {
   height: 40px;
+}
+
+.gap-40px {
+  gap: 40px;
 }
 
 .p-41px {
@@ -2236,6 +2346,10 @@
   height: 41px;
 }
 
+.gap-41px {
+  gap: 41px;
+}
+
 .p-42px {
   padding: 42px;
 }
@@ -2286,6 +2400,10 @@
 
 .h-42px {
   height: 42px;
+}
+
+.gap-42px {
+  gap: 42px;
 }
 
 .p-43px {
@@ -2340,6 +2458,10 @@
   height: 43px;
 }
 
+.gap-43px {
+  gap: 43px;
+}
+
 .p-44px {
   padding: 44px;
 }
@@ -2390,6 +2512,10 @@
 
 .h-44px {
   height: 44px;
+}
+
+.gap-44px {
+  gap: 44px;
 }
 
 .p-45px {
@@ -2444,6 +2570,10 @@
   height: 45px;
 }
 
+.gap-45px {
+  gap: 45px;
+}
+
 .p-46px {
   padding: 46px;
 }
@@ -2494,6 +2624,10 @@
 
 .h-46px {
   height: 46px;
+}
+
+.gap-46px {
+  gap: 46px;
 }
 
 .p-47px {
@@ -2548,6 +2682,10 @@
   height: 47px;
 }
 
+.gap-47px {
+  gap: 47px;
+}
+
 .p-48px {
   padding: 48px;
 }
@@ -2600,54 +2738,112 @@
   height: 48px;
 }
 
+.gap-48px {
+  gap: 48px;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-100.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
 .Inter-100 {
   font-family: Inter;
   font-weight: 100;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-200.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
 .Inter-200 {
   font-family: Inter;
   font-weight: 200;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
 .Inter-300 {
   font-family: Inter;
   font-weight: 300;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 .Inter-400 {
   font-family: Inter;
   font-weight: 400;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
 .Inter-500 {
   font-family: Inter;
   font-weight: 500;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
 .Inter-600 {
   font-family: Inter;
   font-weight: 600;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
 .Inter-700 {
   font-family: Inter;
   font-weight: 700;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-800.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
 .Inter-800 {
   font-family: Inter;
   font-weight: 800;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter/Inter-900.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
 .Inter-900 {
   font-family: Inter;
   font-weight: 900;
@@ -2662,12 +2858,20 @@
   color: hsl(0, 0%, 100%);
 }
 
+.bcolor-neutral-light {
+  border-color: hsl(0, 0%, 100%);
+}
+
 .bg-neutral-mooderate {
   background-color: hsl(0, 0%, 25%);
 }
 
 .color-neutral-mooderate {
   color: hsl(0, 0%, 25%);
+}
+
+.bcolor-neutral-mooderate {
+  border-color: hsl(0, 0%, 25%);
 }
 
 .bg-neutral-dark {
@@ -2678,12 +2882,20 @@
   color: hsl(0, 0%, 5%);
 }
 
+.bcolor-neutral-dark {
+  border-color: hsl(0, 0%, 5%);
+}
+
 .bg-primary-light {
   background-color: hsl(212, 45%, 89%);
 }
 
 .color-primary-light {
   color: hsl(212, 45%, 89%);
+}
+
+.bcolor-primary-light {
+  border-color: hsl(212, 45%, 89%);
 }
 
 .bg-primary-mooderate {
@@ -2694,12 +2906,68 @@
   color: hsl(216, 15%, 48%);
 }
 
+.bcolor-primary-mooderate {
+  border-color: hsl(216, 15%, 48%);
+}
+
 .bg-primary-dark {
   background-color: hsl(218, 44%, 22%);
 }
 
 .color-primary-dark {
   color: hsl(218, 44%, 22%);
+}
+
+.bcolor-primary-dark {
+  border-color: hsl(218, 44%, 22%);
+}
+
+.col-1 {
+  flex-grow: 1;
+}
+
+.col-2 {
+  flex-grow: 2;
+}
+
+.col-3 {
+  flex-grow: 3;
+}
+
+.col-4 {
+  flex-grow: 4;
+}
+
+.col-5 {
+  flex-grow: 5;
+}
+
+.col-6 {
+  flex-grow: 6;
+}
+
+.col-7 {
+  flex-grow: 7;
+}
+
+.col-8 {
+  flex-grow: 8;
+}
+
+.col-9 {
+  flex-grow: 9;
+}
+
+.col-10 {
+  flex-grow: 10;
+}
+
+.col-11 {
+  flex-grow: 11;
+}
+
+.col-12 {
+  flex-grow: 12;
 }
 
 .ma {
@@ -2716,6 +2984,67 @@
 
 .w-100 {
   width: 100%;
+}
+
+.w-310px {
+  width: 310px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.d-grid {
+  display: grid;
+}
+
+.grid-center {
+  place-items: center;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.loader {
+  border: 8px solid hsl(218, 44%, 22%);
+  border-top: 8px solid hsl(0, 0%, 100%);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.bsolid {
+  border-style: solid;
+}
+
+.bnone {
+  border-style: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

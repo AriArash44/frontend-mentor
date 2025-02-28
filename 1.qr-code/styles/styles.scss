@@ -1,4 +1,5 @@
 @use "sass:list";
+@use "sass:map";
 
 $colors: (
     "neutral-light": hsl(0, 0%, 100%),
@@ -8,15 +9,6 @@ $colors: (
     "primary-mooderate": hsl(216, 15%, 48%),
     "primary-dark": hsl(218, 44%, 22%)
 );
-
-@each $weight in (100, 200, 300, 400, 500, 600, 700, 800, 900) {
-    @font-face {
-        font-family: "Inter";
-        src: url("/fonts/Inter-#{$weight}.ttf") format("truetype");
-        font-weight: #{$weight};
-        font-style: normal;
-    }
-}
 
 $size_spacings: ();
 @for $i from 0 through 48 {
@@ -63,6 +55,9 @@ $size_spacings: ();
     .h-#{$space} {
         height: $space;
     }
+    .gap-#{$space} {
+        gap: $space;
+    }
 }
 
 $weight_spacings: ();
@@ -71,6 +66,12 @@ $weight_spacings: ();
 }
 
 @each $space in $weight_spacings {
+    @font-face {
+        font-family: "Inter";
+        src: url("../fonts/Inter/Inter-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+    }
     .Inter-#{$space} {
         font-family: Inter;
         font-weight: $space;
@@ -84,6 +85,20 @@ $weight_spacings: ();
     }
     .color-#{$name} {
         color: $value;
+    }
+    .bcolor-#{$name} {
+        border-color: $value;
+    }
+}
+
+$col_spacing: ();
+@for $i from 1 through 12 {
+    $col_spacing: list.append($col_spacing, #{$i});
+}
+
+@each $space in $col_spacing {
+    .col-#{$space} {
+        flex-grow: $space;
     }
 }
 
@@ -101,4 +116,62 @@ $weight_spacings: ();
 
 .w-100 {
     width: 100%;
+}
+
+.w-310px {
+    width: 310px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.d-grid {
+    display: grid;
+}
+
+.grid-center {
+    place-items: center;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.loader {
+    border: 8px solid map.get($colors, "primary-dark");
+    border-top: 8px solid map.get($colors, "neutral-light");
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bsolid {
+    border-style: solid;
+}
+
+.bnone {
+    border-style: none;
 }
