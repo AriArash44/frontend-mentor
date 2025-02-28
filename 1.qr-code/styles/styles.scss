@@ -1,0 +1,104 @@
+@use "sass:list";
+
+$colors: (
+    "neutral-light": hsl(0, 0%, 100%),
+    "neutral-mooderate": hsl(0, 0%, 25%),
+    "neutral-dark": hsl(0, 0%, 5%),
+    "primary-light": hsl(212, 45%, 89%),
+    "primary-mooderate": hsl(216, 15%, 48%),
+    "primary-dark": hsl(218, 44%, 22%)
+);
+
+@each $weight in (100, 200, 300, 400, 500, 600, 700, 800, 900) {
+    @font-face {
+        font-family: "Inter";
+        src: url("/fonts/Inter-#{$weight}.ttf") format("truetype");
+        font-weight: #{$weight};
+        font-style: normal;
+    }
+}
+
+$size_spacings: ();
+@for $i from 0 through 48 {
+    $size_spacings: list.append($size_spacings, #{$i}px);
+}
+
+@each $space in $size_spacings {
+    .p-#{$space} {
+        padding: $space;
+    }
+    .pb-#{$space} {
+        padding-bottom: $space;
+    }
+    .pt-#{$space} {
+        padding-top: $space;
+    }
+    .pr-#{$space} {
+        padding-right: $space;
+    }
+    .pl-#{$space} {
+        padding-left: $space;
+    }
+    .m-#{$space} {
+        margin: $space;
+    }
+    .mb-#{$space} {
+        margin-bottom: $space;
+    }
+    .mt-#{$space} {
+        margin-top: $space;
+    }
+    .mr-#{$space} {
+        margin-right: $space;
+    }
+    .ml-#{$space} {
+        margin-left: $space;
+    }
+    .fs-#{$space} {
+        font-size: $space;
+    }
+    .br-#{$space} {
+        border-radius: $space;
+    }
+    .h-#{$space} {
+        height: $space;
+    }
+}
+
+$weight_spacings: ();
+@for $i from 1 through 9 {
+    $weight_spacings: list.join($weight_spacings, (100 * $i), comma);
+}
+
+@each $space in $weight_spacings {
+    .Inter-#{$space} {
+        font-family: Inter;
+        font-weight: $space;
+        font-style: normal;
+    }
+}
+
+@each $name, $value in $colors {
+    .bg-#{$name} {
+        background-color: $value;
+    }
+    .color-#{$name} {
+        color: $value;
+    }
+}
+
+.ma {
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.div-shadow {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+}
+
+.w-100 {
+    width: 100%;
+}
