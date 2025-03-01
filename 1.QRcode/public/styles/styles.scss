@@ -1,0 +1,181 @@
+@use "sass:list";
+@use "sass:map";
+
+$colors: (
+    "neutral-light": hsl(0, 0%, 100%),
+    "neutral-mooderate": hsl(0, 0%, 25%),
+    "neutral-dark": hsl(0, 0%, 5%),
+    "primary-light": hsl(212, 45%, 89%),
+    "primary-mooderate": hsl(216, 15%, 48%),
+    "primary-dark": hsl(218, 44%, 22%)
+);
+
+$size_spacings: ();
+@for $i from 0 through 48 {
+    $size_spacings: list.append($size_spacings, #{$i}px);
+}
+
+@each $space in $size_spacings {
+    .p-#{$space} {
+        padding: $space;
+    }
+    .pb-#{$space} {
+        padding-bottom: $space;
+    }
+    .pt-#{$space} {
+        padding-top: $space;
+    }
+    .pr-#{$space} {
+        padding-right: $space;
+    }
+    .pl-#{$space} {
+        padding-left: $space;
+    }
+    .m-#{$space} {
+        margin: $space;
+    }
+    .mb-#{$space} {
+        margin-bottom: $space;
+    }
+    .mt-#{$space} {
+        margin-top: $space;
+    }
+    .mr-#{$space} {
+        margin-right: $space;
+    }
+    .ml-#{$space} {
+        margin-left: $space;
+    }
+    .fs-#{$space} {
+        font-size: $space;
+    }
+    .br-#{$space} {
+        border-radius: $space;
+    }
+    .h-#{$space} {
+        height: $space;
+    }
+    .gap-#{$space} {
+        gap: $space;
+    }
+}
+
+$weight_spacings: ();
+@for $i from 1 through 9 {
+    $weight_spacings: list.join($weight_spacings, (100 * $i), comma);
+}
+
+@each $space in $weight_spacings {
+    @font-face {
+        font-family: "Inter";
+        src: url("../fonts/Inter/Inter-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+    }
+    .Inter-#{$space} {
+        font-family: Inter;
+        font-weight: $space;
+        font-style: normal;
+    }
+}
+
+@each $name, $value in $colors {
+    .bg-#{$name} {
+        background-color: $value;
+    }
+    .color-#{$name} {
+        color: $value;
+    }
+    .bcolor-#{$name} {
+        border-color: $value;
+    }
+}
+
+$col_spacing: ();
+@for $i from 1 through 12 {
+    $col_spacing: list.append($col_spacing, #{$i});
+}
+
+@each $space in $col_spacing {
+    .col-#{$space} {
+        flex-grow: $space;
+    }
+}
+
+.ma {
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.div-shadow {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-310px {
+    width: 310px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.d-grid {
+    display: grid;
+}
+
+.grid-center {
+    place-items: center;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.loader {
+    border: 8px solid map.get($colors, "primary-dark");
+    border-top: 8px solid map.get($colors, "neutral-light");
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bsolid {
+    border-style: solid;
+}
+
+.bnone {
+    border-style: none;
+}
+
+.cpointer {
+    cursor: pointer;
+}
