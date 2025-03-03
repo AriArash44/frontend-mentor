@@ -3055,4 +3055,9 @@
   color: hsl(0, 0%, 25%) !important;
 }
 
+#submit_button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /*# sourceMappingURL=styles.css.map */

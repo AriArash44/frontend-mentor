@@ -11,7 +11,14 @@ let QRsrc = "../public/images/empty-frame.avif";
 
 const generateUniqueId = () => 'loader-' + Math.random().toString(36).substr(2, 9);
 
-document.getElementById("submit_button").addEventListener("click", async () => {
+const submitButton = document.getElementById("submit_button");
+
+let isProcessing = false;
+
+submitButton.addEventListener("click", async () => {
+    if (isProcessing) return;
+    isProcessing = true;
+    submitButton.disabled = true;
     QRImage.src = "";
     const loader = template.content.cloneNode(true);
     const loaderId = generateUniqueId();
@@ -47,6 +54,8 @@ document.getElementById("submit_button").addEventListener("click", async () => {
             loaderElement.remove();
         }
         QRImage.src = QRsrc;
+        isProcessing = false;
+        submitButton.disabled = false;
         Toastify({
             text: toastText,
             duration: 2000,

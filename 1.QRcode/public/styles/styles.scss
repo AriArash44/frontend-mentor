@@ -183,3 +183,8 @@ $col_spacing: ();
 :global(.toast-close) {
     color: map.get($colors, "neutral-mooderate") !important;
 }
+
+#submit_button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
