@@ -32,7 +32,7 @@ document.getElementById("submit_button").addEventListener("click", async () => {
         toastText = "QR code generated";
         success = true;
         const svgData = response.data;
-        const base64SVG = btoa(unescape(encodeURIComponent(svgData)));
+        const base64SVG = window.btoa(unescape(encodeURIComponent(svgData)));
         QRsrc = `data:image/svg+xml;base64,${base64SVG}`;
     })
     .catch(error => {
@@ -59,8 +59,8 @@ document.getElementById("submit_button").addEventListener("click", async () => {
                 background: "#FFFFFF",
                 border: `1px solid ${success ? "#00FF00" : "#FF0000"}`,
                 color: success ? "#00FF00" : "#FF0000",
-                dir: "ltr",
-                boredrRadius: "5px"
+                direction: "rtl",
+                "border-radius": "5px"
             },
         }).showToast();
     });

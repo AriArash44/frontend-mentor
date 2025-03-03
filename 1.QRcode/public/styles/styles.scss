@@ -179,3 +179,7 @@ $col_spacing: ();
 .cpointer {
     cursor: pointer;
 }
+
+:global(.toast-close) {
+    color: map.get($colors, "neutral-mooderate") !important;
+}

@@ -3051,4 +3051,8 @@
   cursor: pointer;
 }
 
+:global(.toast-close) {
+  color: hsl(0, 0%, 25%) !important;
+}
+
 /*# sourceMappingURL=styles.css.map */
