@@ -17,6 +17,11 @@ This repository serves as a collection of solutions and implementations for vari
    git clone https://github.com/AriArash44/frontend-mentor.git
    cd frontend-mentor
    
+2. **Run the desired project:**
+   ```bash
+   cd 'project'
+   npm install
+   npm run dev
 ## Suggestions for Improvement
 
 If you have any suggestions for improving the code, its readability, structure, or anything else, I would greatly appreciate it if you contact me via [my email address](mailto:arashasghari408@gmail.com)
