@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+    base: mode === 'development' ? '/' : '/frontend-mentor/1.QRcode/',
     server: {
         proxy: {
             '/api': {
@@ -9,5 +10,5 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
         }
-    },
-});
+    }
+}));
