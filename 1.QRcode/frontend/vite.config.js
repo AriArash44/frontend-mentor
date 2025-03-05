@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
-    server: {
+export default defineConfig(({ mode }) => ({
+    server: mode === 'development' ? {
         proxy: {
             '/api': {
                 target: 'https://api.qr-code-generator.com',
@@ -9,5 +9,5 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
         }
-    },
-});
+    } : {}
+}));

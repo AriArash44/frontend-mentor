@@ -7,7 +7,8 @@ const qrImage = document.getElementById("QR_code");
 const submitButton = document.getElementById("submit_button");
 
 const EMPTY_IMAGE = "../public/images/empty-frame.avif";
-const API_URL = `/api/v1/create?access-token=${import.meta.env.VITE_API_KEY}`;
+const API_URL = import.meta.env.MODE === 'development' ? `/api/v1/create?access-token=${import.meta.env.VITE_API_KEY}` :
+    'https://qr-code-generator-ouc2zbnse-arashs-projects-9cfaceed.vercel.app/api/qrcode';
 
 const generateUniqueId = () => `loader-${Math.random().toString(36).substr(2, 9)}`;
 
