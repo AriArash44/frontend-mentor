@@ -4,7 +4,7 @@
   "description": "This repository serves as a collection of solutions and implementations for various frontend challenges provided by [Frontend Mentor](https://www.frontendmentor.io). It is a space where I practice my frontend development skills and experiment with modern web technologies.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no t.est specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

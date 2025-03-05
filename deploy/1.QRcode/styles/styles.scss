@@ -1,0 +1,174 @@
+@use "sass:list";
+@use "sass:map";
+
+$colors: (
+    "neutral-light": hsl(0, 0%, 100%),
+    "neutral-mooderate": hsl(0, 0%, 25%),
+    "neutral-dark": hsl(0, 0%, 5%),
+    "primary-light": hsl(212, 45%, 89%),
+    "primary-mooderate": hsl(216, 15%, 48%),
+    "primary-dark": hsl(218, 44%, 22%)
+);
+
+@each $name, $value in $colors {
+    .bg-#{$name} {
+        background-color: $value;
+    }
+    .color-#{$name} {
+        color: $value;
+    }
+    .bcolor-#{$name} {
+        border-color: $value;
+    }
+}
+
+$spacing_sizes: ();
+@for $i from 0 through 48 {
+    $spacing_sizes: list.append($spacing_sizes, #{$i}px);
+}
+
+$utilities: (
+    'p': "padding",
+    'pt': "padding-top",
+    'pr': "padding-right",
+    'pb': "padding-bottom",
+    'pl': "padding-left",
+    'm': "margin",
+    'mt': "margin-top",
+    'mr': "margin-right",
+    'mb': "margin-bottom",
+    'ml': "margin-left",
+    'fs': "font-size",
+    'br': "border-radius",
+    'h': "height",
+    'gap': "gap"
+);
+
+@mixin generate-utilities($utilities, $values) {
+    @each $abbr, $property in $utilities {
+        @each $value in $values {
+            .#{$abbr}-#{$value} {
+                #{$property}: $value;
+            }
+        }
+    }
+}
+
+@include generate-utilities($utilities, $spacing-sizes);
+
+$font_weights: ();
+@for $i from 1 through 9 {
+    $font_weights: list.join($font_weights, (100 * $i), comma);
+}
+
+@each $space in $font_weights {
+    @font-face {
+        font-family: "Inter";
+        src: url("../fonts/Inter/Inter-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+    }
+    .Inter-#{$space} {
+        font-family: Inter;
+        font-weight: $space;
+        font-style: normal;
+    }
+}
+
+$col_spacing: ();
+@for $i from 1 through 12 {
+    $col_spacing: list.append($col_spacing, #{$i});
+}
+
+@each $space in $col_spacing {
+    .col-#{$space} {
+        flex-grow: $space;
+    }
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-310px {
+    width: 310px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-grid {
+    display: grid;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.grid-center {
+    place-items: center;
+}
+
+.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.ma {
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.div-shadow {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.loader {
+    border: 8px solid map.get($colors, "primary-dark");
+    border-top: 8px solid map.get($colors, "neutral-light");
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bsolid {
+    border-style: solid;
+}
+
+.bnone {
+    border-style: none;
+}
+
+.cpointer {
+    cursor: pointer;
+}
+
+:global(.toast-close) {
+    color: map.get($colors, "neutral-mooderate") !important;
+}
+
+#submit_button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

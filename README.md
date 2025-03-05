@@ -19,7 +19,7 @@ This repository serves as a collection of solutions and implementations for vari
    
 2. **Run the desired project:**
    ```bash
-   cd [project-name]
+   cd 'project'
    npm install
    npm run dev
 ## Suggestions for Improvement
