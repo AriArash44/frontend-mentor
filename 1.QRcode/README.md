@@ -33,5 +33,7 @@ Below is a side-by-side preview of the component in both mobile and desktop view
 
 | Mobile Demo                                            | Desktop Demo                                             |
 |--------------------------------------------------------|----------------------------------------------------------|
-| ![Mobile Demo](./public/images/mobile-demo.png)        | ![Desktop Demo](./public/images/desktop-demo.png)        |
+| ![Mobile Demo](./frontend/public/images/mobile-demo.png)        | ![Desktop Demo](./frontend/public/images/desktop-demo.png)        |
 | *Mobile view of the QR Code component*                | *Desktop view of the QR Code component*                  |
+
+you can visit the live version at [QR code generator app](https://ariarash44.github.io/frontend-mentor/1.QRcode/)
