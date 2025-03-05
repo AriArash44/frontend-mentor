@@ -10,62 +10,58 @@ $colors: (
     "primary-dark": hsl(218, 44%, 22%)
 );
 
-$size_spacings: ();
+@each $name, $value in $colors {
+    .bg-#{$name} {
+        background-color: $value;
+    }
+    .color-#{$name} {
+        color: $value;
+    }
+    .bcolor-#{$name} {
+        border-color: $value;
+    }
+}
+
+$spacing_sizes: ();
 @for $i from 0 through 48 {
-    $size_spacings: list.append($size_spacings, #{$i}px);
+    $spacing_sizes: list.append($spacing_sizes, #{$i}px);
 }
 
-@each $space in $size_spacings {
-    .p-#{$space} {
-        padding: $space;
-    }
-    .pb-#{$space} {
-        padding-bottom: $space;
-    }
-    .pt-#{$space} {
-        padding-top: $space;
-    }
-    .pr-#{$space} {
-        padding-right: $space;
-    }
-    .pl-#{$space} {
-        padding-left: $space;
-    }
-    .m-#{$space} {
-        margin: $space;
-    }
-    .mb-#{$space} {
-        margin-bottom: $space;
-    }
-    .mt-#{$space} {
-        margin-top: $space;
-    }
-    .mr-#{$space} {
-        margin-right: $space;
-    }
-    .ml-#{$space} {
-        margin-left: $space;
-    }
-    .fs-#{$space} {
-        font-size: $space;
-    }
-    .br-#{$space} {
-        border-radius: $space;
-    }
-    .h-#{$space} {
-        height: $space;
-    }
-    .gap-#{$space} {
-        gap: $space;
+$utilities: (
+    'p': "padding",
+    'pt': "padding-top",
+    'pr': "padding-right",
+    'pb': "padding-bottom",
+    'pl': "padding-left",
+    'm': "margin",
+    'mt': "margin-top",
+    'mr': "margin-right",
+    'mb': "margin-bottom",
+    'ml': "margin-left",
+    'fs': "font-size",
+    'br': "border-radius",
+    'h': "height",
+    'gap': "gap"
+);
+
+@mixin generate-utilities($utilities, $values) {
+    @each $abbr, $property in $utilities {
+        @each $value in $values {
+            .#{$abbr}-#{$value} {
+                #{$property}: $value;
+            }
+        }
     }
 }
 
-$weight_spacings: ();
+@include generate-utilities($utilities, $spacing-sizes);
+
+$font_weights: ();
 @for $i from 1 through 9 {
-    $weight_spacings: list.join($weight_spacings, (100 * $i), comma);
+    $font_weights: list.join($font_weights, (100 * $i), comma);
 }
 
-@each $space in $weight_spacings {
+@each $space in $font_weights {
     @font-face {
         font-family: "Inter";
         src: url("../fonts/Inter/Inter-#{$space}.ttf") format("truetype");
@@ -76,18 +72,6 @@ $weight_spacings: ();
         font-family: Inter;
         font-weight: $space;
         font-style: normal;
-    }
-}
-
-@each $name, $value in $colors {
-    .bg-#{$name} {
-        background-color: $value;
-    }
-    .color-#{$name} {
-        color: $value;
-    }
-    .bcolor-#{$name} {
-        border-color: $value;
     }
 }
 
@@ -102,16 +86,8 @@ $col_spacing: ();
     }
 }
 
-.ma {
-    margin: auto;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.div-shadow {
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+.h-100vh {
+    height: 100vh;
 }
 
 .w-100 {
@@ -126,8 +102,8 @@ $col_spacing: ();
     display: flex;
 }
 
-.no-wrap {
-    flex-wrap: nowrap;
+.d-grid {
+    display: grid;
 }
 
 .justify-center {
@@ -138,16 +114,24 @@ $col_spacing: ();
     align-items: center;
 }
 
-.d-grid {
-    display: grid;
-}
-
 .grid-center {
     place-items: center;
 }
 
-.h-100vh {
-    height: 100vh;
+.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.ma {
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.div-shadow {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
 }
 
 .overflow-hidden {
