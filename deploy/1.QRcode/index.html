@@ -9,24 +9,27 @@
   <title>Frontend Mentor | QR code component</title>
   
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <script type="module" crossorigin src="/frontend-mentor/1.QRcode/assets/index-CnNpmLfQ.js"></script>
-  <link rel="stylesheet" crossorigin href="/frontend-mentor/1.QRcode/assets/index-Bykhh0sn.css">
+  <script type="module" crossorigin src="/frontend-mentor/1.QRcode/assets/index-AfsgSuTC.js"></script>
+  <link rel="stylesheet" crossorigin href="/frontend-mentor/1.QRcode/assets/index-BQ21pDoP.css">
 </head>
 <body class="bg-primary-light d-grid grid-center h-100vh overflow-hidden">
-  <div class="ma bg-neutral-light br-12px div-shadow w-310px p-12px">
-    <div class="d-flex p-12px justify-center gap-5px">
-      <input type="url" id="link_address" name="link_address" placeholder="URL to QR code" class="br-8px bcolor-neutral-mooderate Inter-400 color-neutral-dark col-1 bsolid p-8px"/>
-      <button id="submit_button" class="h-40px bg-primary-dark br-8px text-center color-neutral-light col-3 bnone cpointer">Submit</button>
+  <main>
+    <h1 class="sr-only">QR code generator app</h1>
+    <div class="ma bg-neutral-light br-12px div-shadow w-310px p-12px">
+      <div class="d-flex p-12px justify-center gap-5px">
+        <input type="url" id="link_address" name="link_address" placeholder="URL to QR code" class="br-8px bcolor-neutral-mooderate Inter-400 color-neutral-dark col-1 bsolid p-8px"/>
+        <button id="submit_button" class="h-40px bg-primary-dark br-8px text-center color-neutral-light col-3 bnone cpointer">Submit</button>
+      </div>
+      <div class="w-100" id="QR_container">
+        <img id="QR_code" class="w-100" src="/frontend-mentor/1.QRcode/assets/empty-frame-CQeCPgAw.avif" alt=""/>
+        <template id="loader">
+          <div class="loader w-100 ma"></div>
+        </template>
+      </div>
+      <h2 class="color-neutral-dark Inter-700 text-center">Improve your front-end skills by building projects.</h2>
+      <p class="fs-15px color-neutral-mooderate Inter-400 text-center">Scan the QR code to visit input URL<br/> and take your coding skills<br/> to the next level</p>
     </div>
-    <div class="w-100" id="QR_container">
-      <img id="QR_code" class="w-100" src="/frontend-mentor/1.QRcode/assets/empty-frame-CQeCPgAw.avif" alt=""/>
-      <template id="loader">
-        <div class="loader w-100 ma"></div>
-      </template>
-    </div>
-    <h2 class="color-neutral-dark Inter-700 text-center">Improve your front-end skills by building projects.</h2>
-    <p class="fs-15px color-neutral-mooderate Inter-400 text-center">Scan the QR code to visit input URL<br/> and take your coding skills<br/> to the next level</p>
-  </div>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 </html>
