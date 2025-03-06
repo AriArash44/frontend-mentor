@@ -27,6 +27,9 @@ This folder contains the implementation for the **first challenge** from [Fronte
   - **Vite Proxy:**  
     Vite is configured with a proxy (in `vite.config.js`) to address CORS issues during local development.
 
+- **Vercel & Github pages:**
+    For deploying back-end and front-end app
+
 ## Demo
 
 Below is a side-by-side preview of the component in both mobile and desktop views:
@@ -36,4 +39,4 @@ Below is a side-by-side preview of the component in both mobile and desktop view
 | ![Mobile Demo](./frontend/public/images/mobile-demo.png)        | ![Desktop Demo](./frontend/public/images/desktop-demo.png)        |
 | *Mobile view of the QR Code component*                | *Desktop view of the QR Code component*                  |
 
-you can visit the live version at [QR code generator app](https://ariarash44.github.io/frontend-mentor/1.QRcode/)
+You can visit the live version at [QR code generator app](https://ariarash44.github.io/frontend-mentor/1.QRcode/)
