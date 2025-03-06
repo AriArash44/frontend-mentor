@@ -27,8 +27,8 @@ This folder contains the implementation for the **first challenge** from [Fronte
   - **Vite Proxy:**  
     Vite is configured with a proxy (in `vite.config.js`) to address CORS issues during local development.
 
-- **Vercel & Github pages:**
-    For deploying back-end and front-end app
+- **Vercel & Github pages:**  
+  For deploying back-end and front-end app.
 
 ## Demo
 
