@@ -147,6 +147,10 @@
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 
+.w-90 {
+  width: 90%;
+}
+
 .w-100 {
   width: 100%;
 }
