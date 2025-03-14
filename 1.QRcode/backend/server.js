@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = process.env.API_KEY;
 const API_URL = 'http://api.qrserver.com/';
 
 app.post('/api/qrcode', async (req, res) => {
@@ -26,5 +25,4 @@ app.post('/api/qrcode', async (req, res) => {
 });
 
 // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-console.log("test");
 export default app;

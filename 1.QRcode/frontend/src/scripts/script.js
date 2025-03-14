@@ -6,9 +6,10 @@ const container = document.getElementById("QR_container");
 const qrImage = document.getElementById("QR_code");
 const submitButton = document.getElementById("submit_button");
 
-const EMPTY_IMAGE = "../public/images/empty-frame.avif";
-const API_URL = import.meta.env.MODE === 'development' ? `/api/v1/create?access-token=${import.meta.env.VITE_API_KEY}` :
-    'https://qr-code-generator-ouc2zbnse-arashs-projects-9cfaceed.vercel.app/api/qrcode';
+const EMPTY_IMAGE = import.meta.env.MODE === 'development' ? "../public/images/empty-frame.avif" :
+    "/frontend-mentor/1.QRcode/assets/empty-frame-CQeCPgAw.avif";
+const API_URL = import.meta.env.MODE === 'development' ? `/api/v1/create-qr-code/?data=www.google.com` :
+    'https://qr-code-generator-3kqcub2t3-arashs-projects-9cfaceed.vercel.app/api/qrcode';
 
 const generateUniqueId = () => `loader-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -33,10 +34,7 @@ const showToast = (message, success) => {
 
 const fetchQRCode = async (linkText) => {
     const payload = {
-        "frame_name": "no-frame",
         "qr_code_text": linkText,
-        "image_format": "SVG",
-        "qr_code_logo": "scan-me-square"
     };
     const config = {
         headers: {

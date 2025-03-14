@@ -5,7 +5,7 @@ export default defineConfig(({ mode }) => ({
     server: mode === 'development' ? {
         proxy: {
             '/api': {
-                target: 'https://api.qr-code-generator.com',
+                target: 'http://api.qrserver.com',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
