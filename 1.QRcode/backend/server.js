@@ -12,11 +12,11 @@ app.use(cors());
 app.use(express.json());
 
 const API_KEY = process.env.API_KEY;
-const API_URL = 'https://api.qr-code-generator.com';
+const API_URL = 'http://api.qrserver.com/';
 
 app.post('/api/qrcode', async (req, res) => {
     try {
-        const response = await axios.post(`${API_URL}/v1/create?access-token=${API_KEY}`, req.body, req.headers);
+        const response = await axios.get(`${API_URL}v1/create-qr-code/?format=svg&data=${req.body.qr_code_text}`, req.headers);
         res.setHeader('Content-Type', response.headers['content-type']);
         res.send(response.data);
     } catch (error) {
