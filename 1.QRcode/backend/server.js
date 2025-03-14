@@ -26,4 +26,5 @@ app.post('/api/qrcode', async (req, res) => {
 });
 
 // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+console.log("test");
 export default app;
