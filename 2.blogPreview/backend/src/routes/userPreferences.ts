@@ -40,7 +40,6 @@ router.post('/:username', (req, res) => {
         [username, theme],
         (err) => {
             if (err) {
-                console.error(err);
                 if (err.code === 'ER_CHECK_CONSTRAINT_VIOLATED' || err.code === 'ER_DATA_TOO_LONG') {
                     return res
                         .status(400)

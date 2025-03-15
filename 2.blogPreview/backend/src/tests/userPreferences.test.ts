@@ -1,7 +1,13 @@
+jest.mock('../db.js', () => ({
+    query: jest.fn(),
+}));
+
+import db from '../db.js';
 import request from 'supertest';
 import express from 'express';
 import router from '../routes/userPreferences.js';
 import cors from 'cors';
+import CustomError from '../types/customError.js';
 
 const app = express();
 
@@ -10,11 +16,7 @@ app.use('/api/userPreferences', router);
 app.use(cors());
 
 describe('Routes', () => {
-    const mockQuery = jest.fn();
-    jest.mock('../db', () => ({
-        query: (query: string, values: any[], callback: Function) =>
-            mockQuery(query, values, callback),
-    }));
+    const mockQuery = db.query as jest.Mock;
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -28,7 +30,9 @@ describe('Routes', () => {
             callback(null, [{ color: expectedTheme }]);
         });
 
-        const response = await request(app).get(`/api/userPreferences/${username}`);
+        const response = await request(app).get(
+            `/api/userPreferences/${username}`
+        );
         expect(response.status).toBe(200);
         expect(response.body).toEqual({ theme: expectedTheme });
     });
@@ -40,7 +44,9 @@ describe('Routes', () => {
             callback(null, []);
         });
 
-        const response = await request(app).get(`/api/userPreferences/${username}`);
+        const response = await request(app).get(
+            `/api/userPreferences/${username}`
+        );
         expect(response.status).toBe(404);
         expect(response.body).toEqual({ error: 'User not found' });
     });
@@ -65,10 +71,6 @@ describe('Routes', () => {
         const username = 'testuser';
         const theme = 'INVALID_COLOR';
 
-        interface CustomError extends Error {
-            code?: string;
-        }
-
         mockQuery.mockImplementation((query, values, callback) => {
             const error = new Error('Invalid color value') as CustomError;
             error.code = 'ER_DATA_TOO_LONG';
@@ -86,10 +88,6 @@ describe('Routes', () => {
     test('POST /:username - invalid color', async () => {
         const username = 'testuser';
         const theme = 'WHITE';
-
-        interface CustomError extends Error {
-            code?: string;
-        }
 
         mockQuery.mockImplementation((query, values, callback) => {
             const error = new Error('Invalid color value') as CustomError;
@@ -110,7 +108,7 @@ describe('Routes', () => {
         const theme = 'BLUE';
 
         mockQuery.mockImplementation((query, values, callback) => {
-            const error = new Error('Internal Server Error');
+            const error = new Error('Internal Server Error') as CustomError;
             callback(error);
         });
 
