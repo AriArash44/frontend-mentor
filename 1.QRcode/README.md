@@ -22,7 +22,7 @@ This folder contains the implementation for the **first challenge** from [Fronte
   - **Toastify:**  
     For displaying notifications to the user.
   - **API Call:**  
-    The QR code data is fetched from the [QR Code Generator API](https://www.qr-code-generator.com/).  
+    The QR code data is fetched from the [QR Code Generator API](https://goqr.me/api/).  
     **Note:** To test the program locally, you'll need to obtain an API key from the QR Code Generator website.
   - **Vite Proxy:**  
     Vite is configured with a proxy (in `vite.config.js`) to address CORS issues during local development.
