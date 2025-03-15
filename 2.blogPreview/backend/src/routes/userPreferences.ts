@@ -1,12 +1,9 @@
 import express from 'express';
 import db from '../db.js';
 import { RowDataPacket } from 'mysql2';
+import UserPreference from '../types/userPreference.js';
 
 const router = express.Router();
-
-interface UserPreference {
-    theme: string;
-}
 
 router.get('/:username', (req, res) => {
     const { username } = req.params;

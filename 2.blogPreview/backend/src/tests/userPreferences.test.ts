@@ -6,10 +6,15 @@ import db from '../db.js';
 import request from 'supertest';
 import express from 'express';
 import router from '../routes/userPreferences.js';
+import http from 'http';
 import cors from 'cors';
 import CustomError from '../types/customError.js';
+import setupWebSocket from '../websocket.js';
 
 const app = express();
+
+const server = http.createServer(app);
+setupWebSocket(server);
 
 app.use(express.json());
 app.use('/api/userPreferences', router);

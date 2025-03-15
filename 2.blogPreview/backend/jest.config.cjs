@@ -8,6 +8,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
     '^../routes/userPreferences.js$': '<rootDir>/src/routes/userPreferences.ts',
-    '^../db.js$': '<rootDir>/src/db.ts'
+    '^../db.js$': '<rootDir>/src/db.ts',
+    '^../websocket.js$': '<rootDir>/src/websocket.ts'
   }
 };
