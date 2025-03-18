@@ -2,12 +2,24 @@ import express from 'express';
 import db from '../db.js';
 import { RowDataPacket } from 'mysql2';
 import UserPreference from '../types/userPreference.js';
+import tokenChecker from '../utils/tokenChecker.js';
 
 const router = express.Router();
 
 router.get('/:username', (req, res) => {
     const { username } = req.params;
-    db.query<RowDataPacket[]>(
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        res.status(401).json({ message: 'Authorization header missing' });
+        return;
+    }
+
+    const token = authHeader.split(' ')[1];
+    try {
+        if (tokenChecker(token, 'ACCESS_SECRET_KEY')?.username !== username) {
+            throw new Error('Invalid or expired token');
+        }
+        db.query<RowDataPacket[]>(
         'SELECT color FROM preferences WHERE username = ?',
         [username],
         (err, results) => {
@@ -25,35 +37,54 @@ router.get('/:username', (req, res) => {
             });
             return res.json(userPreference);
         }
-    );
+        );
+    } catch(err: unknown) {
+        const message = err instanceof Error ? err.message : 'An unknown error occurred';
+        res.status(500).json({ message });
+    }
 });
 
 router.post('/:username', (req, res) => {
     const { username } = req.params;
     const { theme } = req.body;
 
-    db.query(
-        'REPLACE INTO preferences (username, color) VALUES (?, ?)',
-        [username, theme],
-        (err) => {
-            if (err) {
-                if (err.code === 'ER_CHECK_CONSTRAINT_VIOLATED' || err.code === 'ER_DATA_TOO_LONG') {
-                    return res
-                        .status(400)
-                        .json({ error: 'Invalid color value' });
-                } else {
-                    return res
-                        .status(500)
-                        .json({ error: 'Internal Server Error' });
-                }
-            }
-            res.cookie('user_theme', theme, {
-                maxAge: 60 * 60 * 1000,
-                httpOnly: true,
-            });
-            return res.sendStatus(200);
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        res.status(401).json({ message: 'Authorization header missing' });
+        return;
+    }
+    
+    const token = authHeader.split(' ')[1];
+    try {
+        if (tokenChecker(token, 'ACCESS_SECRET_KEY')?.username !== username) {
+            throw new Error('Invalid or expired token');
         }
-    );
+        db.query(
+            'REPLACE INTO preferences (username, color) VALUES (?, ?)',
+            [username, theme],
+            (err) => {
+                if (err) {
+                    if (err.code === 'ER_CHECK_CONSTRAINT_VIOLATED' || err.code === 'ER_DATA_TOO_LONG') {
+                        return res
+                            .status(400)
+                            .json({ error: 'Invalid color value' });
+                    } else {
+                        return res
+                            .status(500)
+                            .json({ error: 'Internal Server Error' });
+                    }
+                }
+                res.cookie('user_theme', theme, {
+                    maxAge: 60 * 60 * 1000,
+                    httpOnly: true,
+                });
+                return res.sendStatus(200);
+            }
+        );
+    } catch(err: unknown) {
+        const message = err instanceof Error ? err.message : 'An unknown error occurred';
+        res.status(500).json({ message });
+    }
 });
 
 export default router;

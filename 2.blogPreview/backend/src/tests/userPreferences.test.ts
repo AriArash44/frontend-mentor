@@ -2,6 +2,12 @@ jest.mock('../db.js', () => ({
     query: jest.fn(),
 }));
 
+jest.mock('../utils/tokenChecker.js', () => ({
+    __esModule: true,
+    default: jest.fn(() => ({ username: 'testuser' })),
+}));
+
+
 import db from '../db.js';
 import request from 'supertest';
 import express from 'express';
@@ -10,6 +16,7 @@ import http from 'http';
 import cors from 'cors';
 import CustomError from '../types/customError.js';
 import setupWebSocket from '../websocket.js';
+import tokenChecker from '../utils/tokenChecker.js';
 
 const app = express();
 
@@ -22,6 +29,7 @@ app.use(cors());
 
 describe('Routes', () => {
     const mockQuery = db.query as jest.Mock;
+    const authHeader = { Authorization: 'Bearer mocked-valid-token' };
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -37,23 +45,9 @@ describe('Routes', () => {
 
         const response = await request(app).get(
             `/api/userPreferences/${username}`
-        );
+        ).set(authHeader);
         expect(response.status).toBe(200);
         expect(response.body).toEqual({ theme: expectedTheme });
-    });
-
-    test('GET /:username - user not found', async () => {
-        const username = 'unknownuser';
-
-        mockQuery.mockImplementation((query, values, callback) => {
-            callback(null, []);
-        });
-
-        const response = await request(app).get(
-            `/api/userPreferences/${username}`
-        );
-        expect(response.status).toBe(404);
-        expect(response.body).toEqual({ error: 'User not found' });
     });
 
     test('POST /:username - success', async () => {
@@ -66,6 +60,7 @@ describe('Routes', () => {
 
         const response = await request(app)
             .post(`/api/userPreferences/${username}`)
+            .set(authHeader)
             .send({ theme });
 
         expect(response.status).toBe(200);
@@ -84,6 +79,7 @@ describe('Routes', () => {
 
         const response = await request(app)
             .post(`/api/userPreferences/${username}`)
+            .set(authHeader)
             .send({ theme });
 
         expect(response.status).toBe(400);
@@ -102,6 +98,7 @@ describe('Routes', () => {
 
         const response = await request(app)
             .post(`/api/userPreferences/${username}`)
+            .set(authHeader)
             .send({ theme });
 
         expect(response.status).toBe(400);
@@ -119,9 +116,25 @@ describe('Routes', () => {
 
         const response = await request(app)
             .post(`/api/userPreferences/${username}`)
+            .set(authHeader)
             .send({ theme });
 
         expect(response.status).toBe(500);
         expect(response.body).toEqual({ error: 'Internal Server Error' });
+    });
+
+    test('GET /:username - user not found', async () => {
+        const username = 'unknownuser';
+        (tokenChecker as jest.Mock).mockImplementation(() => ({ username }));
+
+        mockQuery.mockImplementation((query, values, callback) => {
+            callback(null, []);
+        });
+
+        const response = await request(app).get(
+            `/api/userPreferences/${username}`
+        ).set(authHeader);
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({ error: 'User not found' });
     });
 });

@@ -9,6 +9,8 @@ module.exports = {
   moduleNameMapper: {
     '^../routes/userPreferences.js$': '<rootDir>/src/routes/userPreferences.ts',
     '^../db.js$': '<rootDir>/src/db.ts',
-    '^../websocket.js$': '<rootDir>/src/websocket.ts'
+    '^../websocket.js$': '<rootDir>/src/websocket.ts',
+    '^../utils/tokenChecker.js$': '<rootDir>/src/utils/tokenChecker.ts',
+    '^./envValidator.js': '<rootDir>/src/utils/envValidator.ts',
   }
 };
