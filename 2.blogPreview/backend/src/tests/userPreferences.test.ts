@@ -27,7 +27,7 @@ app.use(express.json());
 app.use('/api/userPreferences', router);
 app.use(cors());
 
-describe('Routes', () => {
+describe('Preferences routes', () => {
     const mockQuery = db.query as jest.Mock;
     const authHeader = { Authorization: 'Bearer mocked-valid-token' };
 
