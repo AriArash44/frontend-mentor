@@ -82,7 +82,7 @@ describe('Authentication routes', () => {
                 .get('/api/authentication/username')
                 .set('Authorization', 'Bearer some-valid-token');
             expect(response.status).toBe(200);
-            expect(response.body).toEqual({ message: 'john' });
+            expect(response.body).toEqual({ username: 'john' });
         });
 
         test('should return 401 if tokenChecker returns an object with no username', async () => {
@@ -108,7 +108,7 @@ describe('Authentication routes', () => {
         });
 
         test('should return 401 if no Authorization header is provided', async () => {
-            const response = await request(app).post('/api/authentication/refresh-token');
+            const response = await request(app).get('/api/authentication/refresh-token');
             expect(response.status).toBe(401);
             expect(response.body).toEqual({
                 message: 'Authorization header missing',
@@ -119,7 +119,7 @@ describe('Authentication routes', () => {
             (tokenChecker as jest.Mock).mockReturnValue({ username: 'john' });
             (generateToken as jest.Mock).mockReturnValue('newAccessToken');
             const response = await request(app)
-                .post('/api/authentication/refresh-token')
+                .get('/api/authentication/refresh-token')
                 .set('Authorization', 'Bearer some-refresh-token');
             expect(response.status).toBe(200);
             expect(response.body).toEqual({ accessToken: 'newAccessToken' });
@@ -130,7 +130,7 @@ describe('Authentication routes', () => {
                 throw new Error('Refresh Error');
             });
             const response = await request(app)
-                .post('/api/authentication/refresh-token')
+                .get('/api/authentication/refresh-token')
                 .set('Authorization', 'Bearer some-refresh-token');
 
             expect(response.status).toBe(500);

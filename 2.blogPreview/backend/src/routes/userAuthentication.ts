@@ -43,7 +43,7 @@ router.get('/username', (req, res) => {
             res.status(401).json({ message: 'Username not found in token' });
             return;
         }
-        res.status(200).json({ message: username });
+        res.status(200).json({ username: username });
     } catch (err: unknown) {
         const message = err instanceof Error ? err.message : 'An unknown error occurred';
         res.status(401).json({ message });
@@ -51,7 +51,7 @@ router.get('/username', (req, res) => {
     
 });
 
-router.post('/refresh-token', (req, res) => {
+router.get('/refresh-token', (req, res) => {
     const authHeader = req.headers['authorization'];
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         res.status(401).json({ message: 'Authorization header missing' });
