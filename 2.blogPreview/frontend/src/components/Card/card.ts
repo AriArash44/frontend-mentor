@@ -1,26 +1,17 @@
+import cardTemplate from './card.html?raw';
+import cardStyles from './card.css?raw';
+import bootstrapCss from 'bootstrap/dist/css/bootstrap.min.css?raw';
+
 class CardComponent extends HTMLElement {
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
-        Promise.all([
-            this.loadCSS('card.css'),
-            this.loadHTML('card.html'),
-        ]).then(([cssContent, htmlContent]) => {
-            const style = document.createElement('style');
-            style.textContent = cssContent;
-            shadow.appendChild(style);
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = htmlContent;
-            shadow.appendChild(wrapper);
-        });
-    }
-
-    private async loadCSS(file: string): Promise<string> {
-        return fetch(file).then((response) => response.text());
-    }
-
-    private async loadHTML(file: string): Promise<string> {
-        return fetch(file).then((response) => response.text());
+        const style = document.createElement('style');
+        style.textContent = bootstrapCss.concat(cardStyles);
+        shadow.appendChild(style);
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = cardTemplate;
+        shadow.appendChild(wrapper);
     }
 }
 

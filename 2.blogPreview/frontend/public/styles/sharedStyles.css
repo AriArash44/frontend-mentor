@@ -1,0 +1,19 @@
+.bg-yellow {
+    background-color: #f4d04e;
+}
+
+.bg-green {
+    background-color: #4caf50;
+}
+
+.bg-red {
+    background-color: #e63946;
+}
+
+.bg-blue {
+    background-color: #4a90e2;
+}
+
+* {
+    font-family: figtree;
+}

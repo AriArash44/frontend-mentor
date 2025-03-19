@@ -28,6 +28,6 @@ class ThemeButtonComponent extends HTMLElement {
     }
 }
 
-customElements.define('themeBottun-component', ThemeButtonComponent);
+customElements.define('theme-bottun-component', ThemeButtonComponent);
 
 export default ThemeButtonComponent;
