@@ -1,1 +1,5 @@
 @import url('./sharedStyles.css');
+
+.w-360px {
+    width: 360px;
+}
