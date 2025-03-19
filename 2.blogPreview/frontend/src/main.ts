@@ -4,3 +4,30 @@ import './components/Avatar/avatar.ts';
 import './components/Card/card.ts';
 import './components/Image/image.ts';
 import './components/ThemeButton/themeButton.ts';
+
+const loginButton = document.getElementById("login-button");
+const logoutButton = document.getElementById("logout-button");
+const loginForm = document.getElementById("login-form");
+const themeSelector = document.getElementById("theme-selector");
+const usernameFeild = document.getElementById("username-feild") as HTMLInputElement;
+
+loginButton?.addEventListener('click', (event) => {
+    event.preventDefault();
+    if(usernameFeild?.value?.trim()) {
+        loginForm?.classList.remove("d-flex");
+        loginForm?.classList.add("d-none");
+        themeSelector?.classList.remove("d-none");
+        themeSelector?.classList.add("d-flex");
+    }
+});
+
+logoutButton?.addEventListener('click', () => {
+    themeSelector?.classList.remove("d-flex");
+    themeSelector?.classList.add("d-none");
+    loginForm?.classList.remove("d-none");
+    loginForm?.classList.add("d-flex");
+});
+
+window.onload = () => {
+    document.body.style.visibility = 'visible';
+};

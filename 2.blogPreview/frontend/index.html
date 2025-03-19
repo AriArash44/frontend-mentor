@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/favicon-32x32.png" type="image/x-icon" />
     <link rel="stylesheet" href="/styles/lightDomStyles.css">
+    <style>
+      body {
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body class="bg-yellow">
-    <form id="login-form" class="d-none position-absolute top-0 end-0 mt-3 me-3 gap-2">
-      <input type="text" placeholder="username" class="border-0 rounded p-2 shadow ">
+    <form id="login-form" class="d-flex position-absolute top-0 end-0 mt-3 me-3 gap-2">
+      <input id="username-feild" type="text" placeholder="username" class="border-0 rounded p-2 shadow ">
       <input type="submit" id="login-button" class="border-0 rounded bg-black text-white p-2 shadow" value="log in">
     </form>
-    <div id="theme-selector" class="d-flex position-absolute top-0 end-0 mt-3 me-3 gap-3 align-items-center">
+    <div id="theme-selector" class="d-none position-absolute top-0 end-0 mt-3 me-3 gap-3 align-items-center">
       <div class="gap-1 d-flex">
         <theme-button-component color="red" active="false"></theme-button-component>
         <theme-button-component color="yellow" active="true"></theme-button-component>
