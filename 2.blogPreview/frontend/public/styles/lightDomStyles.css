@@ -22,3 +22,7 @@
         font-display: swap;
     }
 }
+
+.center-item {
+    place-items: center;
+}

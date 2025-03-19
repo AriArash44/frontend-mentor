@@ -18,9 +18,9 @@ class AvatarComponent extends HTMLElement {
         img.src = this.getAttribute('src') || '';
         img.alt = this.getAttribute('alt') || '';
 
-        const head3 = wrapper.querySelector('h3');
-        if (head3) {
-            head3.textContent = this.getAttribute('txt') || '';
+        const head5 = wrapper.querySelector('h5');
+        if (head5) {
+            head5.textContent = this.getAttribute('txt') || '';
         } else {
             console.warn("avatar.html does not include an <h3> element!");
         }
