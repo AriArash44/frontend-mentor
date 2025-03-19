@@ -1,17 +1,38 @@
-
-
-.bg-yellow{
-    background-color: #F4D04E;
+@font-face {
+    font-family: 'figtree';
+    src: url('/fonts/static/Figtree-Medium.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
 }
 
-.bg-green{
-    background-color: #4CAF50;
+@font-face {
+    font-family: 'figtree';
+    src: url('/fonts/static/Figtree-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-display: swap;
 }
 
-.bg-red{
-    background-color: #E63946;
+@supports (font-variation-settings: normal) {
+    @font-face {
+        font-family: 'figtree';
+        src: url('/fonts/static/Figtree-VariableFont_wght.ttf') format('truetype');
+        font-weight: 100 900;
+        font-display: swap;
+    }
 }
 
-.bg-blue{
-    background-color: #4A90E2;
+.bg-yellow {
+    background-color: #f4d04e;
+}
+
+.bg-green {
+    background-color: #4caf50;
+}
+
+.bg-red {
+    background-color: #e63946;
+}
+
+.bg-blue {
+    background-color: #4a90e2;
 }
