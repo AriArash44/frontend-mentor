@@ -1,5 +1,6 @@
 import { getCookie, isCookieValid } from "../utils/cookieHandler";
-import { apiPost } from "../utils/requestHandler";
+import { themes } from "../consts/themeMapper";
+// import { apiPost } from "../utils/requestHandler";
 
 export class ThemeStore {
     private static instance: ThemeStore;
@@ -23,8 +24,8 @@ export class ThemeStore {
 
     public setTheme(newTheme: string): void {
         this.theme = newTheme;
-        apiPost('/api/userPreferences/bz', {"theme": newTheme})
-        document.body.className = "";
-        document.body.classList.add(`theme-${newTheme}`);
+        // apiPost('/api/userPreferences/bz', {"theme": newTheme})
+        document.documentElement.style.setProperty('--theme-color', themes[newTheme as keyof typeof themes]);
+        document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${newTheme}.svg`);
     }
 }

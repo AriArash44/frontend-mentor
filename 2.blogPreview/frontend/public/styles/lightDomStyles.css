@@ -27,8 +27,12 @@
     place-items: center;
 }
 
+.bg-theme {
+    background-color: var(--theme-color);
+}
+
 #active-header:hover {
-    color: #f4d04e;
+    color: var(--theme-color);
     cursor: pointer;
 }
 

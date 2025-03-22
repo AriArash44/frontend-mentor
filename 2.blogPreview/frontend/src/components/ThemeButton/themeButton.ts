@@ -3,6 +3,10 @@ import themeButtonStyles from './themeButton.css?raw';
 import bootstrapCss from 'bootstrap/dist/css/bootstrap.min.css?raw';
 
 class ThemeButtonComponent extends HTMLElement {
+    static get observedAttributes() {
+        return ['active'];
+    }
+
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -29,6 +33,21 @@ class ThemeButtonComponent extends HTMLElement {
                 })
             );
         });
+    }
+
+    attributeChangedCallback(name: string, newValue: string) {
+        if (name === 'active') {
+            this.updateActiveness(newValue);
+        }
+    }
+
+    updateActiveness(activeness: string) {
+        if(activeness === 'true') {
+            this.shadowRoot?.querySelector('button')?.classList.add('border-4');
+        }
+        else {
+            this.shadowRoot?.querySelector('button')?.classList.remove('border-4');
+        }
     }
 }
 
