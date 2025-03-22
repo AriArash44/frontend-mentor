@@ -16,8 +16,19 @@ class ThemeButtonComponent extends HTMLElement {
             button?.classList.add('border-4');
         }
         const theme = this.getAttribute('color');
-        button?.classList.add("bg-" + theme);
+        button?.classList.add('bg-' + theme);
         shadow.appendChild(wrapper);
+        button?.addEventListener('click', () => {
+            this.dispatchEvent(
+                new CustomEvent('buttonClicked', {
+                    detail: {
+                        color: this.getAttribute('color'),
+                    },
+                    bubbles: true,
+                    composed: true,
+                })
+            );
+        });
     }
 }
 

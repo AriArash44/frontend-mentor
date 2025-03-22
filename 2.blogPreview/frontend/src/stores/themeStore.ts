@@ -23,8 +23,6 @@ export class ThemeStore {
 
     public setTheme(newTheme: string): void {
         this.theme = newTheme;
-        //TODO: does we need to add the class of theme to document.body?
-        //TODO: we need another singelton connected to the localhost for the username
         apiPost('/api/userPreferences/bz', {"theme": newTheme})
         document.body.className = "";
         document.body.classList.add(`theme-${newTheme}`);
