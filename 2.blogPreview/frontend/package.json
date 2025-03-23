@@ -18,6 +18,7 @@
     "bootstrap": "^5.3.3",
     "prettier": "^3.5.3",
     "selenium": "^2.20.0",
-    "selenium-webdriver": "^4.29.0"
+    "selenium-webdriver": "^4.29.0",
+    "toastify-js": "^1.12.0"
   }
 }
