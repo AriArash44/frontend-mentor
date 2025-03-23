@@ -1,4 +1,5 @@
 import avatarTemplate from './avatar.html?raw';
+import avatarStyles from './avatar.css?raw';
 import bootstrapCss from 'bootstrap/dist/css/bootstrap.min.css?raw';
 
 class AvatarComponent extends HTMLElement {
@@ -6,7 +7,7 @@ class AvatarComponent extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
         const styleElem = document.createElement('style');
-        styleElem.textContent = bootstrapCss;
+        styleElem.textContent = bootstrapCss.concat(avatarStyles);
         shadow.appendChild(styleElem);
         const wrapper = document.createElement('div');
         wrapper.innerHTML = avatarTemplate;

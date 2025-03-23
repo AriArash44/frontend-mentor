@@ -1,5 +1,8 @@
 :root {
     --theme-color: #f4d04e;
+    --min-font: 1.5rem;
+    --preferred-font: 1.5vw;
+    --max-font: 2.5rem;
 }
 
 @font-face {
@@ -27,4 +30,20 @@
 
 * {
     font-family: figtree;
+}
+
+.fs-dynamic {
+    font-size: clamp(var(--min-font, 1rem), var(--preferred-font, 2.5vw), var(--max-font, 2rem));
+}
+
+.fs-small {
+    --min-font: 0.9rem;
+    --preferred-font: 1.2vw;
+    --max-font: 1rem;
+}
+
+.fs-large {
+    --min-font: 1.45rem;
+    --preferred-font: 1.8vw;
+    --max-font: 1.65rem;
 }

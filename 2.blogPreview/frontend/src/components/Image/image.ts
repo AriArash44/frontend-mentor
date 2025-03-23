@@ -6,7 +6,7 @@ class ImageComponent extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
         const style = document.createElement('style');
-        style.textContent = bootstrapCss.concat(bootstrapCss);
+        style.textContent = bootstrapCss;
         shadow.appendChild(style);
         const wrapper = document.createElement('div');
         wrapper.innerHTML = imageTemplate;
