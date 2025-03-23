@@ -12,25 +12,27 @@
     </style>
   </head>
   <body class="bg-theme">
-    <form id="login-form" class="d-flex position-absolute top-0 end-0 mt-3 me-3 gap-2">
-      <input id="username-feild" type="text" placeholder="username" class="border-0 rounded p-2 shadow ">
-      <input type="submit" id="login-button" class="border-0 rounded bg-black text-white p-2 shadow" value="log in">
-    </form>
-    <div id="theme-selector" class="d-none position-absolute top-0 end-0 mt-3 me-3 gap-3 align-items-center">
-      <div class="gap-1 d-flex">
-        <theme-button-component color="red" active="false"></theme-button-component>
-        <theme-button-component color="yellow" active="true"></theme-button-component>
-        <theme-button-component color="green" active="false"></theme-button-component>
-        <theme-button-component color="blue" active="false"></theme-button-component>
+    <header>
+      <form id="login-form" class="d-flex position-absolute top-0 end-0 mt-3 me-3 gap-2">
+        <input id="username-feild" type="text" placeholder="username" class="border-0 rounded p-2 shadow ">
+        <input type="submit" id="login-button" class="border-0 rounded bg-black text-white p-2 shadow" value="log in">
+      </form>
+      <div id="theme-selector" class="d-none position-absolute top-0 end-0 mt-3 me-3 gap-3 align-items-center">
+        <div class="gap-1 d-flex">
+          <theme-button-component color="red" active="false"></theme-button-component>
+          <theme-button-component color="yellow" active="true"></theme-button-component>
+          <theme-button-component color="green" active="false"></theme-button-component>
+          <theme-button-component color="blue" active="false"></theme-button-component>
+        </div>
+        <button id="logout-button" class="border-0 rounded bg-black text-white p-2 shadow">log out</button>
       </div>
-      <button id="logout-button" class="border-0 rounded bg-black text-white p-2 shadow">log out</button>
-    </div>
+    </header>
     <main class="d-grid center-item min-vh-100">
       <h1 class="sr-only">blog preview app</h1>
       <card-component>
         <image-component id="card-image" src="/images/illustration-article-yellow.svg"/></image-component>
         <section>
-          <p class="fw-bold rounded bg-yellow p-2 mt-3 d-inline-block">Learning</p>
+          <p class="fw-bold rounded bg-theme p-2 mt-3 d-inline-block">Learning</p>
           <p>Published 21 Dec 2023</p>
           <h3 id="active-header" class="fw-bold">HTML & CSS foundations</h3>
           <p>These languages are the backbone of every website, defining structure, content, and presentation</p>

@@ -35,7 +35,7 @@ class ThemeButtonComponent extends HTMLElement {
         });
     }
 
-    attributeChangedCallback(name: string, newValue: string) {
+    attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
         if (name === 'active') {
             this.updateActiveness(newValue);
         }
