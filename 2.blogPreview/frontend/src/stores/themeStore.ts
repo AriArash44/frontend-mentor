@@ -26,7 +26,7 @@ export class ThemeStore {
     public async setTheme(newTheme: string) {
         this.theme = newTheme;
         try {
-            const response: UsernameApiResponse = await apiGet('/api/authentication/username', );
+            const response: UsernameApiResponse = await apiGet('/api/authentication/username', {}, true);
             apiPost(`/api/userPreferences/${response["username"]}`, {"theme": newTheme}, true)
             document.documentElement.style.setProperty('--theme-color', themes[newTheme as keyof typeof themes]);
             document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${newTheme}.svg`);
