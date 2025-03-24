@@ -55,11 +55,11 @@ themeButtons.forEach((clikedThemeButton) => {
                 otherThemeButton.setAttribute('active', 'false');
                 ThemeStore.getInstance().setTheme(customEvent.detail.color); 
             });
-            loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'false');
+            // loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'false');
         }
         catch(error){
             console.log(error);
-            loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'false');
+            // loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'false');
         }
     });
 });

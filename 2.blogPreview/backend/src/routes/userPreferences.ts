@@ -33,6 +33,8 @@ router.get('/:username', (req, res) => {
             const userPreference: UserPreference = { theme: results[0].color };
             res.cookie('user_theme', results[0].color, {
                 maxAge: 60 * 60 * 1000,
+                sameSite: 'none',
+                secure: true,
                 httpOnly: true,
             });
             return res.json(userPreference);
@@ -76,6 +78,8 @@ router.post('/:username', (req, res) => {
                 }
                 res.cookie('user_theme', theme, {
                     maxAge: 60 * 60 * 1000,
+                    sameSite: 'none',
+                    secure: true,
                     httpOnly: true,
                 });
                 return res.sendStatus(200);
