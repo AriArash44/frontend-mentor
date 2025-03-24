@@ -15,7 +15,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
 const server = http.createServer(app);
 setupWebSocket(server);
