@@ -45,21 +45,21 @@ logoutButton?.addEventListener('click', () => {
 });
 
 themeButtons.forEach((clikedThemeButton) => {
-    clikedThemeButton.addEventListener("buttonClicked", (event) => {
+    clikedThemeButton.addEventListener("buttonClicked", async (event) => {
         try{
-            loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'true');
+            loader?.setAttribute('active', 'true');
             const customEvent = event as CustomEvent;
+            await ThemeStore.getInstance().setTheme(customEvent.detail.color); 
             clikedThemeButton.setAttribute('active', 'true');
             const otherThemeButtons = Array.from(themeButtons).filter((themeButton) => themeButton !== clikedThemeButton);
             otherThemeButtons.forEach((otherThemeButton) => {
                 otherThemeButton.setAttribute('active', 'false');
-                ThemeStore.getInstance().setTheme(customEvent.detail.color); 
             });
-            // loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'false');
+            loader?.setAttribute('active', 'false');
         }
         catch(error){
             console.log(error);
-            // loader?.shadowRoot?.querySelector('div')?.setAttribute('active', 'false');
+            loader?.setAttribute('active', 'false');
         }
     });
 });

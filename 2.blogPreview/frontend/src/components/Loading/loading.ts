@@ -16,7 +16,7 @@ class LoadingComponent extends HTMLElement {
         const wrapper = document.createElement('div');
         wrapper.innerHTML = loadingTemplate;
         if(this.getAttribute('active') === "false") {
-            wrapper.querySelector('div')?.classList.add('d-none');
+            wrapper.classList.add('d-none');
         }
         shadow.appendChild(wrapper);
     }

@@ -7,6 +7,7 @@ import setupWebSocket from './websocket.js';
 import http from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { allowedOrigins } from './consts/allowedOrigin.js';
 
 dotenv.config();
 
@@ -16,7 +17,13 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: true,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 
