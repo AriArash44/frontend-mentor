@@ -20,17 +20,20 @@ const loader = document.querySelector("loading-component");
 loginButton?.addEventListener('click', async (event) => {
     event.preventDefault();
     if(usernameFeild?.value?.trim()) {
-        loginForm?.classList.remove("d-flex");
-        loginForm?.classList.add("d-none");
-        themeSelector?.classList.remove("d-none");
-        themeSelector?.classList.add("d-flex");
+        loader?.setAttribute('active', 'true');
         try {
             const response: LoginApiResponse = await apiGet(`/api/authentication/login/${usernameFeild?.value?.trim()}`);
             localStorage.setItem('access-token', response.accessToken);
             localStorage.setItem('refresh-token', response.refreshToken);
+            loginForm?.classList.remove("d-flex");
+            loginForm?.classList.add("d-none");
+            themeSelector?.classList.remove("d-none");
+            themeSelector?.classList.add("d-flex");
+            loader?.setAttribute('active', 'false');
         }
         catch(err) {
             console.log(err);
+            loader?.setAttribute('active', 'false');
         }
     }
 });

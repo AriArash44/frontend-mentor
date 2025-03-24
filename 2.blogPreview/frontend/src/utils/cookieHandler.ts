@@ -1,9 +1,10 @@
 export function getCookie(name: string) {
+    console.log(document.cookie);
     const cookies = document.cookie
         .split(';')
         .map((cookie) => cookie.trim().split('='))
         .filter(([key]) => key === name);
-
+    console.log(cookies);
     return cookies.length ? decodeURIComponent(cookies[0][1]) : null;
 }
 
