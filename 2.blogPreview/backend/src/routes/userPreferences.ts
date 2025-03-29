@@ -32,10 +32,9 @@ router.get('/:username', (req, res) => {
             }
             const userPreference: UserPreference = { theme: results[0].color };
             res.cookie('user_theme', results[0].color, {
-                maxAge: 60 * 60 * 1000,
+                maxAge: 60 * 1000,
                 sameSite: 'none',
                 secure: true,
-                httpOnly: true,
             });
             return res.json(userPreference);
         }
@@ -77,15 +76,15 @@ router.post('/:username', (req, res) => {
                     }
                 }
                 res.cookie('user_theme', theme, {
-                    maxAge: 60 * 60 * 1000,
+                    maxAge: 60 * 1000,
                     sameSite: 'none',
                     secure: true,
-                    httpOnly: true,
                 });
                 return res.sendStatus(200);
             }
         );
     } catch(err: unknown) {
+        console.log(err);
         const message = err instanceof Error ? err.message : 'An unknown error occurred';
         res.status(500).json({ message });
     }

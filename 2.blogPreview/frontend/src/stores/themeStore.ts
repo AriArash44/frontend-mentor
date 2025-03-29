@@ -1,4 +1,4 @@
-import { getCookie, isCookieValid } from "../utils/cookieHandler";
+import { getCookie } from "../utils/cookieHandler";
 import { themes } from "../consts/themeMapper";
 import { apiPost, apiGet } from "../utils/requestHandler";
 import { UsernameApiResponse } from "../types/usernameApiResponse";
@@ -7,7 +7,7 @@ export class ThemeStore {
     private static instance: ThemeStore;
     private theme: string = (() => {
         const cookieValue = getCookie('user_theme');
-        return cookieValue && isCookieValid(cookieValue) ? cookieValue : "yellow";
+        return cookieValue ? cookieValue : "yellow";
     })();
       
     private constructor() {}
@@ -16,6 +16,8 @@ export class ThemeStore {
         if (!ThemeStore.instance) {
             ThemeStore.instance = new ThemeStore();
         }
+        document.documentElement.style.setProperty('--theme-color', themes[ThemeStore.instance.getTheme() as keyof typeof themes]);
+        document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${ThemeStore.instance.getTheme()}.svg`);
         return ThemeStore.instance;
     }
 

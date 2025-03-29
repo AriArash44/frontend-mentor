@@ -68,5 +68,6 @@ themeButtons.forEach((clikedThemeButton) => {
 });
 
 window.onload = () => {
+    ThemeStore.getInstance();
     document.body.style.visibility = 'visible';
 };
