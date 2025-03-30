@@ -24,7 +24,7 @@ jest.mock('../utils/generateToken.js', () => ({
 
 import envValidator from '../utils/envValidator.js';
 import tokenChecker from '../utils/tokenChecker.js';
-import generateToken from '../utils/generateToken.js';
+import generateToken from '../utils/tokenGeneretor.js';
 
 const app = express();
 app.use(express.json());

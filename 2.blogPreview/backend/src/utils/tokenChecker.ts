@@ -13,7 +13,9 @@ function tokenChecker(token: string, tokenType: string) {
         if (err instanceof Error && err.message === 'Missing ACCESS_SECRET_KEY or REFRESH_SECRET_KEY in environment variables') {
             throw new Error(err.message);
         }
-        throw new Error('Invalid or expired token');
+        else {
+            throw new Error('Invalid or expired token');
+        }
     }
 }
 
