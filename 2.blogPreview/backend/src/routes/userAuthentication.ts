@@ -83,7 +83,7 @@ router.get('/username', (req, res) => {
     }
 });
 
-router.get('/username', (req, res) => {
+router.get('/logout', (req, res) => {
     const accessToken = req.cookies['access-token'];
     const refreshToken = req.cookies['refresh-token'];
     res.status(200).json("ok").cookie('access-token', accessToken ? accessToken : '', {
