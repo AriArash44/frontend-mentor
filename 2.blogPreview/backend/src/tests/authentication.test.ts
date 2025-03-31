@@ -2,6 +2,9 @@ import express from 'express';
 import request from 'supertest';
 import dotenv from 'dotenv';
 import router from '../routes/userAuthentication.js';
+import https from 'https';
+import fs from 'fs';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 process.env.ACCESS_SECRET_KEY = 'test_access';
@@ -17,35 +20,99 @@ jest.mock('../utils/tokenChecker.js', () => ({
     default: jest.fn(),
 }));
 
-jest.mock('../utils/generateToken.js', () => ({
+jest.mock('../utils/tokenGenerator.js', () => ({
     __esModule: true,
     default: jest.fn(),
 }));
 
 import envValidator from '../utils/envValidator.js';
 import tokenChecker from '../utils/tokenChecker.js';
-import generateToken from '../utils/tokenGeneretor.js';
+import tokenGenerator from '../utils/tokenGenerator.js';
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use('/api/authentication', router);
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+const server = https.createServer(
+    {
+        key: fs.readFileSync('../localhost-key.pem'),
+        cert: fs.readFileSync('../localhost-cert.pem'),
+    },
+    app
+);
+
+let serverInstance: any;
+let baseUrl: string;
+
+beforeAll(async () => {
+    await new Promise((resolve) => {
+        serverInstance = server.listen(3000, () => {
+            baseUrl = `https://localhost:3000`;
+            console.log(`HTTPS server running on ${baseUrl}`);
+            resolve(true);
+        });
+    });
+});
+
+afterAll(async () => {
+    serverInstance.close();
+});
+  
 describe('Authentication routes', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
-    
+
     describe('GET /login/:username', () => {
-        test('should return access and refresh tokens on success', async () => {
+        test('should return access and refresh token cookies on success', async () => {
             (envValidator as jest.Mock).mockImplementation(() => {});
-            (generateToken as jest.Mock)
+            (tokenGenerator as jest.Mock)
                 .mockImplementationOnce(() => 'access123')
                 .mockImplementationOnce(() => 'refresh123');
-            const response = await request(app).get('/api/authentication/login/john');
+            const response = await request(baseUrl).get(
+                '/api/authentication/login/john'
+            );
             expect(response.status).toBe(200);
+            expect(response.headers['set-cookie']).toEqual(
+                expect.arrayContaining([
+                    expect.stringContaining('access-token=access123'),
+                    expect.stringContaining('refresh-token=refresh123'),
+                ])
+            );
+        });
+
+        test('should return 500 if envValidator throws an error', async () => {
+            (envValidator as jest.Mock).mockImplementation(() => {
+                throw new Error('Env Error');
+            });
+            const response = await request(baseUrl).get(
+                '/api/authentication/login/john'
+            );
+            expect(response.status).toBe(500);
+            expect(response.body).toEqual({ message: 'Env Error' });
+        });
+
+        test('should return 401 if username doesnt exist in access-token cookie', async () => {
+            (tokenChecker as jest.Mock).mockReturnValue({});
+            const response = await request(baseUrl)
+                .get('/api/authentication/username')
+                .set('Cookie', ['access-token=some-valid-token']);
+            expect(response.status).toBe(401);
             expect(response.body).toEqual({
-                accessToken: 'access123',
-                refreshToken: 'refresh123',
+                message: 'Username not found in token',
+            });
+        });
+
+        test('should return 401 if access-token is Invalid', async () => {
+            const response = await request(baseUrl)
+                .get('/api/authentication/username')
+                .set('Cookie', ['access-token=Invalid_access_token']);
+            expect(response.status).toBe(401);
+            expect(response.body).toEqual({
+                message: 'Invalid or expired token',
             });
         });
 
@@ -53,88 +120,82 @@ describe('Authentication routes', () => {
             (envValidator as jest.Mock).mockImplementation(() => {
                 throw new Error('Env Error');
             });
-            const response = await request(app).get('/api/authentication/login/john');
+            const response = await request(baseUrl).get(
+                '/api/authentication/username'
+            );
             expect(response.status).toBe(500);
             expect(response.body).toEqual({ message: 'Env Error' });
         });
 
-        test('should return 401 if no Authorization header is provided', async () => {
-            const response = await request(app).get('/api/authentication/username');
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({
-                message: 'Authorization header missing',
-            });
-        });
-
-        test('should return 401 if Authorization header is malformed', async () => {
-            const response = await request(app)
-                .get('/api/authentication/username')
-                .set('Authorization', 'InvalidToken');
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({
-                message: 'Authorization header missing',
-            });
-        });
-
-        test('should return 200 with the username when token is valid', async () => {
+        test('should return 200 with the username when access token is valid', async () => {
             (tokenChecker as jest.Mock).mockReturnValue({ username: 'john' });
-            const response = await request(app)
+            const response = await request(baseUrl)
                 .get('/api/authentication/username')
-                .set('Authorization', 'Bearer some-valid-token');
+                .set('Cookie', ['access-token=some-valid-token']);
             expect(response.status).toBe(200);
             expect(response.body).toEqual({ username: 'john' });
         });
 
-        test('should return 401 if tokenChecker returns an object with no username', async () => {
-            (tokenChecker as jest.Mock).mockReturnValue({ username: '' });
-            const response = await request(app)
+        test('should return 401 if access token is not provided and refresh token is invalid', async () => {
+            const response = await request(baseUrl)
                 .get('/api/authentication/username')
-                .set('Authorization', 'Bearer some-valid-token');
+                .set('Cookie', ['refresh-token=Invalid-refresh-token']);
+            expect(response.status).toBe(401);
+            expect(response.body).toEqual({
+                message: 'Invalid or expired token',
+            });
+        });
+
+        test('should return 401 if access token is not provided and username doesnt exist in refresh-token', async () => {
+            (tokenChecker as jest.Mock).mockReturnValue({});
+            const response = await request(baseUrl)
+                .get('/api/authentication/username')
+                .set('Cookie', ['refresh-token=some-valid-token']);
             expect(response.status).toBe(401);
             expect(response.body).toEqual({
                 message: 'Username not found in token',
             });
         });
 
-        test('should return 401 if tokenChecker throws an error', async () => {
-            (tokenChecker as jest.Mock).mockImplementation(() => {
-                throw new Error('Invalid Token');
-            });
-            const response = await request(app)
-                .get('/api/authentication/username')
-                .set('Authorization', 'Bearer some-valid-token');
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ message: 'Invalid Token' });
-        });
-
-        test('should return 401 if no Authorization header is provided', async () => {
-            const response = await request(app).get('/api/authentication/refresh-token');
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({
-                message: 'Authorization header missing',
-            });
-        });
-
-        test('should return a new access token if tokenChecker succeeds', async () => {
+        test('should return 200 with the username and new access-token when access token id not provided but refresh token is valid', async () => {
             (tokenChecker as jest.Mock).mockReturnValue({ username: 'john' });
-            (generateToken as jest.Mock).mockReturnValue('newAccessToken');
-            const response = await request(app)
-                .get('/api/authentication/refresh-token')
-                .set('Authorization', 'Bearer some-refresh-token');
+            (tokenGenerator as jest.Mock).mockReturnValue('newAccess123');
+            const response = await request(baseUrl)
+                .get('/api/authentication/username')
+                .set('Cookie', ['access-token=some-valid-token']);
             expect(response.status).toBe(200);
-            expect(response.body).toEqual({ accessToken: 'newAccessToken' });
+            expect(response.body).toEqual({ username: 'john' });
+            expect(response.headers['set-cookie']).toEqual(
+                expect.arrayContaining([
+                    expect.stringContaining('access-token=newAccess123'),
+                ])
+            );
         });
 
-        test('should return 500 if tokenChecker throws an error', async () => {
-            (tokenChecker as jest.Mock).mockImplementation(() => {
-                throw new Error('Refresh Error');
-            });
-            const response = await request(app)
-                .get('/api/authentication/refresh-token')
-                .set('Authorization', 'Bearer some-refresh-token');
+        test('should return 401 if no access token and refresh token waas provided', async () => {
+            const response = await request(baseUrl).get(
+                '/api/authentication/username'
+            );
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual('Invalid or expired token');
+        });
 
-            expect(response.status).toBe(500);
-            expect(response.body).toEqual({ message: 'Refresh Error' });
+        test('should clear cookies and return 200 on logout', async () => {
+            const response = await request(baseUrl)
+                .get('/api/authentication/logout')
+                .set('Cookie', [
+                    'access-token=anyValue',
+                    'refresh-token=anyValue',
+                ]);
+            expect(response.status).toBe(200);
+            expect(response.body).toBe('ok');
+            expect(response.headers['set-cookie']).toEqual(
+                expect.arrayContaining([
+                    expect.stringContaining('access-token='),
+                    expect.stringContaining('refresh-token='),
+                    expect.stringContaining('Max-Age=0'),
+                ])
+            );
         });
     });
 });

@@ -15,6 +15,6 @@ module.exports = {
     '^../utils/tokenChecker.js$': '<rootDir>/src/utils/tokenChecker.ts',
     '^./envValidator.js': '<rootDir>/src/utils/envValidator.ts',
     '^../utils/envValidator.js': '<rootDir>/src/utils/envValidator.ts',
-    '^../utils/generateToken.js': '<rootDir>/src/utils/generateToken.ts',
+    '^../utils/tokenGenerator.js': '<rootDir>/src/utils/tokenGenerator.ts',
   }
 };

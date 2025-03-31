@@ -2,7 +2,7 @@ import express from 'express';
 import db from '../db.js';
 import { RowDataPacket } from 'mysql2';
 import tokenChecker from '../utils/tokenChecker.js';
-import generateToken from '../utils/tokenGeneretor.js';
+import generateToken from '../utils/tokenGenerator.js';
 
 const router = express.Router();
 

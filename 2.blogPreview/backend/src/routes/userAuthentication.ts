@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import envValidator from '../utils/envValidator.js';
 import tokenChecker from '../utils/tokenChecker.js';
-import generateToken from '../utils/tokenGeneretor.js';
+import generateToken from '../utils/tokenGenerator.js';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ router.get('/login/:username', (req, res) => {
         const { username } = req.params;
         const accessToken = generateToken({ username: username }, SECRET_KEY, { expiresIn: '1h' });
         const refreshToken = generateToken({ username: username }, REFRESH_SECRET_KEY, { expiresIn: '1d' });
-        res.status(200).json("ok").cookie('access-token', accessToken, {
+        res.status(200).cookie('access-token', accessToken, {
             maxAge: 60 * 60 * 1000,
             sameSite: 'none',
             secure: true,
@@ -26,7 +26,7 @@ router.get('/login/:username', (req, res) => {
             sameSite: 'none',
             secure: true,
             httpOnly: true
-        });
+        }).json("ok");
     } catch (err: unknown) {
         const message = err instanceof Error ? err.message : 'An unknown Error occuered!';
         res.status(500).json({ message });
@@ -57,12 +57,12 @@ router.get('/username', (req, res) => {
                 }
                 const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
                 const accessToken = generateToken({ username: username }, SECRET_KEY, { expiresIn: '1h' });
-                res.status(200).json({ username: username }).cookie('access-token', accessToken, {
+                res.status(200).cookie('access-token', accessToken, {
                     maxAge: 60 * 60 * 1000,
                     sameSite: 'none',
                     secure: true,
                     httpOnly: true
-                });
+                }).json({ username: username });
             } catch (err: unknown) {
                 if (err instanceof Error && (err.message === 'Username not found in token' || err.message === 'Invalid or expired token')) {
                     res.status(401).json({ message: err.message });
@@ -84,19 +84,17 @@ router.get('/username', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    const accessToken = req.cookies['access-token'];
-    const refreshToken = req.cookies['refresh-token'];
-    res.status(200).json("ok").cookie('access-token', accessToken ? accessToken : '', {
-        maxAge: 60 * 60 * 1000,
+    res.status(200).cookie('access-token', '', {
+        maxAge: 0,
         sameSite: 'none',
         secure: true,
         httpOnly: true
-    }).cookie('refresh-token', refreshToken ? refreshToken : '', {
-        maxAge: 24 * 60 * 60 * 1000,
+    }).cookie('refresh-token', '', {
+        maxAge: 0,
         sameSite: 'none',
         secure: true,
         httpOnly: true
-    });
+    }).json("ok");
 });
 
 export default router;
