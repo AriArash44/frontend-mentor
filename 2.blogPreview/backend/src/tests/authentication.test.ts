@@ -99,7 +99,7 @@ describe('Authentication routes', () => {
             (tokenChecker as jest.Mock).mockReturnValue({});
             const response = await request(baseUrl)
                 .get('/api/authentication/username')
-                .set('Cookie', ['access-token=some-valid-token']);
+                .set('Cookie', ['access-token=some_valid_token_without_username']);
             expect(response.status).toBe(401);
             expect(response.body).toEqual({
                 message: 'Username not found in token',
