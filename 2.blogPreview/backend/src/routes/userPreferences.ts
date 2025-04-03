@@ -3,6 +3,7 @@ import db from '../db.js';
 import { RowDataPacket } from 'mysql2';
 import tokenChecker from '../utils/tokenChecker.js';
 import generateToken from '../utils/tokenGenerator.js';
+import { errorMessages } from '../consts/errorMessages.js';
 
 const router = express.Router();
 
@@ -11,14 +12,14 @@ router.get('/:username', (req, res) => {
         const { username } = req.params;
         const accessToken = req.cookies['access-token'];
         if (!accessToken) {
-            throw new Error('Access token not provided');
+            throw new Error(errorMessages.accessTokenMissed);
         }
         const tokenUsername = tokenChecker(accessToken, 'ACCESS_SECRET_KEY').username;
         if (!tokenUsername) {
-            throw new Error('Username not found in token');
+            throw new Error(errorMessages.usernameNotInToken);
         }
         if (tokenUsername !== username) {
-            throw new Error('Invalid or expired token');
+            throw new Error(errorMessages.invalidToken);
         }
         db.query<RowDataPacket[]>(
             'SELECT color FROM preferences WHERE username = ?',
@@ -37,19 +38,19 @@ router.get('/:username', (req, res) => {
             }
         );
     } catch (err: unknown) {
-        if (err instanceof Error && err.message === 'Access token not provided') {
+        if (err instanceof Error && err.message === errorMessages.accessTokenMissed) {
             try{
                 const { username } = req.params;
                 const refreshToken = req.cookies['refresh-token'];
                 if (!refreshToken) {
-                    throw new Error('Invalid or expired token');
+                    throw new Error(errorMessages.invalidToken);
                 }
                 const tokenUsername = tokenChecker(refreshToken, 'REFRESH_SECRET_KEY').username;
                 if (!tokenUsername) {
-                    throw new Error('Username not found in token');
+                    throw new Error(errorMessages.usernameNotInToken);
                 }
                 if (tokenUsername !== username) {
-                    throw new Error('Invalid or expired token');
+                    throw new Error(errorMessages.invalidToken);
                 }
                 const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
                 const accessToken = generateToken({ username: username }, SECRET_KEY, { expiresIn: '1h' });
@@ -80,20 +81,20 @@ router.get('/:username', (req, res) => {
                     }
                 );
             } catch (err: unknown) {
-                if (err instanceof Error && (err.message === 'Username not found in token' || err.message === 'Invalid or expired token')) {
+                if (err instanceof Error && (err.message === errorMessages.usernameNotInToken || err.message === errorMessages.invalidToken)) {
                     res.status(401).json({ message: err.message });
                 }
                 else {
-                    const message = err instanceof Error ? err.message : 'An unknown error occurred';
+                    const message = err instanceof Error ? err.message : errorMessages.unknownError;
                     res.status(500).json({ message });
                 }
             }
         }
-        else if (err instanceof Error && (err.message === 'Username not found in token' || err.message === 'Invalid or expired token')) {
+        else if (err instanceof Error && (err.message === errorMessages.usernameNotInToken || err.message === errorMessages.invalidToken)) {
             res.status(401).json({ message: err.message });
         }
         else {
-            const message = err instanceof Error ? err.message : 'An unknown error occurred';
+            const message = err instanceof Error ? err.message : errorMessages.unknownError;
             res.status(500).json({ message });
         }
     }

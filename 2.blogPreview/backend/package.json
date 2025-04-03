@@ -5,8 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "jest",
-    "man_test": "node src/man_test.js"
+    "test": "jest"
   },
   "keywords": [],
   "type": "module",

@@ -1,5 +1,4 @@
-export const allowedOrigins = [
-    'http://localhost:5173', 
+export const allowedOrigins = [ 
     'https://localhost:5173',
-    'https://localhost:3000' 
+    'https://localhost:3000'
 ];

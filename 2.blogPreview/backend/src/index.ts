@@ -14,8 +14,7 @@ import fs from 'fs';
 dotenv.config();
 
 const app = express();
-// const PORT = process.env.PORT || 5000;
-const PORT = 443;
+const PORT = process.env.PORT || 443;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -30,13 +29,13 @@ app.use(cors({
     credentials: true
 }));
 
-const server = http.createServer(app);
-setupWebSocket(server);
+const wsServer = http.createServer(app);
+setupWebSocket(wsServer);
 
 app.use('/api/userPreferences', preferenceRouter);
 app.use('/api/authentication', authenticationRouter);
 
-const server2 = https.createServer(
+const httpsServer = https.createServer(
     {
         key: fs.readFileSync('../localhost-key.pem'),
         cert: fs.readFileSync('../localhost-cert.pem'),
@@ -44,9 +43,9 @@ const server2 = https.createServer(
     app
 );
 
-server2.listen(443, () => {
-    const baseUrl = `https://localhost:443`;
+httpsServer.listen(PORT, () => {
+    const baseUrl = `https://localhost:${PORT}`;
     console.log(`HTTPS server running on ${baseUrl}`);
 });
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 // export default app;
