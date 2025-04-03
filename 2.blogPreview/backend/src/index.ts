@@ -8,11 +8,14 @@ import http from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { allowedOrigins } from './consts/allowedOrigin.js';
+import https from 'https';
+import fs from 'fs';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
+const PORT = 443;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -33,5 +36,17 @@ setupWebSocket(server);
 app.use('/api/userPreferences', preferenceRouter);
 app.use('/api/authentication', authenticationRouter);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server2 = https.createServer(
+    {
+        key: fs.readFileSync('../localhost-key.pem'),
+        cert: fs.readFileSync('../localhost-cert.pem'),
+    },
+    app
+);
+
+server2.listen(443, () => {
+    const baseUrl = `https://localhost:443`;
+    console.log(`HTTPS server running on ${baseUrl}`);
+});
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // export default app;

@@ -1,6 +1,7 @@
 import envValidator from './envValidator.js';
 import jwt from 'jsonwebtoken'; 
 import dotenv from 'dotenv';
+import { error } from 'console';
 
 dotenv.config();
 
@@ -9,9 +10,8 @@ function tokenChecker(token: string, tokenType: string) {
         envValidator();
         const SECRET_KEY = process.env[tokenType]!;
         const verifiedToken = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
-        console.log(verifiedToken);
         if(!verifiedToken){
-            throw new Error('Invalid or expired token');
+            throw new Error();
         }
         return verifiedToken;
     } catch (err) {
@@ -19,7 +19,7 @@ function tokenChecker(token: string, tokenType: string) {
             throw new Error(err.message);
         }
         else {
-            throw err;
+            throw new Error('Invalid or expired token');
         }
     }
 }

@@ -39,7 +39,8 @@ router.get('/username', (req, res) => {
         if (!accessToken) {
             throw new Error('Access token not provided');
         }
-        const username = tokenChecker(accessToken, 'ACCESS_SECRET_KEY').username;
+        const decodedToken = tokenChecker(accessToken, 'ACCESS_SECRET_KEY');
+        const username = decodedToken?.username;
         if (!username) {
             throw new Error('Username not found in token');
         }
