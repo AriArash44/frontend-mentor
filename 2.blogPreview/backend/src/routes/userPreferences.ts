@@ -1,202 +1,64 @@
 import express from 'express';
-import db from '../db.js';
-import { RowDataPacket } from 'mysql2';
-import tokenChecker from '../utils/tokenChecker.js';
-import generateToken from '../utils/tokenGenerator.js';
 import { errorMessages } from '../consts/errorMessages.js';
+import { extractUsernameFromAccessToken, handleRefreshToken } from '../utils/authTokenHandler.js';
+import { accessCookieOptions } from '../consts/cookieOptions.js';
+import { getUserPreferences, setUserPreferences } from '../utils/dbQueries.js';
 
 const router = express.Router();
+const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
+const REFRESH_SECRET_KEY = process.env.REFRESH_SECRET_KEY!;
 
-router.get('/:username', (req, res) => {
+router.get('/:username', async (req, res) => {
     try {
         const { username } = req.params;
-        const accessToken = req.cookies['access-token'];
-        if (!accessToken) {
-            throw new Error(errorMessages.accessTokenMissed);
-        }
-        const tokenUsername = tokenChecker(accessToken, 'ACCESS_SECRET_KEY').username;
-        if (!tokenUsername) {
-            throw new Error(errorMessages.usernameNotInToken);
-        }
-        if (tokenUsername !== username) {
-            throw new Error(errorMessages.invalidToken);
-        }
-        db.query<RowDataPacket[]>(
-            'SELECT color FROM preferences WHERE username = ?',
-            [username],
-            (err, results) => {
-                if (err) {
-                    console.error(err);
-                    throw new Error('Error from DB server');
-                }
-                else if (results.length === 0) {
-                    res.status(404).json({ error: 'User not found' });
-                }
-                else {
-                    res.status(200).json({ theme: results[0].color });
-                }
-            }
-        );
-    } catch (err: unknown) {
-        if (err instanceof Error && err.message === errorMessages.accessTokenMissed) {
-            try{
-                const { username } = req.params;
-                const refreshToken = req.cookies['refresh-token'];
-                if (!refreshToken) {
-                    throw new Error(errorMessages.invalidToken);
-                }
-                const tokenUsername = tokenChecker(refreshToken, 'REFRESH_SECRET_KEY').username;
-                if (!tokenUsername) {
-                    throw new Error(errorMessages.usernameNotInToken);
-                }
-                if (tokenUsername !== username) {
-                    throw new Error(errorMessages.invalidToken);
-                }
-                const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
-                const accessToken = generateToken({ username: username }, SECRET_KEY, { expiresIn: '1h' });
-                db.query<RowDataPacket[]>(
-                    'SELECT color FROM preferences WHERE username = ?',
-                    [username],
-                    (err, results) => {
-                        if (err) {
-                            console.error(err);
-                            throw new Error('Error from DB server');
-                        }
-                        else if (results.length === 0) {
-                            res.status(404).json({ error: 'User not found' }).cookie('access-token', accessToken, {
-                                maxAge: 60 * 60 * 1000,
-                                sameSite: 'none',
-                                secure: true,
-                                httpOnly: true
-                            });
-                        }
-                        else {
-                            res.status(200).json({ theme: results[0].color }).cookie('access-token', accessToken, {
-                                maxAge: 60 * 60 * 1000,
-                                sameSite: 'none',
-                                secure: true,
-                                httpOnly: true
-                            });
-                        }
-                    }
-                );
-            } catch (err: unknown) {
-                if (err instanceof Error && (err.message === errorMessages.usernameNotInToken || err.message === errorMessages.invalidToken)) {
-                    res.status(401).json({ message: err.message });
-                }
-                else {
-                    const message = err instanceof Error ? err.message : errorMessages.unknownError;
-                    res.status(500).json({ message });
-                }
+        try {
+            const tokenUsername = extractUsernameFromAccessToken(req, SECRET_KEY);
+            if (tokenUsername !== username) throw new Error(errorMessages.invalidToken);
+            const color = await getUserPreferences(username);
+            const status = !color ? 404 : 200;
+            const response = !color ? { error: errorMessages.userMissed } : { theme: color };
+            res.status(status).json(response);
+        } catch (err) {
+            if (err instanceof Error && err.message === errorMessages.accessTokenMissed) {
+                const { username, accessToken } = handleRefreshToken(req, SECRET_KEY, REFRESH_SECRET_KEY);
+                const color = await getUserPreferences(username);
+                const status = !color ? 404 : 200;
+                const response = !color ? { error: errorMessages.userMissed } : { theme: color };
+                res.status(status).cookie('access-token', accessToken, accessCookieOptions)
+                    .json(response);
+            } else {
+                throw err;
             }
         }
-        else if (err instanceof Error && (err.message === errorMessages.usernameNotInToken || err.message === errorMessages.invalidToken)) {
-            res.status(401).json({ message: err.message });
-        }
-        else {
-            const message = err instanceof Error ? err.message : errorMessages.unknownError;
-            res.status(500).json({ message });
-        }
+    } catch (err) {
+        const message = err instanceof Error ? err.message : errorMessages.unknownError;
+        res.status(err instanceof Error && (err.message === errorMessages.invalidToken || err.message === errorMessages.usernameNotInToken) ? 401 : 500).json({ message });
     }
 });
 
-router.post('/:username', (req, res) => {
+router.post('/:username', async (req, res) => {
     try {
         const { username } = req.params;
         const { theme } = req.body;
-        const accessToken = req.cookies['access-token'];
-        if (!accessToken) {
-            throw new Error('Access token not provided');
-        }
-        const tokenUsername = tokenChecker(accessToken, 'ACCESS_SECRET_KEY').username;
-        if (!tokenUsername) {
-            throw new Error('Username not found in token');
-        }
-        if (tokenUsername !== username) {
-            throw new Error('Invalid or expired token');
-        }
-        db.query<RowDataPacket[]>(
-            'REPLACE INTO preferences (username, color) VALUES (?, ?)',
-            [username, theme],
-            (err) => {
-                if (err) {
-                    if (err.code === 'ER_CHECK_CONSTRAINT_VIOLATED' || err.code === 'ER_DATA_TOO_LONG') {
-                        res.status(400).json({ error: 'Invalid color value' });
-                    } else {
-                        res.status(500).json({ error: 'Error from DB server' });
-                    }
-                }
-                else { 
-                    res.status(200).json({ theme: theme });
-                }
-            }
-        );
-    } catch (err: unknown) {
-        if (err instanceof Error && err.message === 'Access token not provided') {
-            try{
-                const { username } = req.params;
-                const { theme } = req.body;
-                const refreshToken = req.cookies['refresh-token'];
-                if (!refreshToken) {
-                    throw new Error('Invalid or expired token');
-                }
-                const tokenUsername = tokenChecker(refreshToken, 'REFRESH_SECRET_KEY').username;
-                if (!tokenUsername) {
-                    throw new Error('Username not found in token');
-                }
-                if (tokenUsername !== username) {
-                    throw new Error('Invalid or expired token');
-                }
-                const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
-                const accessToken = generateToken({ username: username }, SECRET_KEY, { expiresIn: '1h' });
-                db.query<RowDataPacket[]>(
-                    'REPLACE INTO preferences (username, color) VALUES (?, ?)',
-                    [username, theme],
-                    (err) => {
-                        if (err) {
-                            if (err.code === 'ER_CHECK_CONSTRAINT_VIOLATED' || err.code === 'ER_DATA_TOO_LONG') {
-                                res.status(400).json({ error: 'Invalid color value' }).cookie('access-token', accessToken, {
-                                    maxAge: 60 * 60 * 1000,
-                                    sameSite: 'none',
-                                    secure: true,
-                                    httpOnly: true
-                                });
-                            } else {
-                                res.status(500).json({ error: 'Error from DB server' }).cookie('access-token', accessToken, {
-                                    maxAge: 60 * 60 * 1000,
-                                    sameSite: 'none',
-                                    secure: true,
-                                    httpOnly: true
-                                });
-                            }
-                        }
-                        else { 
-                            res.status(200).json({ theme: theme }).cookie('access-token', accessToken, {
-                                maxAge: 60 * 60 * 1000,
-                                sameSite: 'none',
-                                secure: true,
-                                httpOnly: true
-                            });
-                        }
-                    }
-                );
-            } catch (err: unknown) {
-                if (err instanceof Error && (err.message === 'Username not found in token' || err.message === 'Invalid or expired token')) {
-                    res.status(401).json({ message: err.message });
-                }
-                else {
-                    const message = err instanceof Error ? err.message : 'An unknown error occurred';
-                    res.status(500).json({ message });
-                }
+        try {
+            const tokenUsername = extractUsernameFromAccessToken(req, SECRET_KEY);
+            if (tokenUsername !== username) throw new Error(errorMessages.invalidToken);
+            await setUserPreferences(username, theme);
+            res.status(200).json({ theme });
+        } catch (err) {
+            if (err instanceof Error && err.message === errorMessages.accessTokenMissed) {
+                const { username: refreshedUsername, accessToken } = handleRefreshToken(req, SECRET_KEY, REFRESH_SECRET_KEY);
+                await setUserPreferences(refreshedUsername, theme);
+                res.status(200).cookie('access-token', accessToken, accessCookieOptions)
+                    .json({ theme });
+            } else {
+                throw err;
             }
         }
-        else if (err instanceof Error && (err.message === 'Username not found in token' || err.message === 'Invalid or expired token')) {
-            res.status(401).json({ message: err.message });
-        }
-        else {
-            const message = err instanceof Error ? err.message : 'An unknown error occurred';
-            res.status(500).json({ message });
-        }
+    } catch (err) {
+        const status = (err instanceof Error && (err as any).status) ? (err as any).status : 500;
+        const message = err instanceof Error ? err.message : errorMessages.unknownError;
+        res.status(status).json({ error: message });
     }
 });
 
