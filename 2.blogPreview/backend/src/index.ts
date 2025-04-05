@@ -15,6 +15,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 443;
+const WS_PORT = process.env.WS_PORT || 5001;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -30,7 +31,8 @@ app.use(cors({
 }));
 
 const wsServer = http.createServer(app);
-setupWebSocket(wsServer);
+const wss = setupWebSocket(wsServer);
+wsServer.listen(WS_PORT);
 
 app.use('/api/userPreferences', preferenceRouter);
 app.use('/api/authentication', authenticationRouter);
