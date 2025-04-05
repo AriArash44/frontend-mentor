@@ -1,6 +1,16 @@
 import { tokenChecker, generateToken } from './jwtTokenHandler.js';
 import { errorMessages } from '../consts/errorMessages.js';
+import dotenv from 'dotenv';
 import { Request } from 'express';
+
+dotenv.config();
+
+export function envValidator(): boolean {
+    if (!process.env.ACCESS_SECRET_KEY || !process.env.REFRESH_SECRET_KEY) {
+        return false;
+    }
+    return true;
+}
 
 export const handleRefreshToken = (req: Request, secretKey: string, refreshSecretKey: string) => {
     const refreshToken = req.cookies['refresh-token'];

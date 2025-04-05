@@ -2,7 +2,7 @@ import express from 'express';
 import { errorMessages } from '../consts/errorMessages.js';
 import { extractUsernameFromAccessToken, handleRefreshToken } from '../utils/authTokenHandler.js';
 import { accessCookieOptions } from '../consts/cookieOptions.js';
-import { getUserPreferences, setUserPreferences } from '../utils/dbQueries.js';
+import { getUserPreferences, setUserPreferences } from '../utils/dbQueryHandler.js';
 
 const router = express.Router();
 const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;

@@ -1,21 +1,16 @@
 import jwt from 'jsonwebtoken'; 
-import dotenv from 'dotenv';
+import { envValidator } from './authTokenHandler.js';
 import { errorMessages } from '../consts/errorMessages.js';
-
-dotenv.config();
-
-export function envValidator(): void {
-    if (!process.env.ACCESS_SECRET_KEY || !process.env.REFRESH_SECRET_KEY) {
-        throw new Error(errorMessages.envMissed);
-    }
-}
 
 export function tokenChecker(token: string, tokenType: string) {
     try {
-        envValidator();
+        const envValidated = envValidator();
+        if (!envValidated) {
+            throw new Error(errorMessages.envMissed)
+        }
         const SECRET_KEY = process.env[tokenType]!;
         const verifiedToken = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
-        if(!verifiedToken){
+        if (!verifiedToken){
             throw new Error();
         }
         return verifiedToken;
@@ -30,5 +25,9 @@ export function tokenChecker(token: string, tokenType: string) {
 }
 
 export function generateToken(payload: object, key: string, expiresIn: object): string {
-    return jwt.sign(payload, key, expiresIn);
+    try {
+        return jwt.sign(payload, key, expiresIn);
+    } catch(err) {
+        throw new Error(errorMessages.unknownError);
+    }
 }

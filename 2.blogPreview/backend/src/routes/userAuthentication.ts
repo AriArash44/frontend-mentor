@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { envValidator, generateToken } from '../utils/jwtTokenHandler.js';
+import { generateToken } from '../utils/jwtTokenHandler.js';
 import { errorMessages } from '../consts/errorMessages.js';
-import { extractUsernameFromAccessToken, handleRefreshToken } from '../utils/authTokenHandler.js';
+import { envValidator, extractUsernameFromAccessToken, handleRefreshToken } from '../utils/authTokenHandler.js';
 import { accessCookieOptions, refreshCookieOptions, clearCookieOptions} from '../consts/cookieOptions.js';
 
 dotenv.config();
@@ -13,7 +13,10 @@ const router = express.Router();
 
 router.get('/login/:username', (req, res) => {
     try {
-        envValidator();
+        const envValidated = envValidator();
+        if (!envValidated) {
+            throw new Error(errorMessages.envMissed)
+        }
         const { username } = req.params;
         const accessToken = generateToken({ username }, SECRET_KEY, { expiresIn: '1h' });
         const refreshToken = generateToken({ username }, REFRESH_SECRET_KEY, { expiresIn: '1d' });

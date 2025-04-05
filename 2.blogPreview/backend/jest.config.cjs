@@ -12,9 +12,11 @@ module.exports = {
     '^../routes/userAuthentication.js$': '<rootDir>/src/routes/userAuthentication.ts',
     '^../db.js$': '<rootDir>/src/db.ts',
     '^../websocket.js$': '<rootDir>/src/websocket.ts',
-    '^../utils/tokenChecker.js$': '<rootDir>/src/utils/tokenChecker.ts',
-    '^./envValidator.js': '<rootDir>/src/utils/envValidator.ts',
-    '^../utils/envValidator.js': '<rootDir>/src/utils/envValidator.ts',
-    '^../utils/tokenGenerator.js': '<rootDir>/src/utils/tokenGenerator.ts',
+    '^./jwtTokenHandler.js$': '<rootDir>/src/utils/jwtTokenHandler.ts',
+    '^./authTokenHandler.js$': '<rootDir>/src/utils/authTokenHandler.ts',
+    '^../utils/authTokenHandler.js$': '<rootDir>/src/utils/authTokenHandler.ts',
+    '^../utils/dbQueryHandler.js': '<rootDir>/src/utils/dbQueryHandler.ts',
+    '^../utils/jwtTokenHandler.js': '<rootDir>/src/utils/jwtTokenHandler.ts',
+    '^../consts/errorMessages.js': '<rootDir>/src/consts/errorMessages.ts',
   }
 };
