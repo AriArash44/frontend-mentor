@@ -18,5 +18,6 @@ module.exports = {
     '^../utils/dbQueryHandler.js': '<rootDir>/src/utils/dbQueryHandler.ts',
     '^../utils/jwtTokenHandler.js': '<rootDir>/src/utils/jwtTokenHandler.ts',
     '^../consts/errorMessages.js': '<rootDir>/src/consts/errorMessages.ts',
+    '^../consts/cookieOptions.js': '<rootDir>/src/consts/cookieOptions.ts',
   }
 };
