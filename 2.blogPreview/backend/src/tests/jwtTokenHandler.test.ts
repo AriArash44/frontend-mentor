@@ -27,7 +27,7 @@ describe('token checker tests', () => {
         const result = tokenChecker(mockToken, 'ACCESS_SECRET_KEY');
         expect(result).toEqual({ username: 'testUser' });
         expect(envValidator).toHaveBeenCalled();
-        expect(jwt.verify).toHaveBeenCalledWith(mockToken, process.env.ACCESS_SECRET_KEY);
+        expect(jwt.verify).toHaveBeenCalledWith(mockToken, 'ACCESS_SECRET_KEY');
     });
     
     it('should throw an error with envMissed message if envValidator return false', () => {

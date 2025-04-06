@@ -56,7 +56,8 @@ router.post('/:username', async (req, res) => {
             }
         }
     } catch (err) {
-        const status = (err instanceof Error && err.message === errorMessages.invalidToken) ? 401 : 500;
+        const status = (err instanceof Error && (err as any).status) ? (err as any).status : 
+            err instanceof Error && err.message === errorMessages.invalidToken? 401: 500;
         const message = err instanceof Error ? err.message : errorMessages.unknownError;
         res.status(status).json({ message });
     }
