@@ -21,7 +21,6 @@ import { envValidator } from '../utils/authTokenHandler.js';
 import { generateToken, tokenChecker } from '../utils/jwtTokenHandler.js';
 import { extractUsernameFromAccessToken, handleRefreshToken } from '../utils/authTokenHandler.js';
 import { errorMessages } from '../consts/errorMessages.js';
-import { Request } from 'express';
 
 dotenv.config();
 

@@ -1,140 +1,238 @@
-// jest.mock('../db.js', () => ({
-//     query: jest.fn(),
-// }));
+jest.mock('../utils/authTokenHandler.js', () => ({
+    extractUsernameFromAccessToken: jest.fn(),
+    handleRefreshToken: jest.fn(),
+}));
 
-// jest.mock('../utils/tokenChecker.js', () => ({
-//     __esModule: true,
-//     default: jest.fn(() => ({ username: 'testuser' })),
-// }));
+jest.mock('../utils/dbQueryHandler.js', () => ({
+    getUserPreferences: jest.fn(),
+    setUserPreferences: jest.fn(),
+}));
 
+import request from 'supertest';
+import express from 'express';
+import router from '../routes/userPreferences.js';
+import cors from 'cors';
+import https from 'https';
+import fs from 'fs';
+import { errorMessages } from '../consts/errorMessages.js';
+import {
+    extractUsernameFromAccessToken,
+    handleRefreshToken,
+} from '../utils/authTokenHandler.js';
+import {
+    getUserPreferences,
+    setUserPreferences,
+} from '../utils/dbQueryHandler.js';
 
-// import db from '../db.js';
-// import request from 'supertest';
-// import express from 'express';
-// import router from '../routes/userPreferences.js';
-// import http from 'http';
-// import cors from 'cors';
-// import CustomError from '../types/customError.js';
-// import setupWebSocket from '../websocket.js';
-// import tokenChecker from '../utils/tokenChecker.js';
+const app = express();
+const PORT = parseInt(process.env.PORT || '443') + 1;
+app.use(express.json());
+app.use('/api/userPreferences', router);
+app.use(cors());
 
-// const app = express();
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-// const server = http.createServer(app);
-// setupWebSocket(server);
+const server = https.createServer(
+    {
+        key: fs.readFileSync('../localhost-key.pem'),
+        cert: fs.readFileSync('../localhost-cert.pem'),
+    },
+    app
+);
 
-// app.use(express.json());
-// app.use('/api/userPreferences', router);
-// app.use(cors());
+let serverInstance: any;
+let baseUrl: string;
 
-// describe('Preferences routes', () => {
-//     const mockQuery = db.query as jest.Mock;
-//     const authHeader = { Authorization: 'Bearer mocked-valid-token' };
+beforeAll(async () => {
+    await new Promise((resolve) => {
+        serverInstance = server.listen(PORT, () => {
+            baseUrl = `https://localhost:${PORT}`;
+            console.log(`HTTPS server running on ${baseUrl}`);
+            resolve(true);
+        });
+    });
+});
 
-//     beforeEach(() => {
-//         jest.clearAllMocks();
-//     });
+afterAll(async () => {
+    await serverInstance.close();
+});
 
-//     test('GET /:username - success', async () => {
-//         const username = 'testuser';
-//         const expectedTheme = 'RED';
+beforeEach(() => {
+    jest.resetAllMocks();
+});
 
-//         mockQuery.mockImplementation((query, values, callback) => {
-//             callback(null, [{ color: expectedTheme }]);
-//         });
+describe('GET /api/userPreferences/:username Tests', () => {
+    it('successfully returns theme when token and username match and preference exists', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('testUser');
+        (getUserPreferences as jest.Mock).mockResolvedValue('RED');
+        const response = await request(app)
+            .get('/api/userPreferences/testUser')
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ theme: 'RED' });
+    });
 
-//         const response = await request(app).get(
-//             `/api/userPreferences/${username}`
-//         ).set(authHeader);
-//         expect(response.status).toBe(200);
-//         expect(response.body).toEqual({ theme: expectedTheme });
-//     });
+    it('returns 404 with error when user preference is not found', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('testUser');
+        (getUserPreferences as jest.Mock).mockResolvedValue(null);
+        const response = await request(app)
+            .get('/api/userPreferences/testUser')
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({ error: errorMessages.userMissed });
+    });
 
-//     test('POST /:username - success', async () => {
-//         const username = 'testuser';
-//         const theme = 'BLUE';
+    it('returns 401 when username from token does not match request parameter', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('anotherUser');
+        (getUserPreferences as jest.Mock).mockResolvedValue('RED');
+        const response = await request(app)
+            .get('/api/userPreferences/testUser')
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ message: errorMessages.invalidToken });
+    });
 
-//         mockQuery.mockImplementation((query, values, callback) => {
-//             callback(null);
-//         });
+    it('handles missing access token by refreshing token and returns theme successfully', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockImplementation(() => {
+            throw new Error(errorMessages.accessTokenMissed);
+        });
+        (handleRefreshToken as jest.Mock).mockReturnValue({
+            username: 'testUser',
+            accessToken: 'new_valid_token',
+        });
+        (getUserPreferences as jest.Mock).mockResolvedValue('BLUE');
+        const response = await request(app).get(
+            '/api/userPreferences/testUser'
+        );
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ theme: 'BLUE' });
+        expect(response.headers['set-cookie'].toString().includes('access-token=new_valid_token')).toBeTruthy();
+    });
 
-//         const response = await request(app)
-//             .post(`/api/userPreferences/${username}`)
-//             .set(authHeader)
-//             .send({ theme });
+    it('handles missing access token and returns 404 when preference is not found', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockImplementation(() => {
+            throw new Error(errorMessages.accessTokenMissed);
+        });
+        (handleRefreshToken as jest.Mock).mockReturnValue({
+            username: 'testUser',
+            accessToken: 'new_valid_token',
+        });
+        (getUserPreferences as jest.Mock).mockResolvedValue(null);
+        const response = await request(app).get(
+            '/api/userPreferences/testUser'
+        );
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({ error: errorMessages.userMissed });
+        expect(response.headers['set-cookie'].toString().includes('access-token=new_valid_token')).toBeTruthy();
+    });
 
-//         expect(response.status).toBe(200);
-//         expect(response.headers['set-cookie'][0]).toContain('user_theme=BLUE');
-//     });
+    it('returns 500 when an unexpected error occurs (e.g. DB error)', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('testUser');
+        (getUserPreferences as jest.Mock).mockRejectedValue(
+            new Error('DB error')
+        );
+        const response = await request(app)
+            .get('/api/userPreferences/testUser')
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ message: 'DB error' });
+    });
 
-//     test('POST /:username - invalid color', async () => {
-//         const username = 'testuser';
-//         const theme = 'INVALID_COLOR';
+    it('returns 401 when extractUsernameFromAccessToken throws usernameNotInToken error', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockImplementation(() => {
+            throw new Error(errorMessages.usernameNotInToken);
+        });
+        const response = await request(app)
+            .get('/api/userPreferences/testUser')
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({
+            message: errorMessages.usernameNotInToken,
+        });
+    });
+});
 
-//         mockQuery.mockImplementation((query, values, callback) => {
-//             const error = new Error('Invalid color value') as CustomError;
-//             error.code = 'ER_DATA_TOO_LONG';
-//             callback(error);
-//         });
+describe('POST /api/userPreferences/:username Tests', () => {
+    it('successfully sets user preference when token and username match', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('testUser');
+        (setUserPreferences as jest.Mock).mockResolvedValue(true);
+        const response = await request(app)
+            .post('/api/userPreferences/testUser')
+            .send({ theme: 'BLUE' })
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ theme: 'BLUE' });
+    });
 
-//         const response = await request(app)
-//             .post(`/api/userPreferences/${username}`)
-//             .set(authHeader)
-//             .send({ theme });
+    it('returns 401 when token and username do not match in POST request', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('anotherUser');
+        (setUserPreferences as jest.Mock).mockResolvedValue(true);
+        const response = await request(app)
+            .post('/api/userPreferences/testUser')
+            .send({ theme: 'BLUE' })
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: errorMessages.invalidToken });
+    });
 
-//         expect(response.status).toBe(400);
-//         expect(response.body).toEqual({ error: 'Invalid color value' });
-//     });
+    it('handles missing access token in POST by refreshing and setting preference', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockImplementation(() => {
+            throw new Error(errorMessages.accessTokenMissed);
+        });
+        (handleRefreshToken as jest.Mock).mockReturnValue({
+            username: 'testUser',
+            accessToken: 'new_valid_token',
+        });
+        (setUserPreferences as jest.Mock).mockResolvedValue(true);
+        const response = await request(app)
+            .post('/api/userPreferences/testUser')
+            .send({ theme: 'GREEN' });
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ theme: 'GREEN' });
+        expect(response.headers['set-cookie'].toString().includes('access-token=new_valid_token')).toBeTruthy();
+    });
 
-//     test('POST /:username - invalid color', async () => {
-//         const username = 'testuser';
-//         const theme = 'WHITE';
+    it('returns 500 when setUserPreferences throws a DB error in POST', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('testUser');
+        (setUserPreferences as jest.Mock).mockRejectedValue(
+            new Error('DB error')
+        );
+        const response = await request(app)
+            .post('/api/userPreferences/testUser')
+            .send({ theme: 'BLUE' })
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ error: 'DB error' });
+    });
 
-//         mockQuery.mockImplementation((query, values, callback) => {
-//             const error = new Error('Invalid color value') as CustomError;
-//             error.code = 'ER_CHECK_CONSTRAINT_VIOLATED';
-//             callback(error);
-//         });
+    it('returns 500 when theme is undefined and setUserPreferences fails', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockReturnValue('testUser');
+        (setUserPreferences as jest.Mock).mockRejectedValue(
+            new Error('Theme is required')
+        );
+        const response = await request(app)
+            .post('/api/userPreferences/testUser')
+            .send({})
+            .set('Cookie', ['access-token=some_valid_token']);
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ error: 'Theme is required' });
+    });
 
-//         const response = await request(app)
-//             .post(`/api/userPreferences/${username}`)
-//             .set(authHeader)
-//             .send({ theme });
-
-//         expect(response.status).toBe(400);
-//         expect(response.body).toEqual({ error: 'Invalid color value' });
-//     });
-
-//     test('POST /:username - internal server error', async () => {
-//         const username = 'testuser';
-//         const theme = 'BLUE';
-
-//         mockQuery.mockImplementation((query, values, callback) => {
-//             const error = new Error('Internal Server Error') as CustomError;
-//             callback(error);
-//         });
-
-//         const response = await request(app)
-//             .post(`/api/userPreferences/${username}`)
-//             .set(authHeader)
-//             .send({ theme });
-
-//         expect(response.status).toBe(500);
-//         expect(response.body).toEqual({ error: 'Internal Server Error' });
-//     });
-
-//     test('GET /:username - user not found', async () => {
-//         const username = 'unknownuser';
-//         (tokenChecker as jest.Mock).mockImplementation(() => ({ username }));
-
-//         mockQuery.mockImplementation((query, values, callback) => {
-//             callback(null, []);
-//         });
-
-//         const response = await request(app).get(
-//             `/api/userPreferences/${username}`
-//         ).set(authHeader);
-//         expect(response.status).toBe(404);
-//         expect(response.body).toEqual({ error: 'User not found' });
-//     });
-// });
+    it('handles error in refresh branch if setUserPreferences fails after token refresh', async () => {
+        (extractUsernameFromAccessToken as jest.Mock).mockImplementation(() => {
+            throw new Error(errorMessages.accessTokenMissed);
+        });
+        (handleRefreshToken as jest.Mock).mockReturnValue({
+            username: 'testUser',
+            accessToken: 'new_valid_token',
+        });
+        (setUserPreferences as jest.Mock).mockRejectedValue(
+            new Error('Refresh DB error')
+        );
+        const response = await request(app)
+            .post('/api/userPreferences/testUser')
+            .send({ theme: 'YELLOW' });
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ error: 'Refresh DB error' });
+    });
+});

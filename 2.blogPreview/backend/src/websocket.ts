@@ -8,19 +8,16 @@ const setupWebSocket = (server: Server) => {
 
     wss.on('connection', (ws: WebSocket, req) => {
         const username = new URLSearchParams(req.url?.split('?')[1]).get('username');
-
         if (!username) {
             ws.close(4001, 'Username is required');
             return;
         }
-
         console.log(`New client connected for username: ${username}`);
-
         if (!userSockets[username]) {
             userSockets[username] = new Set();
         }
         userSockets[username].add(ws);
-
+        
         ws.on('message', (message) => {
             console.log(`Received message from ${username}: ${message}`);
             userSockets[username]?.forEach((client) => {
@@ -31,9 +28,7 @@ const setupWebSocket = (server: Server) => {
         });
 
         ws.on('close', () => {
-            console.log(`Client disconnected for username: ${username}`);
             userSockets[username].delete(ws);
-
             if (userSockets[username].size === 0) {
                 delete userSockets[username];
             }

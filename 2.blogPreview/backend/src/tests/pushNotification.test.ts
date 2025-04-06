@@ -23,53 +23,59 @@ afterAll((done) => {
 });
 
 describe('WebSocket Server tests', () => {
-    test('should allow clients to connect and receive messages', (done) => {
-        const client = new WebSocket(`ws://localhost:${5001}?username=testuser`);
-        client.on('message', (message) => {
-            const data = JSON.parse(message.toString());
-            expect(data).toEqual({ theme: 'GREEN' });
-            client.close();
-            done();
-        });
-        client.on('open', () => {
-            client.send(JSON.stringify({ theme: 'GREEN' }));
+    it('should allow clients to connect and receive messages', async () => {
+        await new Promise<void>((resolve) => {
+            const client = new WebSocket(`ws://localhost:${5001}?username=testuser`);
+            client.on('message', (message) => {
+                const data = JSON.parse(message.toString());
+                expect(data).toEqual({ theme: 'GREEN' });
+                client.close();
+                resolve();
+            });
+            client.on('open', () => {
+                client.send(JSON.stringify({ theme: 'GREEN' }));
+            });
         });
     });
 
-    test('should propagate messages sent by one client to other clients with the same username', (done) => {
-        const client1 = new WebSocket(`ws://localhost:${PORT}?username=testuser`);
-        const client2 = new WebSocket(`ws://localhost:${PORT}?username=testuser`);
-        const receivedMessages: any[] = [];
-        client2.on('message', (message) => {
-            const data = JSON.parse(message.toString());
-            receivedMessages.push(data);
-            if (receivedMessages.length === 1) {
-                expect(receivedMessages).toEqual([{ theme: 'RED' }]);
+    it('should propagate messages sent by one client to other clients with the same username', async () => {
+        await new Promise<void>((resolve) => {
+            const client1 = new WebSocket(`ws://localhost:${PORT}?username=testuser`);
+            const client2 = new WebSocket(`ws://localhost:${PORT}?username=testuser`);
+            const receivedMessages: any[] = [];
+            client2.on('message', (message) => {
+                const data = JSON.parse(message.toString());
+                receivedMessages.push(data);
+                if (receivedMessages.length === 1) {
+                    expect(receivedMessages).toEqual([{ theme: 'RED' }]);
+                    client1.close();
+                    client2.close();
+                    resolve();
+                }
+            });
+            client1.on('open', () => {
+                client1.send(JSON.stringify({ theme: 'RED' }));
+            });
+        });
+    });
+
+    it('should not propagate messages sent by one client to other clients with different usernames', async () => {
+        await new Promise<void>((resolve) => {
+            let messageReceived = false;
+            const client1 = new WebSocket(`ws://localhost:${PORT}?username=user1`);
+            const client2 = new WebSocket(`ws://localhost:${PORT}?username=user2`);
+            client2.on('message', () => {
+                messageReceived = true;
+            });
+            client1.on('open', () => {
+                client1.send(JSON.stringify({ theme: 'BLUE' }));
+            });
+            setTimeout(() => {
+                expect(messageReceived).toBe(false);
                 client1.close();
                 client2.close();
-                done();
-            }
+                resolve();
+            }, 2000);
         });
-        client1.on('open', () => {
-            client1.send(JSON.stringify({ theme: 'RED' }));
-        });
-    });
-
-    test('should not propagate messages sent by one client to other clients with different usernames', (done) => {
-        let messageReceived = false;
-        const client1 = new WebSocket(`ws://localhost:${PORT}?username=user1`);
-        const client2 = new WebSocket(`ws://localhost:${PORT}?username=user2`);
-        client2.on('message', () => {
-            messageReceived = true;
-        });
-        client1.on('open', () => {
-            client1.send(JSON.stringify({ theme: 'BLUE' }));
-        });
-        setTimeout(() => {
-            expect(messageReceived).toBe(false);
-            client1.close();
-            client2.close();
-            done();
-        }, 2000);
     });
 });
