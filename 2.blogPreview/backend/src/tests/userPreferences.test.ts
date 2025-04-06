@@ -172,7 +172,7 @@ describe('POST /api/userPreferences/:username Tests', () => {
             .send({ theme: 'BLUE' })
             .set('Cookie', ['access-token=some_valid_token']);
         expect(response.status).toBe(401);
-        expect(response.body).toEqual({ error: errorMessages.invalidToken });
+        expect(response.body).toEqual({ message: errorMessages.invalidToken });
     });
 
     it('handles missing access token in POST by refreshing and setting preference', async () => {
@@ -202,7 +202,7 @@ describe('POST /api/userPreferences/:username Tests', () => {
             .send({ theme: 'BLUE' })
             .set('Cookie', ['access-token=some_valid_token']);
         expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: 'DB error' });
+        expect(response.body).toEqual({ message: 'DB error' });
     });
 
     it('returns 500 when theme is undefined and setUserPreferences fails', async () => {
@@ -215,7 +215,7 @@ describe('POST /api/userPreferences/:username Tests', () => {
             .send({})
             .set('Cookie', ['access-token=some_valid_token']);
         expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: 'Theme is required' });
+        expect(response.body).toEqual({ message: 'Theme is required' });
     });
 
     it('handles error in refresh branch if setUserPreferences fails after token refresh', async () => {
@@ -233,6 +233,6 @@ describe('POST /api/userPreferences/:username Tests', () => {
             .post('/api/userPreferences/testUser')
             .send({ theme: 'YELLOW' });
         expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: 'Refresh DB error' });
+        expect(response.body).toEqual({ message: 'Refresh DB error' });
     });
 });
