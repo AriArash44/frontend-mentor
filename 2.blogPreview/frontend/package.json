@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/toastify-js": "^1.12.3",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vite-plugin-purgecss": "^0.2.12"

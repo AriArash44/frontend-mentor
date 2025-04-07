@@ -7,7 +7,8 @@ import './components/ThemeButton/themeButton.ts';
 import './components/Loading/loading.ts';
 import { ThemeStore } from './stores/themeStore.ts';
 import { apiGet } from './utils/requestHandler.ts';
-import { LoginApiResponse } from './types/loginApiResponse.ts';
+import { showToast } from './utils/showToastHandler.ts';
+import { errorMessages } from './consts/errorMessages.ts';
 
 const loginButton = document.getElementById("login-button");
 const logoutButton = document.getElementById("logout-button");
@@ -17,14 +18,20 @@ const usernameFeild = document.getElementById("username-feild") as HTMLInputElem
 const themeButtons = document.querySelectorAll("theme-button-component");
 const loader = document.querySelector("loading-component");
 
+function handleApiError(error: any) {
+    const message = (error instanceof Error && Object.values(errorMessages).includes(error.message))
+        ? error.message
+        : (error instanceof Error ? errorMessages.networkError : errorMessages.unknownError);
+    showToast(message, false);
+    loader?.setAttribute('active', 'false');
+}
+  
 loginButton?.addEventListener('click', async (event) => {
     event.preventDefault();
     if(usernameFeild?.value?.trim()) {
         loader?.setAttribute('active', 'true');
         try {
-            const response: LoginApiResponse = await apiGet(`/api/authentication/login/${usernameFeild?.value?.trim()}`);
-            localStorage.setItem('access-token', response.accessToken);
-            localStorage.setItem('refresh-token', response.refreshToken);
+            await apiGet(`/api/authentication/login/${usernameFeild?.value?.trim()}`);
             loginForm?.classList.remove("d-flex");
             loginForm?.classList.add("d-none");
             themeSelector?.classList.remove("d-none");
@@ -32,19 +39,26 @@ loginButton?.addEventListener('click', async (event) => {
             loader?.setAttribute('active', 'false');
         }
         catch(err) {
-            console.log(err);
-            loader?.setAttribute('active', 'false');
+            handleApiError(err);
         }
     }
 });
 
-logoutButton?.addEventListener('click', () => {
-    themeSelector?.classList.remove("d-flex");
-    themeSelector?.classList.add("d-none");
-    loginForm?.classList.remove("d-none");
-    loginForm?.classList.add("d-flex");
-    localStorage.setItem('access-token', '');
-    localStorage.setItem('refresh-token', '');
+logoutButton?.addEventListener('click', async () => {
+    loader?.setAttribute('active', 'true');
+    try {
+        await apiGet('/api/authentication/logout');
+        themeSelector?.classList.remove("d-flex");
+        themeSelector?.classList.add("d-none");
+        loginForm?.classList.remove("d-none");
+        loginForm?.classList.add("d-flex");
+        localStorage.setItem('access-token', '');
+        localStorage.setItem('refresh-token', '');
+        loader?.setAttribute('active', 'false');
+    }
+    catch(err) {
+        handleApiError(err);
+    }
 });
 
 themeButtons.forEach((clikedThemeButton) => {
@@ -60,9 +74,8 @@ themeButtons.forEach((clikedThemeButton) => {
             });
             loader?.setAttribute('active', 'false');
         }
-        catch(error){
-            console.log(error);
-            loader?.setAttribute('active', 'false');
+        catch(err){
+            handleApiError(err);
         }
     });
 });

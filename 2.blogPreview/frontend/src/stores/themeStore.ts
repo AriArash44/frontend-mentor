@@ -1,13 +1,11 @@
-import { getCookie } from "../utils/cookieHandler";
 import { themes } from "../consts/themeMapper";
 import { apiPost, apiGet } from "../utils/requestHandler";
-import { UsernameApiResponse } from "../types/usernameApiResponse";
 
 export class ThemeStore {
     private static instance: ThemeStore;
     private theme: string = (() => {
-        const cookieValue = getCookie('user_theme');
-        return cookieValue ? cookieValue : "yellow";
+        const themeValue = sessionStorage.getItem('user_theme');
+        return themeValue ? themeValue : "yellow";
     })();
       
     private constructor() {}
@@ -26,10 +24,11 @@ export class ThemeStore {
     }
 
     public async setTheme(newTheme: string) {
-        this.theme = newTheme;
         try {
-            const response: UsernameApiResponse = await apiGet('/api/authentication/username', {}, true);
-            await apiPost(`/api/userPreferences/${response["username"]}`, {"theme": newTheme}, true)
+            const response = await apiGet('/api/authentication/username', {});
+            await apiPost(`/api/userPreferences/${response["username"]}`, {"theme": newTheme})
+            this.theme = newTheme;
+            sessionStorage.setItem('user_theme', newTheme); 
             document.documentElement.style.setProperty('--theme-color', themes[newTheme as keyof typeof themes]);
             document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${newTheme}.svg`);
         }
