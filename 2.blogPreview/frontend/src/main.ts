@@ -5,7 +5,7 @@ import './components/Card/card.ts';
 import './components/Image/image.ts';
 import './components/ThemeButton/themeButton.ts';
 import './components/Loading/loading.ts';
-import { ThemeStore } from './stores/themeStore.ts';
+import { ThemeContext } from './stores/themeContext.ts';
 import { apiGet } from './utils/requestHandler.ts';
 import { showToast } from './utils/showToastHandler.ts';
 import { errorMessages } from './consts/errorMessages.ts';
@@ -29,9 +29,10 @@ function handleApiError(error: any) {
 loginButton?.addEventListener('click', async (event) => {
     event.preventDefault();
     if(usernameFeild?.value?.trim()) {
-        loader?.setAttribute('active', 'true');
         try {
+            loader?.setAttribute('active', 'true');
             await apiGet(`/api/authentication/login/${usernameFeild?.value?.trim()}`);
+            ThemeContext.affectTheme((await ThemeContext.getInstance()).getTheme());
             loginForm?.classList.remove("d-flex");
             loginForm?.classList.add("d-none");
             themeSelector?.classList.remove("d-none");
@@ -52,8 +53,6 @@ logoutButton?.addEventListener('click', async () => {
         themeSelector?.classList.add("d-none");
         loginForm?.classList.remove("d-none");
         loginForm?.classList.add("d-flex");
-        localStorage.setItem('access-token', '');
-        localStorage.setItem('refresh-token', '');
         loader?.setAttribute('active', 'false');
     }
     catch(err) {
@@ -66,7 +65,7 @@ themeButtons.forEach((clikedThemeButton) => {
         try{
             loader?.setAttribute('active', 'true');
             const customEvent = event as CustomEvent;
-            await ThemeStore.getInstance().setTheme(customEvent.detail.color); 
+            (await ThemeContext.getInstance()).setTheme(customEvent.detail.color); 
             clikedThemeButton.setAttribute('active', 'true');
             const otherThemeButtons = Array.from(themeButtons).filter((themeButton) => themeButton !== clikedThemeButton);
             otherThemeButtons.forEach((otherThemeButton) => {
@@ -81,6 +80,6 @@ themeButtons.forEach((clikedThemeButton) => {
 });
 
 window.onload = () => {
-    ThemeStore.getInstance();
+    ThemeContext.affectTheme('yellow');
     document.body.style.visibility = 'visible';
 };
