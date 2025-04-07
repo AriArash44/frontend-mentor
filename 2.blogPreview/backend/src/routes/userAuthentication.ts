@@ -6,7 +6,7 @@ import { envValidator, extractUsernameFromAccessToken, handleRefreshToken } from
 import { accessCookieOptions, refreshCookieOptions, clearCookieOptions} from '../consts/cookieOptions.js';
 
 dotenv.config();
-const SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
+const ACCESS_SECRET_KEY = process.env.ACCESS_SECRET_KEY!;
 const REFRESH_SECRET_KEY = process.env.REFRESH_SECRET_KEY!;
 
 const router = express.Router();
@@ -18,7 +18,7 @@ router.get('/login/:username', (req, res) => {
             throw new Error(errorMessages.envMissed)
         }
         const { username } = req.params;
-        const accessToken = generateToken({ username }, SECRET_KEY, { expiresIn: '1h' });
+        const accessToken = generateToken({ username }, ACCESS_SECRET_KEY, { expiresIn: '1h' });
         const refreshToken = generateToken({ username }, REFRESH_SECRET_KEY, { expiresIn: '1d' });
         res.status(200).cookie('access-token', accessToken, accessCookieOptions)
             .cookie('refresh-token', refreshToken, refreshCookieOptions)
@@ -32,11 +32,11 @@ router.get('/login/:username', (req, res) => {
 router.get('/username', (req, res) => {
     try {
         try {
-            const username = extractUsernameFromAccessToken(req, SECRET_KEY);
+            const username = extractUsernameFromAccessToken(req, ACCESS_SECRET_KEY);
             res.status(200).json({ username });
         } catch (err) {
             if (err instanceof Error && err.message === errorMessages.accessTokenMissed) {
-                const { username, accessToken } = handleRefreshToken(req, SECRET_KEY, REFRESH_SECRET_KEY);
+                const { username, accessToken } = handleRefreshToken(req, ACCESS_SECRET_KEY, REFRESH_SECRET_KEY);
                 res.status(200).cookie('access-token', accessToken, accessCookieOptions)
                     .json({ username });
             } else {

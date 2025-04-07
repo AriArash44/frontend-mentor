@@ -14,10 +14,12 @@ module.exports = {
     '^../websocket.js$': '<rootDir>/src/websocket.ts',
     '^./jwtTokenHandler.js$': '<rootDir>/src/utils/jwtTokenHandler.ts',
     '^./authTokenHandler.js$': '<rootDir>/src/utils/authTokenHandler.ts',
+    './utils/authTokenHandler.js': '<rootDir>/src/utils/authTokenHandler.ts',
     '^../utils/authTokenHandler.js$': '<rootDir>/src/utils/authTokenHandler.ts',
     '^../utils/dbQueryHandler.js': '<rootDir>/src/utils/dbQueryHandler.ts',
     '^../utils/jwtTokenHandler.js': '<rootDir>/src/utils/jwtTokenHandler.ts',
     '^../consts/errorMessages.js': '<rootDir>/src/consts/errorMessages.ts',
+    '^./consts/errorMessages.js': '<rootDir>/src/consts/errorMessages.ts',
     '^../consts/cookieOptions.js': '<rootDir>/src/consts/cookieOptions.ts',
   }
 };
