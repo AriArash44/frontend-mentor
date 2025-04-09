@@ -1,3 +1,4 @@
+import { errorMessages } from "../consts/errorMessages";
 import { themes } from "../consts/themeMapper";
 import { apiPost, apiGet } from "../utils/requestHandler";
 import { NameContext } from "./nameContext";
@@ -21,9 +22,17 @@ export class ThemeContext {
         const username = (await NameContext.getInstance()).getName();
         let themeValue = sessionStorage.getItem('user_theme');
         if (!themeValue) {
-            const response = await apiGet(`/api/userPreferences/${username}`, {});
-            themeValue = response['theme'];
-            sessionStorage.setItem('user_name', themeValue!);
+            try{
+                const response = await apiGet(`/api/userPreferences/${username}`, {});
+                themeValue = response['theme'];
+                sessionStorage.setItem('user_theme', themeValue!);
+            } catch(err) {
+                if(err instanceof Error && err.message === errorMessages.userMissed){
+                    themeValue = 'yellow';
+                    sessionStorage.setItem('user_theme', themeValue);
+                }
+                throw err;
+            }
         }
         ThemeContext.instance.theme = themeValue;
         return ThemeContext.instance;
