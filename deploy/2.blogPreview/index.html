@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/lightDomStyles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <style>
+      body {
+        visibility: hidden;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-CqqOls5I.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DnVUw_vK.css">
+  </head>
+  <body class="bg-theme">
+    <header>
+      <loading-component active="false"></loading-component>
+      <form id="login-form" class="d-flex position-absolute top-0 end-0 mt-3 me-3 gap-2">
+        <input id="username-feild" type="text" placeholder="username" class="border-0 rounded px-3 py-2 shadow ">
+        <input type="submit" id="login-button" class="border-0 rounded bg-black text-white px-3 py-2 shadow" value="log in">
+      </form>
+      <div id="theme-selector" class="d-none position-absolute top-0 end-0 mt-3 me-3 gap-3 align-items-center">
+        <div class="gap-1 d-flex">
+          <theme-button-component color="red" active="false"></theme-button-component>
+          <theme-button-component color="yellow" active="true"></theme-button-component>
+          <theme-button-component color="green" active="false"></theme-button-component>
+          <theme-button-component color="blue" active="false"></theme-button-component>
+        </div>
+        <button id="logout-button" class="border-0 rounded bg-black text-white px-3 py-2 shadow">log out</button>
+      </div>
+    </header>
+    <main class="d-grid center-item min-vh-100">
+      <h1 class="sr-only">blog preview app</h1>
+      <card-component>
+        <image-component id="card-image" src="/images/illustration-article-yellow.svg"/></image-component>
+        <section>
+          <p class="d-inline-block rounded bg-theme px-3 py-2 mt-4 fw-bold fs-dynamic fs-small">Learning</p>
+          <p class="fw-medium fs-dynamic fs-small">Published 21 Dec 2023</p>
+          <h4 id="active-header" class="fw-bolder fs-dynamic fs-large">HTML & CSS foundations</h4>
+          <p class="fw-light fs-dynamic fs-small mt-3">These languages are the backbone of every website, defining structure, content, and presentation</p>
+        </section>
+        <avatar-component src="/images/image-avatar.webp" alt="" txt="Greg Hooper"/></avatar-component>
+      </card-component>
+    </main>
+  </body>
+</html>
