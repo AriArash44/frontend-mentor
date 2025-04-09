@@ -16,14 +16,14 @@ router.get('/:username', async (req, res) => {
             if (tokenUsername !== username) throw new Error(errorMessages.invalidToken);
             const color = await getUserPreferences(username);
             const status = !color ? 404 : 200;
-            const response = !color ? { error: errorMessages.userMissed } : { theme: color };
+            const response = !color ? { message: errorMessages.userMissed } : { theme: color };
             res.status(status).json(response);
         } catch (err) {
             if (err instanceof Error && err.message === errorMessages.accessTokenMissed) {
                 const { username, accessToken } = handleRefreshToken(req, SECRET_KEY, REFRESH_SECRET_KEY);
                 const color = await getUserPreferences(username);
                 const status = !color ? 404 : 200;
-                const response = !color ? { error: errorMessages.userMissed } : { theme: color };
+                const response = !color ? { message: errorMessages.userMissed } : { theme: color };
                 res.status(status).cookie('access-token', accessToken, accessCookieOptions)
                     .json(response);
             } else {

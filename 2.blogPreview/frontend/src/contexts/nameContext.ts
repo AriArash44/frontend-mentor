@@ -2,6 +2,7 @@ import { apiGet } from "../utils/requestHandler";
 
 export class NameContext {
     private static instance: NameContext;
+    private static loggedIn: boolean = false;
     private name: any;
       
     private constructor() {}
@@ -17,7 +18,12 @@ export class NameContext {
             sessionStorage.setItem('user_name', nameValue!);
         }
         NameContext.instance.name = nameValue;
+        NameContext.loggedIn = true;
         return NameContext.instance;
+    }
+
+    public static isLoggedIn(): boolean {
+        return NameContext.loggedIn;
     }
 
     public getName(): string {

@@ -11,7 +11,7 @@ export class ThemeContext {
 
     public static affectTheme(themeColor: string = ThemeContext.instance.getTheme()) {
         document.documentElement.style.setProperty('--theme-color', themes[themeColor.toLowerCase() as keyof typeof themes]);
-        document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${themeColor}.svg`);
+        document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${themeColor.toLowerCase()}.svg`);
     }
 
     public static async getInstance(): Promise<ThemeContext> {

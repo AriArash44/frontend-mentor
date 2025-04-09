@@ -23,15 +23,17 @@ const loader = document.querySelector("loading-component");
 function handleApiError(error: any) {
     const message = (error instanceof Error && Object.values(errorMessages).includes(error.message))
         ? error.message
-        : (error instanceof Error ? errorMessages.networkError : errorMessages.unknownError);
+        : errorMessages.unknownError;
     showToast(message);
     loader?.setAttribute('active', 'false');
 }
 
 async function logoutCleanUp() {
-    (await ThemeContext.getInstance()).removeTheme();
-    (await NameContext.getInstance()).removeName();
-    (await WsConnectionContext.getInstance()).closeConnection();
+    if (NameContext.isLoggedIn()){
+        (await ThemeContext.getInstance()).removeTheme();
+        (await NameContext.getInstance()).removeName();
+        (await WsConnectionContext.getInstance()).closeConnection();
+    }
 }
   
 loginButton?.addEventListener('click', async (event) => {

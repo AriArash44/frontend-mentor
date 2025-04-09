@@ -79,7 +79,7 @@ describe('GET /api/userPreferences/:username Tests', () => {
             .get('/api/userPreferences/testUser')
             .set('Cookie', ['access-token=some_valid_token']);
         expect(response.status).toBe(404);
-        expect(response.body).toEqual({ error: errorMessages.userMissed });
+        expect(response.body).toEqual({ message: errorMessages.userMissed });
     });
 
     it('returns 401 when username from token does not match request parameter', async () => {
@@ -122,7 +122,7 @@ describe('GET /api/userPreferences/:username Tests', () => {
             '/api/userPreferences/testUser'
         );
         expect(response.status).toBe(404);
-        expect(response.body).toEqual({ error: errorMessages.userMissed });
+        expect(response.body).toEqual({ message: errorMessages.userMissed });
         expect(response.headers['set-cookie'].toString().includes('access-token=new_valid_token')).toBeTruthy();
     });
 
