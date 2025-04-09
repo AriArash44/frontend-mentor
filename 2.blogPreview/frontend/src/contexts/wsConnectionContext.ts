@@ -24,7 +24,7 @@ export class WsConnectionContext {
         try {
             this.connection = new WebSocket(import.meta.env.VITE_WEBSOCKET_URL);
             this.connection.onmessage = async (event: MessageEvent) => {
-                const message = JSON.parse(event.data.text());
+                const message = JSON.parse(await event.data.text());
                 if (message.theme) {
                     (await ThemeContext.getInstance()).setTheme(message.theme, false);
                 } else {
@@ -35,10 +35,12 @@ export class WsConnectionContext {
                 if (event.code === WebSocketCloseCode.INVALID_TOKEN) {
                     throw new Error(errorMessages.websocketInvalidToken);
                 }
+            };
+            this.connection.onerror = () => {
                 throw new Error(errorMessages.websocketConnectionclosed);
             };
         } catch(err) {
-            throw new Error(errorMessages.websocketConnectionclosed);
+            throw err;
         }
     }
 

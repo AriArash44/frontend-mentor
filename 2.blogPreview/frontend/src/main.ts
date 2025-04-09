@@ -33,6 +33,7 @@ async function logoutCleanUp() {
         (await ThemeContext.getInstance()).removeTheme();
         (await NameContext.getInstance()).removeName();
         (await WsConnectionContext.getInstance()).closeConnection();
+        ThemeContext.affectTheme('yellow');
     }
 }
   
@@ -77,12 +78,7 @@ themeButtons.forEach((clikedThemeButton) => {
         try{
             loader?.setAttribute('active', 'true');
             const customEvent = event as CustomEvent;
-            (await ThemeContext.getInstance()).setTheme(customEvent.detail.color); 
-            clikedThemeButton.setAttribute('active', 'true');
-            const otherThemeButtons = Array.from(themeButtons).filter((themeButton) => themeButton !== clikedThemeButton);
-            otherThemeButtons.forEach((otherThemeButton) => {
-                otherThemeButton.setAttribute('active', 'false');
-            });
+            await (await ThemeContext.getInstance()).setTheme(customEvent.detail.color); 
             loader?.setAttribute('active', 'false');
         }
         catch(err){
