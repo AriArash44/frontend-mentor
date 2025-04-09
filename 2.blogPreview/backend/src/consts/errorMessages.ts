@@ -10,5 +10,7 @@ export const errorMessages = {
     unknownError: 'An unknown Error occuered!',
     usernameNotInToken: 'Username not found in token',
     userMissed: 'User not found',
-    websocketInvalidToken: 'Your token has expired, please refresh via HTTP.'
+    websocketConnectionclosed: 'web socket connection closed',
+    websocketInvalidToken: 'Your token has expired, please refresh via HTTP.',
+    websocketMalformedMessage: 'malformed message from server recieved'
 }

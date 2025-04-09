@@ -5,10 +5,12 @@ import './components/Card/card.ts';
 import './components/Image/image.ts';
 import './components/ThemeButton/themeButton.ts';
 import './components/Loading/loading.ts';
-import { ThemeContext } from './stores/themeContext.ts';
+import { ThemeContext } from './contexts/themeContext.ts';
 import { apiGet } from './utils/requestHandler.ts';
 import { showToast } from './utils/showToastHandler.ts';
 import { errorMessages } from './consts/errorMessages.ts';
+import { NameContext } from './contexts/nameContext.ts';
+import { WsConnectionContext } from './contexts/wsConnectionContext.ts';
 
 const loginButton = document.getElementById("login-button");
 const logoutButton = document.getElementById("logout-button");
@@ -22,8 +24,14 @@ function handleApiError(error: any) {
     const message = (error instanceof Error && Object.values(errorMessages).includes(error.message))
         ? error.message
         : (error instanceof Error ? errorMessages.networkError : errorMessages.unknownError);
-    showToast(message, false);
+    showToast(message);
     loader?.setAttribute('active', 'false');
+}
+
+async function logoutCleanUp() {
+    (await ThemeContext.getInstance()).removeTheme();
+    (await NameContext.getInstance()).removeName();
+    (await WsConnectionContext.getInstance()).closeConnection();
 }
   
 loginButton?.addEventListener('click', async (event) => {
@@ -37,6 +45,7 @@ loginButton?.addEventListener('click', async (event) => {
             loginForm?.classList.add("d-none");
             themeSelector?.classList.remove("d-none");
             themeSelector?.classList.add("d-flex");
+            await WsConnectionContext.getInstance();
             loader?.setAttribute('active', 'false');
         }
         catch(err) {
@@ -49,6 +58,7 @@ logoutButton?.addEventListener('click', async () => {
     loader?.setAttribute('active', 'true');
     try {
         await apiGet('/api/authentication/logout');
+        await logoutCleanUp();
         themeSelector?.classList.remove("d-flex");
         themeSelector?.classList.add("d-none");
         loginForm?.classList.remove("d-none");
@@ -83,3 +93,12 @@ window.onload = () => {
     ThemeContext.affectTheme('yellow');
     document.body.style.visibility = 'visible';
 };
+
+window.addEventListener('beforeunload', async () => {
+    try {
+        await logoutCleanUp();
+    }
+    catch(err) {
+        handleApiError(err);
+    }
+});

@@ -1,6 +1,7 @@
 import { themes } from "../consts/themeMapper";
 import { apiPost, apiGet } from "../utils/requestHandler";
 import { NameContext } from "./nameContext";
+import { WsConnectionContext } from "./wsConnectionContext";
 
 export class ThemeContext {
     private static instance: ThemeContext;
@@ -9,7 +10,7 @@ export class ThemeContext {
     private constructor() {}
 
     public static affectTheme(themeColor: string = ThemeContext.instance.getTheme()) {
-        document.documentElement.style.setProperty('--theme-color', themes[themeColor as keyof typeof themes]);
+        document.documentElement.style.setProperty('--theme-color', themes[themeColor.toLowerCase() as keyof typeof themes]);
         document.getElementById('card-image')?.shadowRoot?.querySelector('img')?.setAttribute('src', `/images/illustration-article-${themeColor}.svg`);
     }
 
@@ -32,11 +33,19 @@ export class ThemeContext {
         return this.theme;
     }
 
-    public async setTheme(newTheme: string) {
-        const username = (await NameContext.getInstance()).getName();
-        await apiPost(`/api/userPreferences/${username}`, {'theme': newTheme});
+    public async setTheme(newTheme: string, setOnServerFlag: boolean = true) {
+        if(setOnServerFlag) {
+            const username = (await NameContext.getInstance()).getName();
+            await apiPost(`/api/userPreferences/${username}`, {'theme': newTheme});
+            (await WsConnectionContext.getInstance()).sendMessage();
+        }
         this.theme = newTheme;
         sessionStorage.setItem('user_theme', newTheme);
         ThemeContext.affectTheme();
+    }
+
+    public removeTheme(): void {
+        sessionStorage.removeItem('user_theme');
+        this.theme = undefined;
     }
 }

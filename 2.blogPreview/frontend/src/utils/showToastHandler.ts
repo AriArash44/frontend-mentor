@@ -1,6 +1,6 @@
 import Toastify from 'toastify-js';
 
-export const showToast = (message: string, success: boolean) => {
+export const showToast = (message: string) => {
     Toastify({
         text: message,
         duration: 2000,
@@ -11,8 +11,8 @@ export const showToast = (message: string, success: boolean) => {
         stopOnFocus: true,
         style: {
         background: "#FFFFFF",
-        border: `1px solid ${success ? "#00FF00" : "#FF0000"}`,
-        color: success ? "#00FF00" : "#FF0000",
+        border: `1px solid "#FF0000"`,
+        color: "#FF0000",
         direction: "rtl",
         "border-radius": "5px"
         },

@@ -23,4 +23,9 @@ export class NameContext {
     public getName(): string {
         return this.name;
     }
+
+    public removeName(): void {
+        sessionStorage.removeItem('user_name');
+        this.name = undefined;
+    }
 }

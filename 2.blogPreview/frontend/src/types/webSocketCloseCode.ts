@@ -1,0 +1,8 @@
+export enum WebSocketCloseCode {
+    NORMAL_CLOSURE = 1000,
+    GOING_AWAY = 1001,
+    PROTOCOL_ERROR = 1002,
+    UNSUPPORTED_DATA = 1003,
+    INVALID_TOKEN = 4003,
+}
+  
