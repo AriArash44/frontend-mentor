@@ -1,5 +1,5 @@
 export const allowedOrigins = [ 
     'https://localhost:5173',
     'https://localhost:3000',
-    'https://ariarash44.github.io/frontend-mentor/2.blogPreview/'
+    'https://ariarash44.github.io'
 ];
