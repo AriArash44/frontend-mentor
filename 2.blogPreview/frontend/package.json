@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test-build": "npx tsc -p tsconfig.test.json",
+    "test-run": "node dist-test/tests/uiTest.js"
   },
   "devDependencies": {
+    "@types/selenium-webdriver": "^4.1.28",
     "@types/toastify-js": "^1.12.3",
     "@types/websocket": "^1.0.10",
     "@types/ws": "^8.18.0",
@@ -20,7 +23,6 @@
     "axios": "^1.8.3",
     "bootstrap": "^5.3.3",
     "prettier": "^3.5.3",
-    "selenium": "^2.20.0",
     "selenium-webdriver": "^4.29.0",
     "toastify-js": "^1.12.0"
   }
