@@ -75,4 +75,7 @@ $(function () {
         }
     });
 });
-  
+
+window.onload = () => {
+    document.body.classList.remove('invisible');
+};
