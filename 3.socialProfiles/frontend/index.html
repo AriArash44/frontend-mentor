@@ -8,7 +8,11 @@
     <title>Frontend Mentor | social links profile</title>
   </head>
   <body class="flex justify-center items-center h-screen bg-gray900">
-    <main class="flex flex-col justify-center items-center rounded-md bg-gray800 w-custom-325 p-8">
+    <main id="loader" role="status" aria-live="polite" class="flex justify-center items-center bg-gray800 rounded-md h-1/2 w-custom-325">
+      <span class="sr-only">Loading...</span>
+      <div class="w-10 h-10 border-4 border-green border-t-transparent rounded-full animate-spin"></div>
+    </main>   
+    <main id="content" class="hidden flex-col justify-center items-center rounded-md bg-gray800 w-custom-325 p-8">
       <h1 class="sr-only">social links profile</h1>
       <img src="/images/avatar.jpg" class="rounded-full w-1/4" alt="user avatar"/>
       <header class="flex flex-col justify-center items-center">

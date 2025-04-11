@@ -2,7 +2,8 @@
 export default {
   content: [
     "./index.html",
-    "./src/components/button/button.html"
+    "./src/components/button/button.html",
+    "./src/main.js"
   ],
   theme: {
     extend: {
