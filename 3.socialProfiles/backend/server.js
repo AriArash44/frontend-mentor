@@ -30,7 +30,7 @@ app.use(
     })
 );
 
-app.listen(PORT, () => {
-    console.log(`GraphQL endpoint is running at http://localhost:${PORT}/graphql`);
-});
-// export default app;
+// app.listen(PORT, () => {
+//     console.log(`GraphQL endpoint is running at http://localhost:${PORT}/graphql`);
+// });
+export default app;
