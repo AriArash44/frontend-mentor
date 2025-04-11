@@ -11,8 +11,7 @@ export async function buttonCreator({ href, buttonText }) {
         }
         
         component.setAttribute('href', href);
-        const button = component.querySelector('button');
-        button.textContent = buttonText;
+        component.textContent = buttonText;
     
         return component;
     } catch (error) {

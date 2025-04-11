@@ -11,6 +11,7 @@ function pascalToSpace(pascal) {
 }
 
 async function init() {
+    document.body.classList.remove('invisible');
     const linkData = await queryRequestHandler(`{ allLinks {
             Github
             FrontendMentor
@@ -33,7 +34,7 @@ async function init() {
 await init();
 
 $(function () {
-    const $buttons = $("#buttunsContainer button")
+    const $buttons = $("#buttunsContainer a")
     let activeIndex = -1;
 
     $buttons.on("mouseenter", function () {
@@ -70,12 +71,8 @@ $(function () {
         } else if (e.which === 13) {
             e.preventDefault();
             if (activeIndex !== -1) {
-                $buttons.eq(activeIndex).trigger("click");
+                $buttons.eq(activeIndex)[0].click();
             }
         }
     });
 });
-
-window.onload = () => {
-    document.body.classList.remove('invisible');
-};
