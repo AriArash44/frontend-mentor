@@ -5,9 +5,9 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export function queryRequestHandler(requiredData) {
+export async function queryRequestHandler(requiredData) {
     const GET_DATA_QUERY = 'query '.concat(requiredData);
-    client.query({
+    return client.query({
         query: gql(GET_DATA_QUERY),
     }).then(response => {
         return response["data"];
