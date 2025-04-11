@@ -15,6 +15,9 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
-    "jquery": "^3.7.1"
+    "@apollo/client": "^3.13.7",
+    "graphql": "^16.10.0",
+    "jquery": "^3.7.1",
+    "react": "^19.1.0"
   }
 }
