@@ -754,7 +754,7 @@ video {
 @font-face {
   font-family: 'inter';
 
-  src: url('/fonts/static/Inter-Bold.ttf') format('truetype');
+  src: url('/frontend-mentor/3.socialProfiles/fonts/static/Inter-Bold.ttf') format('truetype');
 
   font-weight: 700;
 
@@ -764,7 +764,7 @@ video {
 @font-face {
   font-family: 'inter';
 
-  src: url('/fonts/static/Inter-SemiBold.ttf') format('truetype');
+  src: url('/frontend-mentor/3.socialProfiles/fonts/static/Inter-SemiBold.ttf') format('truetype');
 
   font-weight: 600;
 
@@ -774,7 +774,7 @@ video {
 @font-face {
   font-family: 'inter';
 
-  src: url('/fonts/static/Inter-Regular.ttf') format('truetype');
+  src: url('/frontend-mentor/3.socialProfiles/fonts/static/Inter-Regular.ttf') format('truetype');
 
   font-weight: 400;
 
@@ -785,7 +785,7 @@ video {
   @font-face {
     font-family: 'inter';
 
-    src: url('/fonts/variable/Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
+    src: url('/frontend-mentor/3.socialProfiles/fonts/variable/Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
 
     font-weight: 100 900;
 
