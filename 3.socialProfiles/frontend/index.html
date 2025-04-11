@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/images/favicon-32x32.png" type="image/x-icon" />
-    <link href="/styles/styles.css" rel="stylesheet">
+    <link href="/styles/compiled.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Frontend Mentor | social links profile</title>
   </head>
-  <body>
-    <main>
+  <body class="flex justify-center items-center h-screen bg-gray900">
+    <main class="flex flex-col justify-center items-center rounded-md bg-gray800 w-custom-325 p-8">
       <h1 class="sr-only">social links profile</h1>
-      <img/>
-      <header>
-        <h2></h2>
-        <p></p>
+      <img src="/images/avatar.jpg" class="rounded-full w-1/4" alt="user avatar"/>
+      <header class="flex flex-col justify-center items-center">
+        <h2 class="text-white font-bold text-lg mt-4">Arash Asghari</h2>
+        <p class="text-green text-sm font-regular">Tehran, Iran</p>
       </header>
-      <section>
-        <h3></h3>
-        list of the light dom components
+      <section class="flex flex-col justify-center items-center mt-4">
+        <h3 class="text-white text-sm font-regular">"Front-end developer and avid reader."</h3>
+        <div id="buttunsContainer" class="mt-2"></div>
       </section>
     </main>
     <script type="module" src="/src/main.js"></script>
