@@ -15,7 +15,7 @@ export default {
         gray900: "hsl(0, 0%, 8%)"
       },
       fontSize: {
-        sm: "14px",
+        sm: "13px",
         lg: "18px",
       },
       fontWeight: {
@@ -24,7 +24,7 @@ export default {
         bold: 700,
       },
       width: {
-        'custom-325': '325px'
+        'custom-350': '350px'
       }
     },
   },
