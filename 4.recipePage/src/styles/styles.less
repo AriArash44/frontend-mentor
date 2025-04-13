@@ -1,0 +1,81 @@
+@base-font: Outfit;
+@gutter: 20px;
+@colors: {
+    white: hsl(0, 0%, 100%);
+    stone100: hsl(30, 54%, 90%);
+    stone150: hsl(30, 18%, 87%);
+    stone600: hsl(30, 10%, 34%);
+    stone900: hsl(24, 5%, 18%);
+    brown800: hsl(14, 45%, 36%);
+    rose800: hsl(332, 51%, 32%);
+    rose50: hsl(330, 100%, 98%);
+};
+
+@outfit-font-weights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+.each(@font-weights, {
+    @weight: @value;
+    @font-name: "Outfit-@{weight}";
+    @font-face {
+        font-family: "Outfit";
+        src: url("../assets/fonts/outfit/static/@{font-name}.ttf") format("truetype");
+        font-weight: @weight;
+        font-style: normal;
+    }
+});
+@supports (font-variation-settings: normal) {
+    @font-face {
+        font-family: 'Outfit';
+        src: url("../assets/fonts/outfit/variable/Outfit-VariableFont_wght.ttf") format("truetype-variations");
+        font-weight: 100 900;
+        font-display: swap;
+        font-style: normal;
+    }
+}
+
+@font-face {
+    font-family: 'Young-serif';
+    src: url("../assets/fonts/outfit/young-serif/YoungSerif-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    div {
+
+    }
+}
+
+section {
+    h2 {
+        ol {
+            li {
+
+            }
+        }
+    }
+}
+
+section {
+    h2 {
+        ul {
+            li {
+
+            }
+        }
+    }
+}
+
+details {
+    summary {
+        
+    }
+}
+
+.loader {
+    border: 8px solid @colors[brown800];
+    border-top: 8px solid @colors[white];
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
