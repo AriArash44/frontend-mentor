@@ -1,12 +1,16 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import glob from 'glob-all';
-import PurgeCSSPlugin from 'purgecss-webpack-plugin';
+import { PurgeCSSPlugin } from 'purgecss-webpack-plugin';
 
-module.exports = (env, argv) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const config = (env, argv) => {
     const isDevMode = argv.mode === 'development';
     const outputPath = isDevMode
         ? path.resolve(__dirname, 'dist/dev')
@@ -66,6 +70,9 @@ module.exports = (env, argv) => {
         plugins: plugins,
         devServer: {
             static: isDevMode ? './dist/dev' : './dist/prod',
+            devMiddleware: {
+                writeToDisk: true,
+            },
         },
         mode: argv.mode,
         optimization: {
@@ -76,3 +83,5 @@ module.exports = (env, argv) => {
         },
     };
 };
+
+export default config;
