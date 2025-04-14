@@ -6,6 +6,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import glob from 'glob-all';
 import { PurgeCSSPlugin } from 'purgecss-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +25,22 @@ const config = (env, argv) => {
         new MiniCssExtractPlugin({
             filename: 'styles/[name].[contenthash].css',
         }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'public/mockServiceWorker.js'),
+                    to: outputPath,
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, 'public/assets/images/favicon-32x32.png'),
+                    to: outputPath,
+                    noErrorOnMissing: true,
+                },
+            ],
+        }),
     ];
+    
     if (!isDevMode) {
         plugins.push(
             new PurgeCSSPlugin({
@@ -32,6 +48,7 @@ const config = (env, argv) => {
             })
         );
     }
+    
     return {
         entry: './src/index.js',
         output: {
@@ -65,9 +82,13 @@ const config = (env, argv) => {
                         'less-loader',
                     ],
                 },
+                {
+                    test: /\.jpeg$/i,
+                    type: 'asset/inline',
+                },
             ],
         },
-        plugins: plugins,
+        plugins,
         devServer: {
             static: isDevMode ? './dist/dev' : './dist/prod',
             devMiddleware: {

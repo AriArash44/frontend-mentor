@@ -12,13 +12,12 @@
 };
 
 @outfit-font-weights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
-.each(@font-weights, {
-    @weight: @value;
-    @font-name: "Outfit-@{weight}";
+each(@outfit-font-weights, {
+    @font-name: "Outfit-@{value}";
     @font-face {
         font-family: "Outfit";
         src: url("../assets/fonts/outfit/static/@{font-name}.ttf") format("truetype");
-        font-weight: @weight;
+        font-weight: @value;
         font-style: normal;
     }
 });
@@ -34,7 +33,7 @@
 
 @font-face {
     font-family: 'Young-serif';
-    src: url("../assets/fonts/outfit/young-serif/YoungSerif-Regular.ttf") format("truetype");
+    src: url("../assets/fonts/young-serif/YoungSerif-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
 }
