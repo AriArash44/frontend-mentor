@@ -44,7 +44,7 @@ worker.start().then(() => {
                         <h2>Nutrition</h2>
                         <p>${data.nutrition.title}</p>
                         <table>${Object.entries(data.nutrition.data).map(([key, value]) => html`
-                            <tr><td>${capitalizeFirstLetter(key)}:</td><td><strong>${value}</strong><td/></tr>`)}</table>
+                            <tr><td>${capitalizeFirstLetter(key)}</td><td><strong>${value}</strong></td></tr>`)}</table>
                     </section>
                 </main>
             `;
