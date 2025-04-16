@@ -34,7 +34,7 @@ Below is a side-by-side preview of the project in both mobile and desktop views:
 
 | Mobile Demo                                            | Desktop Demo                                             |
 |--------------------------------------------------------|----------------------------------------------------------|
-| ![Mobile Demo](./frontend/public/assets/images/mobile-demo.png) | ![Desktop Demo](./frontend/public/assets/images/desktop-demo.png) |
+| ![Mobile Demo](./public/assets/images/mobile-demo.png) | ![Desktop Demo](./public/assets/images/desktop-demo.png) |
 | *Mobile view of the recipe page*                      | *Desktop view of the recipe page*                        |
 
 You can view the live version at: [Recipe Page App](https://ariarash44.github.io/frontend-mentor/4.recipePage/)
