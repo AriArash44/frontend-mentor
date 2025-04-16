@@ -1,6 +1,6 @@
 @base-font: Outfit;
-@gutter: 20px;
-@radius: 1rem;
+@gutter: 40px;
+@radius: 0.75rem;
 @colors: {
     white: hsl(0, 0%, 100%);
     stone100: hsl(30, 54%, 90%);
@@ -11,6 +11,10 @@
     rose800: hsl(332, 51%, 32%);
     rose50: hsl(330, 100%, 98%);
 };
+
+@gutter-third: calc(@gutter / 3);
+@gutter-half: calc(@gutter / 2);
+@gutter-quarter: calc(@gutter / 4);
 
 @outfit-font-weights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
 each(@outfit-font-weights, {
@@ -52,10 +56,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    div:first-child  {
-        margin-top: 10%;
-        margin-bottom: 10%;
-        border-radius: @radius;
+
+    div:first-child {
+        margin-top: 8%;
+        margin-bottom: 8%;
+        border-radius: calc(2 * @radius);
         background-color: @colors[white];
         min-height: 50vh;
         display: flex;
@@ -63,7 +68,7 @@ body {
         align-items: center;
         flex-direction: column;
         padding: @gutter;
-        width: min(clamp(400px, 50vw, 800px), 100%);
+        width: min(clamp(500px, 47vw, 1000px), 100%);
     }
     div:nth-child(2) {
         display: none;
@@ -77,13 +82,14 @@ header {
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: young-serif !important;
-}
+p, td, li { font-size: 16px; }
+summary { font-size: 22px; }
+h1, h2, h3, h4, h5, h6 { font-family: Young-serif !important; }
 
-details {
+.details-style() {
+    margin-top: calc(@gutter * 2 / 3);
     background-color: @colors[rose50];
-    padding: @gutter;
+    padding: calc(@gutter * 2 / 3);
     border-radius: @radius;
     pointer-events: none;
     summary {
@@ -91,9 +97,13 @@ details {
         font-weight: 700;
         color: @colors[rose800];
     }
-    ul{
-        li{
-            margin-top: @gutter;
+    ul {
+        margin-left: @gutter-third;
+        padding-left: @gutter-third;
+        li {
+            margin-top: @gutter-quarter;
+            list-style-position: outside;
+            padding-left: @gutter-half;
         }
         li::marker {
             color: @colors[rose800];
@@ -101,29 +111,24 @@ details {
     }
 }
 
-main {
-    width: 100%;
+details {
+    .details-style();
 }
 
 section {
-    h2 {
+    h2 { color: @colors[brown800]; }
+    ol, ul {
+        margin-left: @gutter-third;
+        padding-left: @gutter-third;
+        margin-top: @gutter-third;
+        li {
+            margin-top: @gutter-quarter;
+            list-style-position: outside;
+            padding-left: @gutter-half;
+        }
+    }
+    ol li::marker, ul li::marker {
         color: @colors[brown800];
-    }
-    ol {
-        li {
-            margin-top: calc(@gutter * 2 / 3);
-        }
-        li::marker {
-            color: @colors[brown800];
-        }
-    }
-    ul {
-        li {
-            margin-top: calc(@gutter * 2 / 3);
-        }
-        li::marker {
-            color: @colors[brown800];
-        }
     }
 }
 
@@ -132,7 +137,7 @@ table {
     border-collapse: collapse;
     tr:not(:first-child) {
         td {
-            border-top: 1px solid @colors[stone600];
+            border-top: 1px solid @colors[stone150];
         }
     }
     tr {
@@ -140,15 +145,15 @@ table {
             color: @colors[brown800];
         }
         td {
-            padding: calc(@gutter / 2);
+            padding: calc(@gutter / 2) calc(@gutter);
         }
     }
 }
 
 hr {
     border: none;
-    border-top: 1px solid @colors[stone600];
-    margin: @gutter 0px;
+    border-top: 1px solid @colors[stone150];
+    margin: calc(@gutter / 3 * 2) 0px;
 }
 
 .loader {
@@ -164,4 +169,22 @@ hr {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 576px) {
+    body {
+        div:first-child {
+            overflow: hidden;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+    }
+    header {
+        img {
+            transform: scale(1.35);
+            transform-origin: center bottom;
+            border-radius: 0;
+        }
+    }
 }
