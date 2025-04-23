@@ -10,11 +10,12 @@ interface PictureProps {
 const StyledPicture = styled("picture")({
     display: "block",
     maxWidth: "100%",
+    height: "100%"
 });
 
 const StyledImg = styled("img")({
     width: "100%",
-    height: "auto",
+    height: "100%",
     display: "block",
 });
 

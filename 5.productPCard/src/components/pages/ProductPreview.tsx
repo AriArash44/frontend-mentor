@@ -19,7 +19,7 @@ function ProductPreview() {
           desktopImg.onload = () => {
             const timer = setTimeout(() => {
               setLoaded(true);
-              }, 200000);
+              }, 2000);
             return () => clearTimeout(timer);
             };
         };
@@ -30,9 +30,13 @@ function ProductPreview() {
       <Main>
         <Grid spacing={2} container>
           <Grid size={{ xs: 12, sm: 6 }} sx={{
-            '@media (max-width: 599.5px)': {
-              height: '250px',
-            }
+            height: {
+              xs: () => {
+                const screenWidth = window.innerWidth;
+                const calculatedHeight = 250 - 0.1 * (350 - screenWidth);
+                return `${calculatedHeight}px`;
+              },
+            },
           }}>
             { 
               loaded ? 
@@ -61,12 +65,12 @@ function ProductPreview() {
                 <Grid container sx={{
                   margin: "2rem 0rem",
                 }}>
-                  <Grid size={7}>
+                  <Grid size={8}>
                     <Typography variant="h4" component="h2" color={theme.palette.primary.main}>
                       $149.99
                     </Typography>
                   </Grid> 
-                  <Grid size={5}>
+                  <Grid size={4}>
                     <del color={theme.palette.neutral.grey}>$169.99</del>
                   </Grid> 
                 </Grid>
