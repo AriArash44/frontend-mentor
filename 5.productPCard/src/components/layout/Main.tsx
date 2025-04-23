@@ -23,6 +23,7 @@ const Main: React.FC<MainProps> = ({
       }}>
         <Box sx={{
           borderRadius: 2,
+          overflow: 'clip',
           backgroundColor: theme.palette.neutral.white,
           width: 'min(clamp(500px, 47vw, 1000px), 95%)'
         }} component="main" className={className}>
