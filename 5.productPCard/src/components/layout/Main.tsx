@@ -1,24 +1,34 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import theme from "../../themes";
 import { useTheme } from "@emotion/react";
 import React from "react";
 
 interface MainProps {
+    className?: string;
     children: React.ReactNode;
 }
 
 const Main: React.FC<MainProps> = ({
-    children
+    className = "default",
+    children,
 }) => {
     useTheme();
     return(
-      <Box sx={{
-        borderRadius: 1,
-        backgroundColor: theme.palette.neutral.white,
-        width: 'min(clamp(500px, 47vw, 1000px), 95%)'
-      }} component="main">
-        {children}
-      </Box>
+      <Grid sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: theme.palette.neutral.cream,
+      }}>
+        <Box sx={{
+          borderRadius: 2,
+          backgroundColor: theme.palette.neutral.white,
+          width: 'min(clamp(500px, 47vw, 1000px), 95%)'
+        }} component="main" className={className}>
+          {children}
+        </Box>
+      </Grid>
     );
 };
 
