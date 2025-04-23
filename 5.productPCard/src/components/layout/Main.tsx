@@ -20,6 +20,7 @@ const Main: React.FC<MainProps> = ({
         alignItems: 'center',
         minHeight: '100vh',
         backgroundColor: theme.palette.neutral.cream,
+        padding: "1rem 0"
       }}>
         <Box sx={{
           borderRadius: 2,
