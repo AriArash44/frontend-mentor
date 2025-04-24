@@ -42,4 +42,4 @@ Below is a preview of the page in mobile and desktop views:
 | ![Mobile Demo](./src/assets/images/mobile-demo.png)        | ![Desktop Demo](./src/assets/images/desktop-demo.png)        |
 | *Mobile view of the Product Preview Page*             | *Desktop view of the Product Preview Page*               |
 
-You can visit the live version at [Product Preview Page](https://ariarash44.github.io/frontend-mentor/5.productPreviewPage/)
+You can visit the live version at [Product Preview Page](https://ariarash44.github.io/frontend-mentor/5.productPreview/)
