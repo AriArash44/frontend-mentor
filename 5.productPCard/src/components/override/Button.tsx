@@ -11,16 +11,22 @@ interface ButtonProps {
     disabled?: boolean;
 }
 
-const StyledButton = styled(Button)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    padding: "0.65rem 1rem",
-    borderRadius: "0.4rem",
-    textTransform: "inherit",
-    gap: theme.spacing(1),
-}));
+const StyledButton = styled(Button)(() => {
+    const theme = useTheme();
+    return {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        padding: "0.65rem 1rem",
+        borderRadius: "0.4rem",
+        textTransform: "inherit",
+        gap: theme.spacing(1),
+        "&:hover, &:active": {
+            backgroundColor: theme.palette.primary.dark,
+        },
+    };
+});
 
 const Override_Button: React.FC<ButtonProps> = ({
     onClick,
@@ -28,32 +34,29 @@ const Override_Button: React.FC<ButtonProps> = ({
     variant = "contained",
     disabled = false,
 }) => {
-    const theme = useTheme();
     return (
         <motion.div
-            whileHover={{
-                scale: 1.05,
-                color: theme.palette.primary.dark,
-                transition: { duration: 0.2 },
-            }}
-            whileTap={{
-                scale: 0.95,
-                color: theme.palette.primary.dark,
-            }}
-            transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 17,
-            }}
+          whileHover={{
+            scale: 1.05,
+            transition: { duration: 0.2 },
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 17,
+          }}
         >
-            <StyledButton
-                color="primary"
-                variant={variant}
-                disabled={disabled}
-                onClick={onClick}
-            >
-                {children}
-            </StyledButton>
+          <StyledButton
+            color="primary"
+            variant={variant}
+            disabled={disabled}
+            onClick={onClick}
+          >
+            {children}
+          </StyledButton>
         </motion.div>
     );
 };

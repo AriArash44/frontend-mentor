@@ -19,7 +19,7 @@ const theme = createTheme({
         },
     },
     typography: {
-        // fontFamily: '"Montserrat", sans-serif',
+        fontFamily: '"Montserrat", sans-serif',
         body1: { fontWeight: 500 },
         body2: { fontWeight: 500 },
         ...typography

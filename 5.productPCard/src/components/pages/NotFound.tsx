@@ -21,7 +21,7 @@ const StyledImage = styled.img`
 function NotFound() {
   return (
     <StyledMain>
-      <Typography variant="h4" component="h1" gutterBottom>The page does not exists</Typography>
+      <Typography variant="h4" component="h1" gutterBottom>The page does not exist</Typography>
       <Typography component="p">
         Click <Link to="/">here</Link> to go back to the home page.
       </Typography>

@@ -7,17 +7,14 @@ interface PictureProps {
     alt: string
 }
 
-const StyledPicture = styled("picture")({
+const commonStyles = {
     display: "block",
-    maxWidth: "100%",
-    height: "100%"
-});
-
-const StyledImg = styled("img")({
     width: "100%",
     height: "100%",
-    display: "block",
-});
+};
+
+const StyledPicture = styled("picture")(commonStyles);
+const StyledImg = styled("img")(commonStyles);
 
 const ResponsiveImage: React.FC<PictureProps> = ({
     mobileImage, 

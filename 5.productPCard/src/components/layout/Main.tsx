@@ -1,6 +1,5 @@
 import { Box, Grid } from "@mui/material";
 import theme from "../../themes";
-import { useTheme } from "@emotion/react";
 import React from "react";
 
 interface MainProps {
@@ -12,7 +11,6 @@ const Main: React.FC<MainProps> = ({
     className = "default",
     children,
 }) => {
-    useTheme();
     return(
       <Grid sx={{
         display: 'flex',
@@ -26,7 +24,7 @@ const Main: React.FC<MainProps> = ({
           borderRadius: 2,
           overflow: 'clip',
           backgroundColor: theme.palette.neutral.white,
-          width: 'min(620px, 95%)',
+          width: 'min(690px, 95%)',
           '@media (max-width: 599.5px)': {
             width: 'min(clamp(420px, 80vw, 100%), 95%)',
           },
