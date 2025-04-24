@@ -10,7 +10,15 @@ import Main from "../layout/Main";
 
 function ProductPreview() {
     const [loaded, setLoaded] = useState(false);
+    const [calculatedHeight, setCalculatedHeight] = useState(`1000px`);
     useEffect(() => {
+        const handleResize = () => {
+            const screenWidth = window.innerWidth;
+            const newHeight = 250 - 0.5 * (350 - screenWidth);
+            setCalculatedHeight(`${newHeight}px`);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
         const mobileImg = new Image();
         const desktopImg = new Image();
         mobileImg.src = mobileProductImage;
@@ -20,8 +28,10 @@ function ProductPreview() {
             const timer = setTimeout(() => {
               setLoaded(true);
               }, 2000);
-            return () => clearTimeout(timer);
+            return () => {
+              clearTimeout(timer);
             };
+          };
         };
     }, []);
     const theme = useTheme();
@@ -30,12 +40,8 @@ function ProductPreview() {
       <Main>
         <Grid spacing={2} container>
           <Grid size={{ xs: 12, sm: 6 }} sx={{
-            height: {
-              xs: () => {
-                const screenWidth = window.innerWidth;
-                const calculatedHeight = 250 - 0.1 * (350 - screenWidth);
-                return `${calculatedHeight}px`;
-              },
+            '@media (max-width: 599.5px)': {
+              height: calculatedHeight,
             },
           }}>
             { 
