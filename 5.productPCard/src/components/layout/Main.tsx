@@ -26,7 +26,7 @@ const Main: React.FC<MainProps> = ({
           borderRadius: 2,
           overflow: 'clip',
           backgroundColor: theme.palette.neutral.white,
-          width: 'min(650px, 95%)',
+          width: 'min(620px, 95%)',
           '@media (max-width: 599.5px)': {
             width: 'min(clamp(420px, 80vw, 100%), 95%)',
           },

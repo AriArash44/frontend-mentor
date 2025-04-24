@@ -16,6 +16,9 @@ const StyledButton = styled(Button)(({ theme }) => ({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+    padding: "0.65rem 1rem",
+    borderRadius: "0.4rem",
+    textTransform: "inherit",
     gap: theme.spacing(1),
 }));
 

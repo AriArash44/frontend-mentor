@@ -56,7 +56,7 @@ function ProductPreview() {
                 }}>
                   P E R F U M E
                 </Typography> 
-                <Typography variant="h4" component="h1" gutterBottom>
+                <Typography variant="h4" component="h1" gutterBottom color={theme.palette.neutral.black}>
                   Gabrielle Essence Eau De Parfum
                 </Typography>
                 <Typography color={theme.palette.neutral.grey} gutterBottom>
@@ -65,13 +65,18 @@ function ProductPreview() {
                 <Grid container sx={{
                   margin: "2rem 0rem",
                 }}>
-                  <Grid size={8}>
+                  <Grid size={7}>
                     <Typography variant="h4" component="h2" color={theme.palette.primary.main}>
                       $149.99
                     </Typography>
                   </Grid> 
-                  <Grid size={4}>
-                    <del color={theme.palette.neutral.grey}>$169.99</del>
+                  <Grid size={5}>
+                    <del style={{
+                      color: theme.palette.neutral.grey, 
+                      display: "inline-block", 
+                      marginTop: "0.3rem", 
+                      marginLeft: "0.5rem"
+                    }}>$169.99</del>
                   </Grid> 
                 </Grid>
                 <Override_Button onClick={() => {
