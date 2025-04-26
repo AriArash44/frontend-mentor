@@ -1,6 +1,6 @@
 import { MainLayout, Header, Body } from "../layout/Main.jsx";
 import { Component } from "react";
-import { Card } from "../common/Cards.jsx";
+import { Card, Cards } from "../common/Cards.jsx";
 
 export class FourCard extends Component {
     render() {
@@ -16,10 +16,12 @@ export class FourCard extends Component {
               </div>
             </Header>
             <Body>
-              <Card color="cyan" header="Supervisor" caption="Monitors activity to identify project roadblocks" image="/images/icon-supervisor.svg"/>
-              <Card color="red" header="Team Builder" caption="Scans our talent network to create the optimal team for your project" image="/images/icon-team-builder.svg"/>
-              <Card color="blue" header="Karma" caption="Regularly evaluates our talent to ensure quality" image="/images/icon-karma.svg"/>
-              <Card color="orange" header="Calculator" caption="Uses data from past projects to provide better delivery estimates" image="/images/icon-calculator.svg"/>
+              <Cards>
+                <Card color="cyan" header="Supervisor" caption="Monitors activity to identify project roadblocks" image="/images/icon-supervisor.svg"/>
+                <Card color="red" header="Team Builder" caption="Scans our talent network to create the optimal team for your project" image="/images/icon-team-builder.svg"/>
+                <Card color="orange" header="Karma" caption="Regularly evaluates our talent to ensure quality" image="/images/icon-karma.svg"/>
+                <Card color="blue" header="Calculator" caption="Uses data from past projects to provide better delivery estimates" image="/images/icon-calculator.svg"/>
+              </Cards>
             </Body>
           </MainLayout>
         );
