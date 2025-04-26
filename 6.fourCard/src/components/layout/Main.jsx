@@ -22,7 +22,7 @@ export class MainLayout extends Component {
 
         return (
             <>
-              <header className="header">{header}</header>
+              <header className="header flex justify-center align-center mt-8 lg:mt-12">{header}</header>
               <main className="body">{body}</main>
             </>
         );

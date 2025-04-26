@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+    --color-custom-red: hsl(0, 78%, 62%);
+    --color-custom-cyan: hsl(180, 62%, 55%);
+    --color-custom-orange: hsl(34, 97%, 64%);
+    --color-custom-blue: hsl(212, 86%, 64%);
+    --color-gray-700: hsl(234, 12%, 12%);
+    --color-gray-600: hsl(234, 12%, 22%);
+    --color-gray-500: hsl(234, 12%, 34%);
+    --color-gray-400: hsl(212, 6%, 44%);
+    --color-gray-300: hsl(212, 6%, 72%);
+    --color-gray-200: hsl(212, 6%, 84%);
+    --color-gray-100: hsl(212, 6%, 92%);
+    --color-white: hsl(0, 0%, 100%);
+}
+
+@layer base {
+    h1 {
+        font-size: var(--text-2xl);
+    }
+    h2 {
+        font-size: var(--text-2xl);
+    }
+    h3 {
+        font-size: var(--text-lg);
+    }
+}

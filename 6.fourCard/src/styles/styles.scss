@@ -1,0 +1,33 @@
+$font_weights: (200, 400, 600);
+
+@each $space in $font_weights {
+    @font-face {
+        font-family: 'poppins';
+        src: url("/fonts/Poppins-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
+* {
+    font-family: poppins;
+}
+
+$colors: (
+    "black": rgb(0, 0, 0),
+    "cyan": rgb(69, 211, 211),
+    "blue": rgb(84, 158, 242),
+    "orange": rgb(252, 175, 74),
+    "red": rgb(234, 83, 83)
+);
+
+$opacity: 0.3;
+
+@each $name, $color in $colors {
+    .custom-#{$name}-shadow {
+        box-shadow: 0px 10px 25px -10px rgba($color, $opacity);
+        -webkit-box-shadow: 0px 10px 25px -10px rgba($color, $opacity);
+        -moz-box-shadow: 0px 10px 25px -10px rgba($color, $opacity);
+    }
+}
