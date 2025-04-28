@@ -69,9 +69,9 @@ export class FourCard extends Component {
             <Body>
               <DndProvider backend={HTML5Backend}>
                 <Cards>
-                {this.state.cards.map((card) => (
-                  <Card key={card.id} {...card} moveCard={this.moveCard} />
-                ))}
+                  {this.state.cards.map((card) => (
+                    <Card key={card.id} {...card} moveCard={this.moveCard} />
+                  ))}
                 </Cards>
               </DndProvider>
             </Body>

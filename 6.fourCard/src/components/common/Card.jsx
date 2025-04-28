@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { DragSource, DropTarget } from "react-dnd";
+/* eslint-disable-next-line no-unused-vars */
+import { motion } from "motion/react"; 
 
 const ItemTypes = {
     CARD: 'card'
@@ -44,16 +46,20 @@ class Card extends Component {
     }
     render() {
         return this.props.connectDragSource(this.props.connectDropTarget(
-            <div className={(this.state.isHovered ? `custom-${this.props.color}-shadow` : `custom-black-shadow`).
-                concat(` dark:bg-gray-200 max-w-[350px] rounded p-6 border-t-4 border-custom-${this.props.color}`)}
-            onMouseEnter={() => this.setState({ isHovered: true })}
-            onMouseLeave={() => this.setState({ isHovered: false })}>
-              <h3 className="text-gray-600 font-semibold">{this.props.header}</h3>
-              <p className="text-gray-400 text-sm mt-2.5 leading-relaxed">{this.props.caption}</p>
-              <div className="flex justify-end">
-                <img className="mt-10" loading="lazy" src={this.props.image} alt=""/>
+          <div>
+            <motion.div layout transition={{ duration: 0.5, ease: "easeInOut" }}>
+              <div className={(this.state.isHovered ? `custom-${this.props.color}-shadow` : `custom-black-shadow`).
+                  concat(` dark:bg-gray-200 max-w-[350px] rounded p-6 border-t-4 border-custom-${this.props.color}`)}
+              onMouseEnter={() => this.setState({ isHovered: true })}
+              onMouseLeave={() => this.setState({ isHovered: false })}>
+                <h3 className="text-gray-600 font-semibold">{this.props.header}</h3>
+                <p className="text-gray-400 text-sm mt-2.5 leading-relaxed">{this.props.caption}</p>
+                <div className="flex justify-end">
+                  <img className="mt-10" loading="lazy" src={this.props.image} alt=""/>
+                </div>
               </div>
-            </div>
+            </motion.div>
+          </div>
         ));
     }
 }
