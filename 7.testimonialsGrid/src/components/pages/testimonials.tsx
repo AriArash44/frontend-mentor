@@ -1,4 +1,4 @@
-import Card from "../common/Card";
+import Card from "../common/Card.tsx";
 import { graduateStatus } from "../../types/graduateStatus";
 
 const headers = {
@@ -19,17 +19,17 @@ const captions = {
 
 const Testimonals = () => {
     return (
-      <div className="grid md:grid-cols-4 md:grid-rows-2 gap-5 max-w-[1114px] my-20">
-        <div className="col-span-2">
+      <div className="grid md:grid-cols-2 md:grid-row-6 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-2 w-9/10 xl:w-17/20 gap-5 my-30">
+        <div className="row-start-1 col-start-1 md:row-span-2 lg:row-span-1 lg:col-span-2">
           <Card avatar="/images/image-daniel.jpg" name="Daniel Clifford" status={graduateStatus.VerifiedGraduated} header={headers.daniel} caption={captions.daniel} bgColor="purple-500" primaryColor="white" secondaryColor="purple-300" />
-        </div><div>
+        </div><div className="lg:col-span-2 xl:col-span-1">
           <Card avatar="/images/image-jonathan.jpg" name="Jonathan Walters" status={graduateStatus.VerifiedGraduated} header={headers.jonathan} caption={captions.jonathan} bgColor="gray-500" primaryColor="white" secondaryColor="white" />
-        </div><div className="row-span-2">
-          <Card avatar="/images/image-kira.jpg" name="Kira Whittle" status={graduateStatus.VerifiedGraduated} header={headers.kira} caption={captions.kira} bgColor="white" primaryColor="gray-500" secondaryColor="gray-400" />
         </div><div>
           <Card avatar="/images/image-jeanette.jpg" name="Jeanette Harmon" status={graduateStatus.VerifiedGraduated} header={headers.jeanette} caption={captions.jeanette} bgColor="white" primaryColor="gray-500" secondaryColor="gray-400" />
-        </div><div className="col-span-2">
+        </div><div className="md:col-span-2">
           <Card avatar="/images/image-patrick.jpg" name="Patrick Abrams" status={graduateStatus.VerifiedGraduated} header={headers.patrick} caption={captions.patrick} bgColor="dark-blue" primaryColor="gray-100" secondaryColor="gray-200" />
+        </div><div className="md:row-start-2 md:col-start-2 lg:col-start-3 lg:row-start-1 xl:col-start-4 md:row-span-2">
+          <Card avatar="/images/image-kira.jpg" name="Kira Whittle" status={graduateStatus.VerifiedGraduated} header={headers.kira} caption={captions.kira} bgColor="white" primaryColor="gray-500" secondaryColor="gray-400" />
         </div>
       </div>
     );
