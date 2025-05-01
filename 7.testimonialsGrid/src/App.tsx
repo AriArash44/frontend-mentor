@@ -1,8 +1,9 @@
+import Testimonals from "./components/pages/Testimonials"
+
 function App() {
-  return (
-    <>
-    </>
-  )
+    return (
+      <Testimonals />
+    )
 }
 
 export default App

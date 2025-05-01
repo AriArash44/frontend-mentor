@@ -32,3 +32,19 @@
 * {
     font-family: barlow;
 }
+
+.avatar {
+    @apply rounded-full w-12 h-12;
+}
+
+@layer base {
+    h1 {
+        font-size: var(--text-2xl);
+    }
+    h2 {
+        font-size: var(--text-xl);
+    }
+    h3 {
+        font-size: var(--text-lg);
+    }
+}
