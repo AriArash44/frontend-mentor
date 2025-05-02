@@ -34,7 +34,7 @@ const Card = (props: CardProps) => {
             <section className={`bg-${props.bgColor} rounded-lg p-11 h-full custom-shadow relative`}>
               {props.qutation ? <img className="absolute top-0 right-1/12 md:right-1/8 w-30 md:w-35" src="/images/bg-pattern-quotation.svg" alt=""/>: ""}
               <div className="flex align-end gap-5 relative z-10">
-                <img className={`avatar border-${props.borderColor}`} src={props.avatar} alt={props.alt}/>
+                <img className={`avatar border-${props.borderColor}`} src={props.avatar} alt={props.alt ? props.alt : ""}/>
                 <div>
                   <h3 className={`text-${props.primaryColor} font-medium`}>{props.name}</h3>
                   <p className={`text-${props.secondaryColor} font-medium`}>{props.status}</p>
