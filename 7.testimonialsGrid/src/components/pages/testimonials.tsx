@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import Card from "../common/Card.tsx";
-import { graduateStatus } from "../../types/graduateStatus";
+import { graduateStatus } from "../../types/graduateStatus.ts";
 import { names, headers, captions } from "../../consts/users.ts";
 import Checkbox from "../common/Checkbox.tsx";
 import { cardsVisibilityContext, cardsVisibilityReducer } from "../../contexts/cardsVisibility.ts";
