@@ -1,6 +1,5 @@
 import { graduateStatus } from "../../types/graduateStatus";
-import { useContext } from "react";
-import { cardsVisibilityContext } from "../../contexts/cardsVisibility";
+import { useCardsVisibility } from "../../hooks/useCardsVisibility";
 
 interface CardProps {
     avatar: string,
@@ -18,7 +17,7 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-    const { cardsVisibilityState } = useContext(cardsVisibilityContext);
+    const { cardsVisibilityState } = useCardsVisibility();
     return (
       <section className={`bg-${props.bgColor} rounded-lg p-11 h-full custom-shadow relative ${cardsVisibilityState[props.index] ? "" : "invisible"}`}>
         {props.qutation ? <img className="absolute top-0 right-20 w-35" src="/images/bg-pattern-quotation.svg" alt=""/>: ""}

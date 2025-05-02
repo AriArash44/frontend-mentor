@@ -14,8 +14,8 @@ const Testimonals = () => {
       <cardsVisibilityContext.Provider value={{ cardsVisibilityState, dispatch }}>
         <div className="w-9/10 xl:w-17/20 mb-30 mt-10 m-auto">
           <div className="flex flex-col">
-            <h1 className="m-auto">Select the checkboxes to view the feedback you'd like to see:</h1>
-            <div className="flex gap-5 m-auto mt-2 mb-12">
+            <h1 className="m-auto text-center w-4/5 md:w-full">Select the checkboxes to view the feedback you'd like to see:</h1>
+            <div className="flex gap-5 m-auto mt-8 md:mt-2 mb-12 flex-wrap justify-center">
               {Object.keys(names).map((name, index) => (
                 <React.Fragment key={name}>
                   <Checkbox name={names[name]} index={index} />
