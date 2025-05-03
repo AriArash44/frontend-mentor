@@ -130,7 +130,7 @@ const MenuListMini = ({ showText }) => (
     </>
 );
 
-export default function Aside() {
+const Aside = React.forwardRef((props, ref) => {
     const isMobile = useMediaQuery('(max-width:500px)');
     const isTablet = useMediaQuery('(min-width:500px) and (max-width:900px)');
     const isDesktop = useMediaQuery('(min-width:900px)');
@@ -169,12 +169,12 @@ export default function Aside() {
           </Button>
         )}
         {isDesktop && (
-          <Box sx={{ position: 'fixed', left: 0, top: 0, width: drawerWidth, height: '100vh', backgroundColor: 'transparent', outline: '1px solid #E9E9E9', background: "#F8F8F8", overflowY: 'auto' }}>
+          <Box ref={ref} sx={{ position: 'fixed', left: 0, top: 0, width: drawerWidth, height: '100vh', backgroundColor: 'transparent', outline: '1px solid #E9E9E9', background: "#F8F8F8", overflowY: 'auto' }}>
             {fullListContent}
           </Box>
         )}
         {isTablet && (
-          <MiniDrawerStyled variant="permanent" open={tabletOpen}>
+          <MiniDrawerStyled ref={ref} variant="permanent" open={tabletOpen}>
             <DrawerHeader>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: tabletOpen ? 'space-between' : 'center', width: '100%', padding: '0 8px' }}>
                 {tabletOpen && (
@@ -193,6 +193,7 @@ export default function Aside() {
         )}
         {isMobile && (
           <DrawerMui
+            ref={ref}
             anchor="left"
             open={mobileOpen}
             onClose={toggleMobileDrawer(false)}
@@ -205,4 +206,6 @@ export default function Aside() {
         )}
       </>
     );
-}
+})
+
+export default Aside;

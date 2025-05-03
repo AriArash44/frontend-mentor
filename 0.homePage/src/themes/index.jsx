@@ -14,7 +14,7 @@ const theme = createTheme({
     },
     typography: {
         body1: { fontFamily: '"SpaceGrotesk", serif', fontWeight: 400 },
-        body2: { fontFamily: '"SpaceGrotesk", serif', fontWeight: 400 },
+        body2: { fontSize: "clamp(1.2rem, calc(5vw), 2rem)", fontFamily: '"SpaceGrotesk", serif', fontWeight: 400 },
         ...typography
     }
 });
