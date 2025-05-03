@@ -12,9 +12,9 @@ const Togglable = ({header, children}) => {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          <Typography component="span">{header}</Typography>
+          <Typography component="span" sx={{ fontWeight: 700, color: "#555555"}}>{header}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{paddingTop: 0}}>
           {children}
         </AccordionDetails>
       </Accordion>

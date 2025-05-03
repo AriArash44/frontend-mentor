@@ -28,7 +28,7 @@ const drawerWidth = 275;
 const openedMixin = {
     width: drawerWidth,
     transition: 'width 0.3s ease-out',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
 };
 
 const closedMixin = {
@@ -89,7 +89,7 @@ const MenuListFull = () => (
     <>
       {menuItems.map(({ header, items, icons }) => (
         <Togglable header={header} key={header}>
-          <List sx={{ backgroundColor: "#EEEEEE" }}>
+          <List>
             {items.map((text, index) => (
               <ListItem key={text} disablePadding>
                 <StyledA href={`/frontend-mentor/${text}`}>
@@ -141,7 +141,7 @@ export default function Aside() {
     const fullListContent = (
       <Box sx={{ width: drawerWidth }} role="presentation">
         <Box sx={{ p: 2 }}>
-          <Typography component="h1" variant="h4">
+          <Typography component="h1" variant={isMobile ? 'h6' : 'h5'} sx={{ marginBottom: isDesktop ? 3 : 1 }}>
             Projects
           </Typography>
         </Box>
@@ -169,7 +169,7 @@ export default function Aside() {
           </Button>
         )}
         {isDesktop && (
-          <Box sx={{ position: 'fixed', left: 0, top: 0, width: drawerWidth, height: '100vh', backgroundColor: 'transparent', outline: '1px solid #E9E9E9' }}>
+          <Box sx={{ position: 'fixed', left: 0, top: 0, width: drawerWidth, height: '100vh', backgroundColor: 'transparent', outline: '1px solid #E9E9E9', background: "#F8F8F8", overflowY: 'auto' }}>
             {fullListContent}
           </Box>
         )}
