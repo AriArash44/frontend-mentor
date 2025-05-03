@@ -10,14 +10,24 @@ const Home = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const handleResize = useCallback(() => {
         setWindowWidth(window.innerWidth);
-    }, [window.innerWidth]);
+    }, []);
     useEffect(() => {
-        if(ref.current) {
-            setAsideWidth(ref.current.clientWidth);
-        }
+        if (!ref.current) return;
+        const observer = new ResizeObserver(entries => {
+            const { width } = entries[0].contentRect;
+            setAsideWidth(width);
+        });
+        observer.observe(ref.current);
+        return () => {
+            observer.disconnect();
+        };
+    }, [ref]);
+    useEffect(() => {
         window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, [handleResize, ref]);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    }, [handleResize]);
     const mainContentWidth = useMemo(() => {
         return windowWidth - asideWidth;
     }, [windowWidth, asideWidth]);

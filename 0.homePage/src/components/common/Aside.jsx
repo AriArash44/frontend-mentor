@@ -131,8 +131,8 @@ const MenuListMini = ({ showText }) => (
 );
 
 const Aside = React.forwardRef((props, ref) => {
-    const isMobile = useMediaQuery('(max-width:500px)');
-    const isTablet = useMediaQuery('(min-width:500px) and (max-width:900px)');
+    const isMobile = useMediaQuery('(max-width:600px)');
+    const isTablet = useMediaQuery('(min-width:600px) and (max-width:900px)');
     const isDesktop = useMediaQuery('(min-width:900px)');
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const toggleMobileDrawer = (open) => () => setMobileOpen(open);
@@ -162,7 +162,9 @@ const Aside = React.forwardRef((props, ref) => {
               minHeight: '50px',
               p: 0,
               mt: '15px',
-              ml: '15px'
+              ml: '15px',
+              position: 'relative',
+              zIndex: 10
             }}
           >
             <MenuIcon />
@@ -193,7 +195,6 @@ const Aside = React.forwardRef((props, ref) => {
         )}
         {isMobile && (
           <DrawerMui
-            ref={ref}
             anchor="left"
             open={mobileOpen}
             onClose={toggleMobileDrawer(false)}
