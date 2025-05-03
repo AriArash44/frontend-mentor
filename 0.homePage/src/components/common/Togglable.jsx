@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Togglable = ({header, children}) => {
-    console.log(children)
     return (
       <Accordion>
         <AccordionSummary
