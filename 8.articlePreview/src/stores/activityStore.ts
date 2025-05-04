@@ -29,10 +29,10 @@ const activeReducer = (
     }
 };
 
-const store = configureStore({
+const activityStore = configureStore({
     reducer: {
         uiState: activeReducer,
     },
 });
 
-export default store;
+export default activityStore;
