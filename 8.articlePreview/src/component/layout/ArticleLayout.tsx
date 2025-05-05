@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from "react";
 import { Grid, Box, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../stores/activityStore.tsx";
+import { RootState } from "../../stores/store";
 
 interface ArticleLayoutProps {
     children: ReactNode;

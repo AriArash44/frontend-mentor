@@ -6,11 +6,11 @@ import shareIconActive from "../../assets/images/icon-share-white.svg";
 import { Grid, Box, Typography, Button, useTheme, styled } from "@mui/material";
 import OverrideTooltip from "../overrides/Tooltip";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../stores/activityStore.tsx";
-import { useState, useEffect, useCallback } from "react";
-import FacebookIcon from "../../assets/images/icon-facebook.svg";
-import TwitterIcon from "../../assets/images/icon-twitter.svg";
-import PinterestIcon from "../../assets/images/icon-pinterest.svg";
+import { RootState } from "../../stores/slices/uiStateSlice.ts";
+import { useState, useEffect, useCallback, useRef } from "react";
+
+
+
 
 const iconButtonStyles = {
     minWidth: "20px",
@@ -33,19 +33,33 @@ const ArticlePreview = () => {
             window.removeEventListener("resize", handleResize);
         }
     }, [handleResize]);
+    const componentRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
+                onOutsideClick();
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     const ShareButton = () => {
         return (
-          <Button sx={{ 
+          <Button ref={componentRef} sx={{ 
             bgcolor: isActive ? theme["palette"]["grayishBlue"]["dark"] : theme["palette"]["grayishBlue"]["light"],
             borderRadius: "9999px", minWidth: "40px", height: "40px"
           }}
           onMouseEnter={() => dispatch({ type: "MAKE_ACTIVE" })}
           onMouseLeave={() => dispatch({ type: "MAKE_INACTIVE" })}
-          onClick={() => dispatch({ type: "MAKE_ACTIVE" })}>
+          onClick={() => dispatch({ type: "MAKE_ACTIVE" })}
+          onOutsideClick={() => dispatch({ type: "MAKE_INACTIVE" })}>
             <img src={isActive ? shareIconActive : shareIcon} alt="click" className=""/>
           </Button>
         );
     };
+    const ShareButton = ShareButton();
     const TooltipContent = (isMobile: boolean) => {
         return (
           <Grid container spacing={0.5} sx={{
@@ -55,20 +69,20 @@ const ArticlePreview = () => {
             <Grid size={windowWidth < 900 ? 4 : 6}>
               <Typography sx={{fontStyle: "mono", color: theme["palette"]["grayishBlue"]["light"]}}>S H A R E</Typography>
             </Grid><Grid size={2}>
-              <StyledButton>
+              <StyledButton onClick={facebookShareUrl(window.location.href)}>
                 <img src={FacebookIcon} alt=""/>
               </StyledButton>
             </Grid><Grid size={2}>
-              <StyledButton>
+              <StyledButton onClick={twitterShareUrl(window.location.href)}>
                 <img src={TwitterIcon} alt=""/>
               </StyledButton>
             </Grid><Grid size={2}>
-              <StyledButton>
+              <StyledButton onClick={pinterestShareUrl(window.location.href)}>
                 <img src={PinterestIcon} alt=""/>
               </StyledButton>
             </Grid><Grid size={windowWidth < 900 ? 2 : 0}>
               { isMobile && 
-                ShareButton()
+                ``
               }
             </Grid>
           </Grid>
