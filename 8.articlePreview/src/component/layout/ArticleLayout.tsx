@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, useTheme } from "@mui/material";
 
 interface ArticleLayoutProps {
     children: ReactNode;
@@ -34,15 +34,26 @@ const ArticleLayout: ArticleLayoutComponent = ({ children }) => {
             if (child.type === Footer) footer = child;
         }
     });
+    const theme = useTheme();
     return (
-      <Grid container component="div">
-        <Grid size={{ xs: 12, md: 5 }}>
-          <Box component="figure">{figure}</Box>
-        </Grid>
-        <Grid size={{ xs: 12, md: 7 }}>
-          <Box component="header">{header}</Box>
-          <Box component="main">{main}</Box>
-          <Box component="footer">{footer}</Box>
+      <Grid container component="div" sx={{
+        bgcolor: theme["palette"]["grayishBlue"]["light"],
+        height: "100vh", justifyContent: "center", alignItems: "center"
+      }}>
+        <Grid container component="div" sx={{
+          width: "clamp(50rem, 60%, 70rem)", bgcolor: "white",
+          borderRadius: 2, overflow: "hidden"
+        }}>
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Box component="figure" sx={{
+              width: "100%", height: "100%"
+            }}>{figure}</Box>
+          </Grid>
+          <Grid size={{ xs: 12, md: 7 }} sx={{padding: 3}}>
+            <Box component="header">{header}</Box>
+            <Box component="main">{main}</Box>
+            <Box component="footer">{footer}</Box>
+          </Grid>
         </Grid>
       </Grid>
     );
