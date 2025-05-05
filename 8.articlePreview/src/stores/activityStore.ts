@@ -35,4 +35,6 @@ const activityStore = configureStore({
     },
 });
 
+export type RootState = ReturnType<typeof activityStore.getState>;
+
 export default activityStore;

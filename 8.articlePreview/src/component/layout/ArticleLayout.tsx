@@ -1,5 +1,7 @@
 import React, { ReactElement, ReactNode } from "react";
 import { Grid, Box, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores/activityStore.tsx";
 
 interface ArticleLayoutProps {
     children: ReactNode;
@@ -34,10 +36,11 @@ const ArticleLayout: ArticleLayoutComponent = ({ children }) => {
             if (child.type === Footer) footer = child;
         }
     });
+    const isActive = useSelector((state: RootState) => state.uiState.active);
     const theme = useTheme();
     return (
       <Grid container component="div" sx={{
-        bgcolor: theme["palette"]["grayishBlue"]["light"],
+        bgcolor: isActive ? theme["palette"]["grayishBlue"]["regular"] : theme["palette"]["grayishBlue"]["light"],
         height: "100vh", justifyContent: "center", alignItems: "center"
       }}>
         <Grid container className="custom-shadow" component="div" sx={{
@@ -49,7 +52,7 @@ const ArticleLayout: ArticleLayoutComponent = ({ children }) => {
               width: "100%", height: "100%"
             }}>{figure}</Box>
           </Grid>
-          <Grid size={{ xs: 12, md: 7 }} sx={{padding: 3}}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <Box component="header">{header}</Box>
             <Box component="main">{main}</Box>
             <Box component="footer">{footer}</Box>
