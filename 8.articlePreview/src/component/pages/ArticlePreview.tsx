@@ -12,8 +12,10 @@ const ArticlePreview = () => {
           <img src={DrawerImage} alt="Drawer" className="w-full h-full"/>
         </ArticleLayout.Figure>
         <ArticleLayout.Header>
-          <Typography component="h1" variant="h5" gutterBottom sx={{
-            color: theme["palette"]["grayishBlue"]["very_dark"]
+          <Typography component="h1" gutterBottom sx={{
+            color: theme["palette"]["grayishBlue"]["very_dark"],
+            fontSize : {xs: "20px", md: "26px"},
+            fontWeight: 700
           }}>
             Shift the overall look and feel by adding these wonderful touches to furniture in your home 
           </Typography>
@@ -27,10 +29,10 @@ const ArticlePreview = () => {
         </ArticleLayout.Main>
         <ArticleLayout.Footer>
           <Grid container sx={{ marginTop: 3, flexWrap: "nowrap", alignItems: "center"}}>
-            <Grid size={2}>
-              <img src={AvatarImage} alt="Avatar" className="rounded-full w-15"/>
+            <Grid size={{xs: 2, md: 1}}>
+              <img src={AvatarImage} alt="Avatar" className="rounded-full w-12"/>
             </Grid>
-            <Grid size={8} sx={{ marginLeft: 2 }}>
+            <Grid size={{xs: 8, md: 9}} sx={{marginLeft: "1rem"}}>
               <Typography component="p" gutterBottom sx={{
                 color: theme["palette"]["grayishBlue"]["very_dark"], fontWeight: 700
               }}>Michelle Appleton</Typography>
@@ -40,8 +42,8 @@ const ArticlePreview = () => {
               <Button sx={{ 
                 bgcolor: theme["palette"]["grayishBlue"]["light"],
                 borderRadius: "9999px",
-                minWidth: "50px",
-                height: "50px"
+                minWidth: "40px",
+                height: "40px"
                }}>
                 <img src={shareIcon} alt="click" className=""/>
               </Button>

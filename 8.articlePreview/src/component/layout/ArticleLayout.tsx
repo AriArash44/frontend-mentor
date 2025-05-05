@@ -40,9 +40,9 @@ const ArticleLayout: ArticleLayoutComponent = ({ children }) => {
         bgcolor: theme["palette"]["grayishBlue"]["light"],
         height: "100vh", justifyContent: "center", alignItems: "center"
       }}>
-        <Grid container component="div" sx={{
-          width: "clamp(50rem, 60%, 70rem)", bgcolor: "white",
-          borderRadius: 2, overflow: "hidden"
+        <Grid container className="custom-shadow" component="div" sx={{
+          width: {xs: "20rem", md: "clamp(50rem, 60%, 70rem)"}, 
+          bgcolor: "white", borderRadius: 2, overflow: "hidden"
         }}>
           <Grid size={{ xs: 12, md: 5 }}>
             <Box component="figure" sx={{
