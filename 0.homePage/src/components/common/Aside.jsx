@@ -82,6 +82,11 @@ const menuItems = [
         header: "Chapter 2",
         items: ["5.productPreview", "6.fourCard", "7.testimonialsgrid"],
         icons: [<Cart />, <Cards />, <Testimonial />]
+    },
+    {
+      header: "Chapter 3",
+      items: ["8.articlePreview"],
+      icons: [<Cart />]
     }
 ];
 
