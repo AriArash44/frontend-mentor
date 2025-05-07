@@ -25,7 +25,7 @@ const TooltipContent = () => {
     return (
       <Grid container spacing={0.5} sx={{
         bgcolor: theme["palette"]["grayishBlue"]["very_dark"],
-        padding: 2, width: "100%", height: "100%", alignItems: "center"
+        padding: windowWidth <= 900 ? 2 : 1, width: "100%", height: "100%", alignItems: "center"
       }} onMouseLeave={() => {
         dispatch(makeInactive())
       }} onMouseEnter={() => {

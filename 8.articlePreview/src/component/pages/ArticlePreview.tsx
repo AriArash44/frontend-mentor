@@ -4,9 +4,9 @@ import OverrideTooltip from "../overrides/Tooltip";
 import ShareButton from "../common/ShareButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores/store";
+import TooltipContent from "../common/TooltipContent";
 import DrawerImage from "../../assets/images/drawers.jpg";
 import AvatarImage from "../../assets/images/avatar-michelle.jpg";
-import TooltipContent from "../common/TooltipContent";
 
 const ArticlePreview = () => {
     const isActive = useSelector((state: RootState) => state.uiState.active);
@@ -38,7 +38,7 @@ const ArticlePreview = () => {
         </ArticleLayout.Main>
         <ArticleLayout.Footer>
           { isActive && windowWidth < 900 ? 
-            <Box sx={{paddingTop: 1}}>
+            <Box sx={{paddingTop: 2}}>
               <TooltipContent />
             </Box>
           : <Grid container sx={{ marginTop: 3, flexWrap: "nowrap", alignItems: "center", paddingX: 4, paddingBottom: 4}}>
@@ -53,7 +53,7 @@ const ArticlePreview = () => {
               </Grid>
               <Grid size={2}>
                 { windowWidth >= 900 ? 
-                  <OverrideTooltip>
+                  <OverrideTooltip title={<TooltipContent/>}>
                     <Grid container justifyContent="center" >
                       <ShareButton isVisible={true} />
                     </Grid>

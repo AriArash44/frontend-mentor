@@ -1,6 +1,6 @@
 import { Button, useTheme } from "@mui/material";
 import { RootState } from "../../stores/store";
-import { makeActive, makeInactive } from "../../stores/slices/uiStateSlice";
+import { makeActive, makeInactive, toggleActiveState } from "../../stores/slices/uiStateSlice";
 import { useSelector, useDispatch } from "react-redux";
 import shareIcon from "../../assets/images/icon-share.svg";
 import shareIconActive from "../../assets/images/icon-share-white.svg";
@@ -25,6 +25,11 @@ const ShareButton = (props: ShareButtonProps) => {
       onMouseLeave={() => {
         if (windowWidth >= 900) {
           dispatch(makeInactive());
+        }
+      }}
+      onClick={() => {
+        if (windowWidth < 900) {
+          dispatch(toggleActiveState());
         }
       }}>
         <img src={isActive ? shareIconActive : shareIcon} alt="click" className=""/>
