@@ -13,8 +13,8 @@ const theme = createTheme({
         ...palette
     },
     typography: {
-        body1: { fontSize: "13px", fontFamily: 'Manrope', fontWeight: 400 },
-        body2: { fontSize: "13px", fontFamily: 'Manrope', fontWeight: 400 },
+        body1: { fontSize: "14px", fontFamily: 'Manrope', fontWeight: 400, lineHeight: 1.6 },
+        body2: { fontSize: "14px", fontFamily: 'Manrope', fontWeight: 400, lineHeight: 1.6 },
         ...typography
     }
 });

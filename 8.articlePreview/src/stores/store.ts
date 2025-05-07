@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import uiStateReducer from "./slices/uiStateSlice";
-import shareButtonReducer from "./slices/shareButtonSlice";
 import windowWidthReducer, { updateWidth } from "./slices/windowWidthSlice";
 
 const store = configureStore({
     reducer: {
         uiState: uiStateReducer,
-        shareButton: shareButtonReducer,
         windowWidth: windowWidthReducer,
     },
 });
