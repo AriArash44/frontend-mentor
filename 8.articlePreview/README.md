@@ -15,7 +15,7 @@ Below is a side-by-side preview of the component in both mobile and desktop view
 
 | Mobile Demo                                            | Desktop Demo                                             |
 |--------------------------------------------------------|----------------------------------------------------------|
-| ![Mobile Demo](./src/assets/images/mobile-demo.png)        | ![Desktop Demo](./src/assets/public/images/desktop-demo.png)        |
+| ![Mobile Demo](./src/assets/images/mobile-demo.png)        | ![Desktop Demo](./src/assets/images/desktop-demo.png)        |
 | *Mobile view of the Article Preview component*                | *Desktop view of the Article Preview component*                  |
 
 You can visit the live version at [Article Preview app](https://ariarash44.github.io/frontend-mentor/8.articlePreview/)
