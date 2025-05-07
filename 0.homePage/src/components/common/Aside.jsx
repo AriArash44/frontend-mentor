@@ -80,7 +80,7 @@ const menuItems = [
     },
     {
         header: "Chapter 2",
-        items: ["5.productPreview", "6.fourCard", "7.testimonialsgrid"],
+        items: ["5.productPreview", "6.fourCard", "7.testimonialsGrid"],
         icons: [<Cart />, <Cards />, <Testimonial />]
     },
     {
