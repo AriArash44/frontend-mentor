@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+@theme {
+    --color-custom-red: hsl(4, 100%, 67%);
+    --color-blue-800: hsl(234, 29%, 20%);
+    --color-blue-700: hsl(235, 18%, 26%);
+    --color-gray: hsl(0, 0%, 58%);
+    --color-white: hsl(0, 0%, 100%);
+}
+
+@font-face {
+    font-family: "roboto";
+    src: url("../assets/fonts/Roboto-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "roboto";
+    src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: roboto;
+}
