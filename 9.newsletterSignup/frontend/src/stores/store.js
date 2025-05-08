@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import mySliceReducer from './mySlice';
+import fetchResultSlice from './slices/fetchResultState';
 
 const store = configureStore({
-  reducer: {
-    mySlice: mySliceReducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+    reducer: {
+        fetchResultSlice: fetchResultSlice,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export default store;

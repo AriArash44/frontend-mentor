@@ -6,47 +6,49 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export const fetchData = createAsyncThunk('mySlice/fetchData', async (requiredData) => {
-    const GET_DATA_QUERY = 'query '.concat(requiredData);
-    return client.query({
-        query: gql(GET_DATA_QUERY),
-    }).then(response => {
-        return response["data"];
-    })
-    .catch(error => {
-        console.log(error);
-        return {};
-    });
+export const fetchData = createAsyncThunk(
+    'fetchData',
+    async (requiredData, { rejectWithValue }) => {
+        try {
+            const GET_DATA_QUERY = gql`
+                query {
+                    ${requiredData}
+                }
+            `;
+            const response = await client.query({ query: GET_DATA_QUERY });
+            if (response.errors && response.errors.length > 0) {
+                return rejectWithValue(response.errors[0].message);
+            }
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message || 'An error occurred');
+        }
+    }
+);
+
+const fetchResultSlice = createSlice({
+    name: 'fetchResultSlice',
+    initialState: {
+        data: [],
+        loading: false,
+        error: null,
+    },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchData.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchData.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload;
+            })
+            .addCase(fetchData.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
+            });
+    },
 });
 
-const mySlice = createSlice({
-  name: 'mySlice',
-  initialState: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchData.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(fetchData.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
-});
-
-export default mySlice.reducer;
-
-
-
-
-
-
+export default fetchResultSlice.reducer;
