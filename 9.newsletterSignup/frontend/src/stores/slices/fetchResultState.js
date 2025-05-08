@@ -29,7 +29,7 @@ export const fetchData = createAsyncThunk(
 const fetchResultSlice = createSlice({
     name: 'fetchResultSlice',
     initialState: {
-        data: [],
+        data: null,
         loading: false,
         error: null,
     },
@@ -37,14 +37,17 @@ const fetchResultSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchData.pending, (state) => {
+                state.data = null;
                 state.loading = true;
                 state.error = null;
             })
             .addCase(fetchData.fulfilled, (state, action) => {
-                state.loading = false;
                 state.data = action.payload;
+                state.loading = false;
+                state.error = null;
             })
             .addCase(fetchData.rejected, (state, action) => {
+                state.data = null;
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             });

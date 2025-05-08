@@ -2,10 +2,10 @@ import ListIcon from "../../assets/images/icon-list.svg";
 
 const ListItem = (props) => {
     return (
-      <span>
+      <div className="flex gap-2 items-start mt-2">
         <img src={ListIcon} alt="*"/>
-        <p className="ml-2 flex">{props.title}</p>
-      </span>
+        <p>{props.title}</p>
+      </div>
     );
 };
 

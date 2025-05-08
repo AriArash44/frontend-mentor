@@ -6,16 +6,19 @@ import illustrationSignupDesktop from "../../assets/images/illustration-sign-up-
 
 const SignupPage = () => {
     return (
-      <SignupLayout>
+      <SignupLayout> 
         <SignupLayout.Figure>
           <ResponsiveImage desktopImage={illustrationSignupDesktop} mobileImage={illustrationSignupMobile} alt="illustration sign up image"/>
         </SignupLayout.Figure>
         <SignupLayout.Header>
-          <h1>Stay Updated!</h1>
+          <h1 className="font-bold">Stay Updated!</h1>
         </SignupLayout.Header>
         <SignupLayout.Main>
-          <p>Join 60,000+ product managers receiving monthly updates on:</p>
+          <p className="mt-2 mb-4">Join 60,000+ product managers receiving monthly updates on:</p>
           <ListItem title="Product discovery and building what matters"/>
+          <ListItem title="Measuring to ensure updates are a success"/>
+          <ListItem title="And much more!"/>
+          
         </SignupLayout.Main>
       </SignupLayout>
     );

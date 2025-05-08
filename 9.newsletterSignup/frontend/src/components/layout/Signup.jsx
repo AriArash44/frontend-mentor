@@ -1,6 +1,6 @@
 import React from "react";
 
-const Figure = ({ children }) => <figure>{children}</figure>;
+const Figure = ({ children }) => <>{children}</>;
 const Header = ({ children }) => <>{children}</>;
 const Main = ({ children }) => <>{children}</>;
 
@@ -15,14 +15,15 @@ const SignupLayout = ({children}) => {
             }
         }
     });
-    return (
-      <div dir="rtl" className="flex flex-col sm:flex-row bg-white sm:rounded-3xl center-content w-full signup-width gap-8">
-        <div dir="ltr" className="w-full sm:w-1/2">
-          <figure className="p-0 md:p-5">
+    return ( 
+      <div dir="rtl" className="flex flex-col sm:flex-row justify-center items-center
+      bg-white sm:rounded-3xl w-full sm:w-[50rem] h-full sm:h-auto sm:gap-8">
+        <div dir="ltr" className="w-full h-full sm:w-1/2">
+          <figure className="p-0 w-full sm:p-5">
               {figure}
           </figure>
-        </div>
-        <div dir="ltr" className="w-full sm:w-1/2 p-5">
+        </div> 
+        <div dir="ltr" className="w-full sm:w-1/2 p-5 sm:p-10">
           <header>{header}</header>
           <main>{main}</main>
         </div>
