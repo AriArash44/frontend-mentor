@@ -26,14 +26,18 @@ export const fetchData = createAsyncThunk(
     }
 );
 
+const initialState = {
+    data: null,
+    loading: false,
+    error: null,
+};
+
 const fetchResultSlice = createSlice({
     name: 'fetchResultSlice',
-    initialState: {
-        data: null,
-        loading: false,
-        error: null,
+    initialState,
+    reducers: {
+        resetState: () => initialState
     },
-    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchData.pending, (state) => {
@@ -54,4 +58,5 @@ const fetchResultSlice = createSlice({
     },
 });
 
+export const { resetState } = fetchResultSlice.actions;
 export default fetchResultSlice.reducer;

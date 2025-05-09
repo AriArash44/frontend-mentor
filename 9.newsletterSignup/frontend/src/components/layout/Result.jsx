@@ -1,10 +1,9 @@
 import React from "react";
 
-const Figure = ({ children }) => <figure>{children}</figure>;
 const Header = ({ children }) => <>{children}</>;
 const Main = ({ children }) => <>{children}</>;
 
-const ResultLayput = (({children}) => {
+const ResultLayout = (({children}) => {
     let header, main;
     React.Children.forEach(children, child => {
         if (React.isValidElement(child)) {
@@ -15,16 +14,15 @@ const ResultLayput = (({children}) => {
         }
     });
     return (
-      <div>
+      <div className="flex flex-col justify-center items-center p-10
+      bg-white sm:rounded-3xl w-full sm:w-[30rem] h-full sm:h-auto sm:gap-8">
         <header>{header}</header>
         <main>{main}</main>
       </div>
     );
 });
 
+ResultLayout.Header = Header;
+ResultLayout.Main = Main;
 
-ResultLayput.Figure = Figure;
-ResultLayput.Header = Header;
-ResultLayput.Main = Main;
-
-export default ResultLayput;
+export default ResultLayout;
