@@ -34,15 +34,36 @@
         @media screen and (min-width: 48rem) {
             font-size: var(--text-5xl);
         }
+        color: var(--color-blue-800);
     }
     h2 {
         font-size: var(--text-xl);
+        color: var(--color-blue-800);
     }
     h3 {
         font-size: var(--text-lg);
+        color: var(--color-blue-800);
+    }
+    p {
+        font-size: 14px;
     }
 }
 
 .spinner {
-    @apply w-16 h-16 border-4 border-white border-solid border-r-transparent rounded-full animate-spin;
+    @apply w-16 h-16 border-4 border-blue-800 border-solid border-r-transparent rounded-full animate-spin;
+}
+
+@media screen and (min-width: 48rem) {
+    .spinner {
+        @apply border-white;
+        border-right-color: transparent;
+    }
+}
+
+.custom-gradiant {
+    background: linear-gradient(to left, #FF693E, #FF537B);
+}
+
+.custom-shadow {
+    box-shadow: 20px 20px 40px -15px #FF693E, -20px 20px 40px -15px #FF537B;
 }

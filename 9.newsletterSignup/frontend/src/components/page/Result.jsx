@@ -22,7 +22,7 @@ const highlightEmail = (text, email) => {
     }, []);
 };
 
-const ResultPage = (props) => {
+const ResultPage = (props) => { 
     const emailAddress = extractEmail(props.caption);
     const dispatch = useDispatch();
     const { _register, handleSubmit, formState: { _errors } } = useForm();
@@ -31,11 +31,11 @@ const ResultPage = (props) => {
       <ResultLayout>
         <ResultLayout.Header>
           <img src={SuccessIcon} alt="Success!!!" />
-          <h1 className="font-bold">{props.title}</h1>
+          <h1 className="font-bold leading-none mt-8">{props.title}</h1>
         </ResultLayout.Header>
         <ResultLayout.Main>
           <p>{highlightEmail(props.caption, emailAddress)}</p>
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
             <Button text="Dismiss message"/>
           </form>
         </ResultLayout.Main>

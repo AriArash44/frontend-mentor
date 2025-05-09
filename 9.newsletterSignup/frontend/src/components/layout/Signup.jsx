@@ -17,13 +17,13 @@ const SignupLayout = ({children}) => {
     });
     return ( 
       <div dir="rtl" className="flex flex-col sm:flex-row justify-center items-center
-      bg-white sm:rounded-3xl w-full sm:w-[50rem] h-full sm:h-auto sm:gap-8">
+      bg-white sm:rounded-3xl w-full sm:w-[48rem] h-full sm:h-auto sm:shadow-2xl">
         <div dir="ltr" className="w-full h-full sm:w-1/2">
           <figure className="p-0 w-full sm:p-5">
               {figure}
           </figure>
         </div> 
-        <div dir="ltr" className="w-full sm:w-1/2 p-5 sm:p-10">
+        <div dir="ltr" className="w-full sm:w-1/2 p-5 sm:p-10 sm:pr-5">
           <header>{header}</header>
           <main>{main}</main>
         </div>
