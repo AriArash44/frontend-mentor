@@ -22,6 +22,7 @@ import Cart from '@mui/icons-material/AddShoppingCart';
 import Cards from '@mui/icons-material/Dashboard';
 import Testimonial from '@mui/icons-material/FormatQuote';
 import Togglable from './Togglable';
+import Newspaper from '@mui/icons-material/Newspaper';
 
 const drawerWidth = 275;
 
@@ -85,8 +86,8 @@ const menuItems = [
     },
     {
       header: "Chapter 3",
-      items: ["8.articlePreview"],
-      icons: [<Cart />]
+      items: ["8.articlePreview", "9.newsletterSignup"],
+      icons: [<Cart />, <Newspaper/> ]
     }
 ];
 
