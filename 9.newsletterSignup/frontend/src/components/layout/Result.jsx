@@ -15,9 +15,9 @@ const ResultLayout = (({children}) => {
     });
     return (
       <div className="flex flex-col justify-center items-center p-10
-      bg-white sm:rounded-3xl w-full sm:w-[30rem] h-screen sm:h-auto sm:gap-8">
-        <header className="w-full">{header}</header>
-        <main className="mt-8 sm:mt-2">{main}</main>
+      bg-white sm:rounded-3xl w-full sm:w-[30rem] h-screen sm:h-auto gap-4 sm:gap-8">
+        <header className="w-full h-full flex flex-col justify-end">{header}</header>
+        <main className="mt-8 sm:mt-2 flex flex-col h-full justify-between">{main}</main>
       </div>
     );
 });

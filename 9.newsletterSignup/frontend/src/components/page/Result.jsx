@@ -30,7 +30,7 @@ const ResultPage = (props) => {
     return (
       <ResultLayout>
         <ResultLayout.Header>
-          <img src={SuccessIcon} alt="Success!!!" />
+          <img className="w-16" src={SuccessIcon} alt="Success!!!" />
           <h1 className="font-bold leading-none mt-8">{props.title}</h1>
         </ResultLayout.Header>
         <ResultLayout.Main>
