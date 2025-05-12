@@ -1,0 +1,19 @@
+@use "sass:list";
+
+$font_weights: ();
+@for $i from 3 through 5 {
+    $font_weights: list.join($font_weights, (100 * $i), comma);
+}
+
+@each $space in $font_weights {
+    @font-face {
+        font-family: "Rubik";
+        src: url("../assets/fonts/Rubik-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+    }
+}
+
+* {
+    font-family: "Rubik";
+}
