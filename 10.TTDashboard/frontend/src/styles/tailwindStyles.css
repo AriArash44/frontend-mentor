@@ -13,3 +13,12 @@
     --color-purple-500: hsl(235, 45%, 61%);
     --color-navy-200: hsl(236, 100%, 87%);
 }
+
+@layer base {
+    h1 {
+        font-size: var(--text-2xl);
+    }
+    h1 {
+        font-size: var(--text-md);
+    }
+}
