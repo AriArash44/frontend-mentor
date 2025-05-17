@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
     const { dispatch } = useContext(TimeFrameContext)!;
     return (
-      <button className="bg-white" 
+      <button className="text-left py-2 text-purple-500 hover:text-white hover:cursor-pointer" 
       onClick = {() => {
           dispatch({
               type: "SET_TIMEFRAME",

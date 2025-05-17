@@ -8,7 +8,7 @@ $font_weights: ();
 @each $space in $font_weights {
     @font-face {
         font-family: "Rubik";
-        src: url("../assets/fonts/Rubik-#{$space}.ttf") format("truetype");
+        src: url("/fonts/Rubik-#{$space}.ttf") format("truetype");
         font-weight: #{$space};
         font-style: normal;
     }

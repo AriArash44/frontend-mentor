@@ -37,7 +37,7 @@ const DashboardLayout: DashboardLayoutComponent = ({ children }) => {
         <header>
           {header}
         </header>
-        <main className="grid gap-3 grid-cols-1 md:grid-cols-4 grid-rows-7 md:grid-rows-2 w-11/12 lg:w-[1000px]">
+        <main className="grid gap-6 grid-cols-1 my-20 md:grid-cols-4 grid-rows-7 md:grid-rows-2 w-11/12 lg:w-[1000px]">
           {main}
         </main>
       </div>

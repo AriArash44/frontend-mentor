@@ -8,8 +8,7 @@ import { useContext } from "react";
 import { TimeFrameContext } from "../../contexts/timeFrame";
 
 const DashboardPage = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {imageSrc, error, loading} = useGetImage("user-image?username=JeremyRobson");
+    const {imageSrc, error } = useGetImage("user-image?username=JeremyRobson");
     const { timeFrame } = useContext(TimeFrameContext)!;
     const { data } = useFetcher(`time-data?timeSlot=${timeFrame["timeFrame"].toLowerCase()}`);
     if (error) {
@@ -21,11 +20,13 @@ const DashboardPage = () => {
           <h1 className="sr-only hidden">time tracking dashboard</h1>
         </DashboardLayout.Header>
         <DashboardLayout.Main>
-          { !imageSrc ?
+          { !imageSrc || !data ?
             <div className="spinner"></div>
           : 
             <>
-              <ProfCard profImg={imageSrc} username="Jeremy Robson"/>
+              <div className="lg:row-span-2">
+                <ProfCard profImg={imageSrc} username="Jeremy Robson"/>
+              </div>
               {data.map((item: any) => (
                 <Card headImg={item["title"].toLowerCase().replace(/ /g, "-")} title={item["title"]}
                     value={item["current"]} preValue={item["previous"]} key={item["title"]}/>

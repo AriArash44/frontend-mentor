@@ -16,9 +16,9 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-2xl);
+        font-size: var(--text-4xl);
     }
-    h1 {
+    h2 {
         font-size: var(--text-md);
     }
 }
