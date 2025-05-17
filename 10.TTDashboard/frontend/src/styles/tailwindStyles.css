@@ -22,3 +22,8 @@
         font-size: var(--text-md);
     }
 }
+
+.spinner {
+    @apply w-16 h-16 border-4 border-white border-solid border-r-transparent
+            rounded-full animate-spin absolute inset-1/2 translate-x-[-50%] translate-y-[-50%];
+}

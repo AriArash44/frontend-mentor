@@ -34,7 +34,7 @@ const DashboardLayout: DashboardLayoutComponent = ({ children }) => {
     });
     return (
       <div className="flex flex-col justify-center items-center min-h-screen w-screen bg-navy-950">
-        <header className="w-full h-full flex flex-col justify-end">
+        <header>
           {header}
         </header>
         <main className="grid gap-3 grid-cols-1 md:grid-cols-4 grid-rows-7 md:grid-rows-2 w-11/12 lg:w-[1000px]">

@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
     const { dispatch } = useContext(TimeFrameContext)!;
     return (
-      <button className="" 
+      <button className="bg-white" 
       onClick = {() => {
           dispatch({
               type: "SET_TIMEFRAME",

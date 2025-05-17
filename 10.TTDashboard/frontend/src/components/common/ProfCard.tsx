@@ -1,13 +1,13 @@
 import Button from "./Button";
 
 interface ProfCardProps {
-    profImg: Blob;
+    profImg: string;
     username: string;
 }
 
 const ProfCard = (props: ProfCardProps) => {
     return (
-      <div>
+      <div className="bg-navy-900">
         <div>
           <img className="rounded-full" src={props.profImg} alt="" />
           <p>Report for</p>

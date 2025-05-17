@@ -12,7 +12,7 @@ const Card = (props: CardProps) => {
     const { timeFrame } = useContext(TimeFrameContext)!;
     return (
       <div className="rounded bg-navy-900">
-        <img src={props.headImg} alt=""/>
+        <img src={`/images/icon-${props.headImg}.svg`} alt=""/>
         <div className="flex justify-around">
           <h2 className="text-white">{props.title}</h2>
           <button className="">...</button>
