@@ -13,6 +13,6 @@ const axiosFetch = async (url: string) => {
 export function useFetcher(endpoint: string) {
     const finalUrl = import.meta.env.VITE_BASE_URL.concat(endpoint);
     return useSWR(finalUrl, axiosFetch, {
-        refreshInterval: 30000,
+        refreshInterval: 10000,
     });
 }
