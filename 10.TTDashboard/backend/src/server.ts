@@ -27,7 +27,7 @@ app.get('/api/time-data', async (req: Request, res: Response): Promise<any> => {
         const finalData = data.map((activity) => {
             return {
                 title: activity.title,
-                current: activity.timeframes[timeSlotValue as keyof typeof activity.timeframes]["current"] + getRandomInt(-2, 3),
+                current: Math.max(0, activity.timeframes[timeSlotValue as keyof typeof activity.timeframes]["current"] + getRandomInt(-3, 3)),
                 previous: activity.timeframes[timeSlotValue as keyof typeof activity.timeframes]["previous"]
             }
         });
