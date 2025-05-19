@@ -20,4 +20,8 @@
   font-family: "Rubik";
 }
 
+.card-container:has(.three-dot-button:hover) {
+  background-color: var(--color-navy-900);
+}
+
 /*# sourceMappingURL=styles.css.map */
