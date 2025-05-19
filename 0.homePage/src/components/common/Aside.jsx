@@ -23,6 +23,7 @@ import Cards from '@mui/icons-material/Dashboard';
 import Testimonial from '@mui/icons-material/FormatQuote';
 import Togglable from './Togglable';
 import Newspaper from '@mui/icons-material/Newspaper';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 const drawerWidth = 275;
 
@@ -86,8 +87,8 @@ const menuItems = [
     },
     {
       header: "Chapter 3",
-      items: ["8.articlePreview", "9.newsletterSignup"],
-      icons: [<Cart />, <Newspaper/> ]
+      items: ["8.articlePreview", "9.newsletterSignup", "10.ttDashboard"],
+      icons: [<Cart />, <Newspaper />, <AccessAlarmIcon /> ]
     }
 ];
 
