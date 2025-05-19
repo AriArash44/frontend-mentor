@@ -87,7 +87,7 @@ const menuItems = [
     },
     {
       header: "Chapter 3",
-      items: ["8.articlePreview", "9.newsletterSignup", "10.ttDashboard"],
+      items: ["8.articlePreview", "9.newsletterSignup", "10.TTDashboard"],
       icons: [<Cart />, <Newspaper />, <AccessAlarmIcon /> ]
     }
 ];
