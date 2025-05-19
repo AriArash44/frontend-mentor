@@ -8,10 +8,12 @@ interface ProfCardProps {
 const ProfCard = (props: ProfCardProps) => {
     return (
       <div className="bg-navy-900 rounded-xl h-full">
-        <div className="bg-purple-600 rounded-xl p-6">
+        <div className="flex gap-5 items-center md:block bg-purple-600 rounded-xl p-8">
           <img className="rounded-full w-20 h-20 border-white border-3" src={props.profImg} alt="" />
-          <p className="text-navy-200 mt-8 font-light">Report for</p>
-          <h1 className="text-white font-light mb-10">{props.username}</h1>
+          <div>
+            <p className="text-navy-200 md:mt-8 font-light">Report for</p>
+            <h1 className="text-white font-light md:mb-10">{props.username}</h1>
+          </div>
         </div>
         <div className="flex flex-row justify-between md:flex-col p-6">
           <Button ButtonValue="Daily"></Button>

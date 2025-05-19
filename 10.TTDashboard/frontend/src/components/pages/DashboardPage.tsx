@@ -24,7 +24,7 @@ const DashboardPage = () => {
             <div className="spinner"></div>
           : 
             <>
-              <div className="lg:row-span-2">
+              <div className="md:row-span-2">
                 <ProfCard profImg={imageSrc} username="Jeremy Robson"/>
               </div>
               {data.map((item: any) => (

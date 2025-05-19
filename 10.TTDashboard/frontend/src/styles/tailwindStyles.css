@@ -17,7 +17,12 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-4xl);
+        font-size: var(--text-2xl);
+    }
+    @media (min-width: 768px) {
+        h1 {
+            font-size: var(--text-4xl);
+        }
     }
     h2 {
         font-size: var(--text-md);
