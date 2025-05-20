@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
     const { timeFrame ,dispatch } = useContext(TimeFrameContext)!;
     return (
-      <button className={`${timeFrame.timeFrame === props.ButtonValue ? "text-white" : "text-purple-500"}
+      <button type="button" className={`${timeFrame.timeFrame === props.ButtonValue ? "text-white" : "text-purple-500"}
          hover:text-white hover:cursor-pointer text-left py-2`}
       onClick = {() => {
           dispatch({
