@@ -30,7 +30,7 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-xl);
+        font-size: var(--text-3xl);
     }
     h2 {
         font-size: var(--text-md);

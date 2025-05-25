@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-green-900 text-wight shadow-xs hover:bg-green-400 hover:text-green-900",
+          "bg-green-900 text-white shadow-xs hover:bg-green-400 hover:text-green-900",
         secondary:
           "bg-green-400 text-green-900 shadow-xs hover:bg-secondary/80",
       },
@@ -49,4 +49,4 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+export { Button }
