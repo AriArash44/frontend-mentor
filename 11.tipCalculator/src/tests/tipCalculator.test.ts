@@ -8,7 +8,7 @@ describe('tip calculator tests', () => {
         tip = 15;
         people = 5;
         const { tipPerPerson, totalPerPerson, success } = tipCalculator(bill, tip, people);
-        expect(tipPerPerson).toBe(4.27);
+        expect(tipPerPerson).toBe(4.28);
         expect(totalPerPerson).toBe(32.79);
         expect(success).toBe(true);
     });
