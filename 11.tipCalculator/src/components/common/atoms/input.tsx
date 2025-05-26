@@ -4,9 +4,11 @@ import { useState } from "react"
 
 interface InputProps extends React.ComponentProps<"input"> {
     icon?: string;
+    value?: string | undefined;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Input({ className, type, icon, ...props }: InputProps) {
+function Input({ className, type, icon, value, onChange, ...props }: InputProps) {
     const [ isActive, setIsActive ] = useState(false);
     return (
       <div className={cn("flex bg-gray-50 gap-2 p-2 rounded-sm",
@@ -17,6 +19,8 @@ function Input({ className, type, icon, ...props }: InputProps) {
         </div> }
         <input
           type={type}
+          value={value}
+          onChange={onChange}
           data-slot="input"
           className={cn(
             "w-full focus:outline-0 text-green-900 font-bold pr-2",

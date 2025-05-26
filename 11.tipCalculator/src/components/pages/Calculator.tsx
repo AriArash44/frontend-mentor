@@ -3,16 +3,26 @@ import TipCalculator from "../common/molecules/TipButtons";
 import useTipStore from "@/stores/tipStore";
 import { Button } from "../common/atoms/button";
 import tipCalculator from "@/utils/tipCalculator";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "../common/atoms/input";
 
 const Calculator = () => {
+    const [toggleReset, setToggleReset] = useState(false);
+    const [bill, setBill] = useState("");
+    const [people, setPeople] = useState("");
+    const [{ tipPerPerson, totalPerPerson, success}, setResult] = useState({ tipPerPerson: 0, totalPerPerson: 0, success: false})
     const { tip, reset } = useTipStore();
     useEffect(() => {
         return () => { 
             reset()
         };
-    }, [])
+    }, []);
+    useEffect(() => {
+        if(parseInt(bill) && parseInt(people)) {
+            setResult(tipCalculator(tip, parseInt(bill), parseInt(people)));
+            console.log({ tipPerPerson, totalPerPerson, success})
+        }
+    }, [bill, tip, people]);
     return (
       <Layout>
         <Layout.Header>
@@ -21,11 +31,11 @@ const Calculator = () => {
         <Layout.Main>
           <div>
             <p>Bill</p>
-            <Input icon="/images/icon-dollar.svg" />
+            <Input icon="/images/icon-dollar.svg" value={bill} onChange={(e) => setBill(e.target.value)} placeholder="0"/>
             <p className="mt-4">Select Tip %</p>
-            <TipCalculator />
+            <TipCalculator toggleReset={toggleReset} />
             <p className="mt-4">Number of people</p>
-            <Input icon="/images/icon-person.svg" />
+            <Input icon="/images/icon-person.svg" value={people} onChange={(e) => setPeople(e.target.value)} placeholder="0"/>
           </div>
           <div className="bg-green-900 rounded-2xl p-6 flex flex-col justify-between">
             <div className="flex justify-between">
@@ -33,16 +43,23 @@ const Calculator = () => {
                 <p className="text-white">Tip Amount</p>
                 <p className="text-gray-300 text-xs">/ person</p>
               </div>
-              <h1 className="text-green-400 font-bold">$0.00</h1>
+              <h1 className="text-green-400 font-bold">${tipPerPerson}</h1>
             </div>
             <div className="flex justify-between">
               <div>
                 <p className="text-white">Total</p>
                 <p className="text-gray-300 text-xs">/ person</p>
               </div>
-              <h1 className="text-green-400 font-bold">$0.00</h1>
+              <h1 className="text-green-400 font-bold">${totalPerPerson}</h1>
             </div>
-            <Button className="w-full" variant="secondary" onClick={() => {tipCalculator(tip!)}} disabled={!tip} >RESET</Button>
+            <Button className="w-full" variant="secondary" disabled={!tip && !bill && !people} 
+            onClick={() => {
+                setBill("");
+                setPeople("");
+                setResult({ tipPerPerson: 0, totalPerPerson: 0, success: false});
+                reset();
+                setToggleReset(!toggleReset);
+            }}>RESET</Button>
           </div>
         </Layout.Main>
       </Layout>

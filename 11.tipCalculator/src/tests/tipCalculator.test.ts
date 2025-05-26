@@ -32,4 +32,14 @@ describe('tip calculator tests', () => {
         expect(totalPerPerson).toBe(0);
         expect(success).toBe(false);
     });
+
+    it('should return failure when any field isnt numeric', () => {
+        bill = null;
+        tip = undefined;
+        people = 0;
+        const { tipPerPerson, totalPerPerson, success } = tipCalculator(bill, tip, people);
+        expect(tipPerPerson).toBe(0);
+        expect(totalPerPerson).toBe(0);
+        expect(success).toBe(false);
+    });
 });

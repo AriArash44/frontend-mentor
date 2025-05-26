@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "font-bold rounded-sm",
+  "font-bold rounded-sm py-2",
   {
     variants: {
       variant: {
