@@ -9,12 +9,14 @@ import { Input } from "../common/atoms/input";
 const Calculator = () => {
     const { tip, reset } = useTipStore();
     useEffect(() => {
-        return (reset());
+        return () => { 
+            reset()
+        };
     }, [])
     return (
       <Layout>
         <Layout.Header>
-          <h1 className="text-sm text-green-900 w-16 font-bold">S P L I T T E R</h1>
+          <h1 className="text-base text-green-900 w-18 font-bold opacity-80">S P L I T T E R</h1>
         </Layout.Header>
         <Layout.Main>
           <div>
@@ -40,7 +42,7 @@ const Calculator = () => {
               </div>
               <h1 className="text-green-400 font-bold">$0.00</h1>
             </div>
-            <Button className="w-full" variant="secondary" onClick={() => {tipCalculator(tip!)}} disabled={!tip} >Reset</Button>
+            <Button className="w-full" variant="secondary" onClick={() => {tipCalculator(tip!)}} disabled={!tip} >RESET</Button>
           </div>
         </Layout.Main>
       </Layout>

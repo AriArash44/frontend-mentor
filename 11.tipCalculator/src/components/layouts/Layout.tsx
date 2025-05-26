@@ -33,8 +33,8 @@ const Layout: LayoutComponent = ({ children }) => {
         }
     });
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen w-screen bg-gray-200">
-        <header>
+      <div className="flex flex-col items-center min-h-screen w-screen bg-gray-200">
+        <header className="mt-25 mb-15">
           {header}
         </header>
         <main className="grid gap-6 grid-cols-1 sm:grid-cols-2 bg-white w-full 
