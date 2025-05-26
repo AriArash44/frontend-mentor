@@ -10,7 +10,7 @@ const Calculator = () => {
     const [toggleReset, setToggleReset] = useState(false);
     const [bill, setBill] = useState("");
     const [people, setPeople] = useState("");
-    const [{ tipPerPerson, totalPerPerson, success}, setResult] = useState({ tipPerPerson: 0, totalPerPerson: 0, success: false})
+    const [{ tipPerPerson, totalPerPerson }, setResult] = useState({ tipPerPerson: 0, totalPerPerson: 0, success: false})
     const { tip, reset } = useTipStore();
     useEffect(() => {
         return () => { 
@@ -19,8 +19,7 @@ const Calculator = () => {
     }, []);
     useEffect(() => {
         if(parseInt(bill) && parseInt(people)) {
-            setResult(tipCalculator(tip, parseInt(bill), parseInt(people)));
-            console.log({ tipPerPerson, totalPerPerson, success})
+            setResult(tipCalculator(parseInt(bill), tip, parseInt(people)));
         }
     }, [bill, tip, people]);
     return (
@@ -31,11 +30,14 @@ const Calculator = () => {
         <Layout.Main>
           <div>
             <p>Bill</p>
-            <Input icon="/images/icon-dollar.svg" value={bill} onChange={(e) => setBill(e.target.value)} placeholder="0"/>
+            <Input icon="/images/icon-dollar.svg" value={bill} onChange={(e) => setBill(e.target.value)} placeholder="0" allowDecimal={true}/>
             <p className="mt-4">Select Tip %</p>
             <TipCalculator toggleReset={toggleReset} />
-            <p className="mt-4">Number of people</p>
-            <Input icon="/images/icon-person.svg" value={people} onChange={(e) => setPeople(e.target.value)} placeholder="0"/>
+            <div className="flex justify-between mt-4">
+              <p className="">Number of people</p>
+              {people === "0" && <p className="text-red-400">Can't be zero</p>}
+            </div>
+            <Input icon="/images/icon-person.svg" validMin={1} value={people} onChange={(e) => setPeople(e.target.value)} placeholder="0" />
           </div>
           <div className="bg-green-900 rounded-2xl p-6 flex flex-col justify-between">
             <div className="flex justify-between">
