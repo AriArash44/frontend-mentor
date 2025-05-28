@@ -1,18 +1,17 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "font-bold rounded-sm py-2",
+  "font-bold rounded-sm py-2 cursor-pointer",
   {
     variants: {
       variant: {
         default:
-          "bg-green-900 text-white shadow-xs hover:bg-green-400 hover:text-green-900",
+          "bg-green-900 text-white hover:bg-green-400 hover:text-green-900",
         secondary:
-          "bg-green-400 text-green-900 shadow-xs hover:bg-secondary/80",
+          "bg-green-400 text-green-900",
       }
     },
     defaultVariants: {
@@ -31,7 +30,6 @@ function Button({
     asChild?: boolean
   }) {
   const Comp = asChild ? Slot : "button"
-
   return (
     <Comp
       data-slot="button"
