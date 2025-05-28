@@ -19,9 +19,7 @@ const Calculator = () => {
         };
     }, [reset]);
     useEffect(() => {
-        if(parseFloat(bill) && parseInt(people)) {
-            setResult(tipCalculator(parseFloat(bill), tip, parseInt(people)));
-        }
+        setResult(tipCalculator(parseFloat(bill), tip, parseInt(people)));
     }, [bill, tip, people]);
     return (
       <Layout>
