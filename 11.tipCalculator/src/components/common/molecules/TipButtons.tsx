@@ -17,12 +17,12 @@ const TipButtons = (props: TipButtonsProps) => {
     }, [props.toggleReset]);
     const tips = [5, 10, 15, 25, 50];
     return (
-      <div className="grid grid-cols-3 grid-rows-2 gap-3">
+      <div className="grid grid-cols-3 grid-rows-2 gap-3 mt-3">
         {tips.map((tip, i) => (
           <Button key={tip} variant={selectedItem === i + 1 ? "secondary" : "default"} onClick={() => {set(tip); setCustomTip(""); setSelectedItem(i + 1);}}>{tip}%</Button>
         ))}
-        <Input placeholder="Custom" value={customTip} validMax={100} onChange={(e) => {set(parseInt(e.target.value)); setCustomTip(e.target.value); setSelectedItem(0)}} />
-       </div>
+        <Input className="text-lg" placeholder="Custom" value={customTip} validMax={100} onChange={(e) => {set(parseInt(e.target.value)); setCustomTip(e.target.value); setSelectedItem(0)}} />
+      </div>
     );
 };
 

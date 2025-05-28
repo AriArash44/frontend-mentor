@@ -17,7 +17,7 @@ function Input({ className, type, icon, value, onChange, allowDecimal, validMin,
       <div className={cn("flex bg-gray-50 gap-2 p-2 rounded-sm",
         isActive ? "outline-2 outline-green-400" : "",
         value && ((validMin && parseInt(value) < validMin) || 
-        (validMax && parseInt(value) > validMax)) ? "outline-2 outline-red-400" : ""
+        (validMax && parseInt(value) > validMax)) ? "outline-2 outline-red-600" : ""
       )}>
         { icon && <div className="grid w-5 place-items-center">
           <img className="" src={icon} alt=""/>
@@ -27,8 +27,8 @@ function Input({ className, type, icon, value, onChange, allowDecimal, validMin,
           value={value}
           onChange={(e) => {
               const sanitizedValue = allowDecimal
-                ? e.target.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1") 
-                : e.target.value.replace(/[^0-9]/g, "");
+                ? e.target.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1").replace(/^0+(\d)/, "$1").replace(/(\.\d{2})\d*/g, "$1")
+                : e.target.value.replace(/[^0-9]/g, "").replace(/^0+(\d)/, "$1");
               onChange?.({ ...e, target: { ...e.target, value: sanitizedValue } });
           }}
           data-slot="input"

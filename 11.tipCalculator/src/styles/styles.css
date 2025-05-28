@@ -30,9 +30,13 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-3xl);
+        font-size: var(--text-4xl);
     }
     h2 {
         font-size: var(--text-md);
     }
+}
+
+.inputHeader {
+    @apply font-bold text-gray-500 mb-1 text-sm;
 }

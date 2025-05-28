@@ -37,8 +37,8 @@ const Layout: LayoutComponent = ({ children }) => {
         <header className="mt-25 mb-15">
           {header}
         </header>
-        <main className="grid gap-6 grid-cols-1 sm:grid-cols-2 bg-white w-full 
-          rounded-t-2xl sm:w-[40rem] sm:rounded-2xl p-6">
+        <main className="grid gap-6 grid-cols-1 md:grid-cols-2 bg-white w-full 
+          rounded-t-2xl md:w-[48rem] md:rounded-2xl p-6">
           {main}
         </main>
       </div>

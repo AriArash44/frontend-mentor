@@ -19,30 +19,32 @@ const Calculator = () => {
         };
     }, [reset]);
     useEffect(() => {
-        if(parseInt(bill) && parseInt(people)) {
-            setResult(tipCalculator(parseInt(bill), tip, parseInt(people)));
+        if(parseFloat(bill) && parseInt(people)) {
+            setResult(tipCalculator(parseFloat(bill), tip, parseInt(people)));
         }
     }, [bill, tip, people]);
     return (
       <Layout>
         <Layout.Header>
-          <h1 className="text-base text-green-900 w-18 font-bold opacity-80">S P L I T T E R</h1>
+          <h1 className="text-lg text-green-900 w-20 font-bold opacity-80">S P L I T T E R</h1>
         </Layout.Header>
         <Layout.Main>
-          <div>
-            <p>Bill</p>
+          <div className="p-4">
+            <p className="inputHeader">Bill</p>
             <Input icon="/images/icon-dollar.svg" value={bill} onChange={(e) => setBill(e.target.value)} placeholder="0" allowDecimal={true}/>
-            <p className="mt-4">Select Tip %</p>
+            <p className="mt-8 inputHeader">Select Tip %</p>
             <TipButtons toggleReset={toggleReset} />
-            <div className="flex justify-between mt-4">
-              <p className="">Number of people</p>
-              {people === "0" && <p className="text-red-400">Can't be zero</p>}
+            <div className="flex justify-between mt-8">
+              <p className="inputHeader">Number of people</p>
+              {people === "0" && <p className="text-red-600 text-sm">Can't be zero</p>}
             </div>
             <Input icon="/images/icon-person.svg" validMin={1} value={people} onChange={(e) => setPeople(e.target.value)} placeholder="0" />
           </div>
-          <div className="bg-green-900 rounded-2xl p-6 flex flex-col justify-between">
-            <CalculationResult title="Tip Amount" res={tipPerPerson} />
-            <CalculationResult title="Total" res={totalPerPerson} />
+          <div className="bg-green-900 rounded-2xl p-9 flex flex-col justify-between">
+            <div>
+              <CalculationResult title="Tip Amount" res={tipPerPerson} />
+              <CalculationResult title="Total" res={totalPerPerson} />
+            </div>
             <Button className="w-full" variant="secondary" disabled={!tip && !bill && !people} 
             onClick={() => {
                 setBill("");
