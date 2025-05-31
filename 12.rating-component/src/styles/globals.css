@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme inline {
+    --orange-500: hsl(25, 97%, 53%);
+    --grey-500: hsl(217, 12%, 63%);
+    --grey-900: hsl(213, 19%, 18%);
+    --grey-950: hsl(216, 12%, 8%);
+}
+
+@font-face {
+    font-family: "Overpass";
+    src: url("/fonts/Overpass-400.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Overpass";
+    src: url("/fonts/Overpass-700.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    background: var(--grey-950);
+    font-family: "Overpass";
+}
