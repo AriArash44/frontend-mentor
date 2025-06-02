@@ -21,7 +21,21 @@
     font-style: normal;
 }
 
+@layer base {
+    h1 {
+        font-size: var(--text-3xl);
+    }
+    h2 {
+        font-size: var(--text-2xl);
+    }
+}
+
 body {
     background: var(--grey-950);
     font-family: "Overpass";
+    color: white;
+}
+
+.spinner {
+    @apply w-16 h-16 border-4 border-gray-950 border-solid border-r-transparent rounded-full animate-spin;
 }
