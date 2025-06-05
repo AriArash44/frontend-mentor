@@ -3,8 +3,6 @@
 import RateButtons from "@/components/molecules/RateButtons";
 import Image from "next/image";
 import { useState } from "react";
-import { showToast } from "../utils/showToastHandler";
-import { serverPost } from "@/utils/serverPost";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -13,15 +11,6 @@ export default function Home() {
     const handleRateChange = (newRating) => {
         setRating(newRating);
     };
-    const postRate = async () => {
-        try {
-            const res = await serverPost("/rate", {"rate": rating});
-            router.push(`/thanks/?message=${res.message}`);
-        } catch(e) {
-            console.log(e)
-            showToast(e.message || "an error occured");
-        } 
-    }
     return (
       <>
         <header>
@@ -37,7 +26,9 @@ export default function Home() {
             <RateButtons onRateChange={handleRateChange}/>
           </section>
           <button className="bg-orange-500 rounded-full py-2 w-full mt-5 text-gray-950 hover:bg-whites cursor-pointer" 
-          onClick={async() => { await postRate() }} type="submit">SUBMIT</button>
+          onClick={() => { 
+              router.push(`/thanks?rate=${rating}`);
+          }} type="submit">SUBMIT</button>
         </main>
       </>
     );

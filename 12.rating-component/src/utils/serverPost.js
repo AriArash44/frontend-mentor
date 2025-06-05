@@ -17,7 +17,7 @@ export async function serverPost(url, headers = {}, body = {}) {
             const errorData = await res.json();
             errorMessage = errorData?.message ?? res.statusText;
         } catch (e) {
-            errorMessage = res.statusText;
+            errorMessage = e.message ?? res.statusText;
         }
         throw new Error(`Failed to fetch data. Status: ${res.status}, message: ${errorMessage}`);
     }
