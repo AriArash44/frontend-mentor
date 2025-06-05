@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme inline {
-    --orange-500: hsl(25, 97%, 53%);
-    --grey-500: hsl(217, 12%, 63%);
-    --grey-900: hsl(213, 19%, 18%);
-    --grey-950: hsl(216, 12%, 8%);
+    --color-orange-500: hsl(25, 97%, 53%);
+    --color-grey-500: hsl(217, 12%, 63%);
+    --color-grey-900: hsl(213, 19%, 18%);
+    --color-grey-950: hsl(216, 12%, 8%);
 }
 
 @font-face {
@@ -23,19 +23,19 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-3xl);
+        font-size: var(--text-2xl);
     }
     h2 {
-        font-size: var(--text-2xl);
+        font-size: var(--text-lg);
     }
 }
 
 body {
-    background: var(--grey-950);
+    background: var(--color-grey-950);
     font-family: "Overpass";
     color: white;
 }
 
 .spinner {
-    @apply w-16 h-16 border-4 border-gray-950 border-solid border-r-transparent rounded-full animate-spin;
+    @apply w-16 h-16 border-4 border-white border-solid border-r-transparent rounded-full animate-spin;
 }

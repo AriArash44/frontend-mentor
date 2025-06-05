@@ -15,7 +15,12 @@ export default function RootLayout({ children }) {
         <body
           className="flex min-h-screen justify-center items-center"
         >
-          {children}
+          <header>
+            <h1 className="sr-only hidden">rating app component</h1>
+          </header>
+          <main className="rounded-2xl bg-grey-900 p-6 w-[325px] sm:w-[375px]">
+            {children}
+          </main>
         </body>
       </html>
     );
