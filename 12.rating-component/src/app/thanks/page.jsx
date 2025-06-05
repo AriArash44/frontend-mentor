@@ -6,7 +6,7 @@ export default async function Thanks({ searchParams }) {
     const rate = params.rate;
     const res = await serverPost("/rate", { cache: 'no-store' }, {"rate": rate});
     let randNum = Math.random();
-    if(randNum > 0.5) {
+    if (randNum > 0.9) {
         throw new Error("sample random error just for test");
     }
     return(

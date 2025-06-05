@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 export default function Error({ error, reset }) {
     const handleReset = () => {
         reset();
-        router.refresh();
+        window.location.reload();
     };
     return (
       <div>
