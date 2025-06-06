@@ -1,12 +1,22 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useEffect } from "react";
 
 export default function Error({ error, reset }) {
     const handleReset = () => {
         reset();
         window.location.reload();
     };
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Enter") {
+                handleReset();
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
     return (
       <div>
         <h1>Something went wrong!</h1>
