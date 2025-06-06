@@ -2,8 +2,10 @@
 
 @theme inline {
     --color-orange-500: hsl(25, 97%, 53%);
+    --color-grey-200: hsl(217, 12%, 68%);
     --color-grey-500: hsl(217, 12%, 63%);
     --color-grey-900: hsl(213, 19%, 18%);
+    --color-grey-920: hsl(213, 19%, 14%);
     --color-grey-950: hsl(216, 12%, 8%);
 }
 
@@ -38,4 +40,8 @@ body {
 
 .spinner {
     @apply w-16 h-16 border-4 border-white border-solid border-r-transparent rounded-full animate-spin;
+}
+
+.bg-gradiant {
+    @apply bg-gradient-to-b from-grey-900 to-grey-920;
 }
