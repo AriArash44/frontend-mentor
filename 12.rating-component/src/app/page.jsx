@@ -39,14 +39,14 @@ export default function Home() {
     return (
       <>
         <div className="bg-grey-500/10 rounded-full p-3 w-12 h-12 bg-opacity-5 flex justify-center items-center">
-          <Image width={20} height={20} src="/images/icon-star.svg" alt="star Icon"/>
+          <Image width={20} height={20} src="/images/icon-star.svg" role="presentation" alt="star Icon"/>
         </div>
         <section>
           <h1 className="font-bold mt-8">How did we do?</h1>
           <p className="text-sm text-grey-200 leading-relaxed mt-2 mb-5">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
           <RateButtons rating={rating} onRateChange={handleRateChange}/>
         </section>
-        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} aria-label="Submit rating"
         className={"bg-orange-500 rounded-full py-2 w-full mt-8 text-gray-950 font-bold ".concat(
             rating ? "hover:bg-white cursor-pointer " : "cursor-not-allowed opacity-75"
         )} 
