@@ -25,6 +25,7 @@ import Togglable from './Togglable';
 import Newspaper from '@mui/icons-material/Newspaper';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import CalculateIcon from '@mui/icons-material/Calculate';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 const drawerWidth = 275;
 
@@ -87,11 +88,20 @@ const menuItems = [
         icons: [<Cart />, <Cards />, <Testimonial />]
     },
     {
-      header: "Chapter 3",
-      items: ["8.articlePreview", "9.newsletterSignup", "10.TTDashboard", "11.tipCalculator"],
-      icons: [<Cart />, <Newspaper />, <AccessAlarmIcon />, <CalculateIcon /> ]
+        header: "Chapter 3",
+        items: ["8.articlePreview", "9.newsletterSignup", "10.TTDashboard", "11.tipCalculator"],
+        icons: [<Cart />, <Newspaper />, <AccessAlarmIcon />, <CalculateIcon /> ]
+    },
+    {
+        header: "Chapter 4",
+        items: ["12.ratingComponent", ],
+        icons: [<RateReviewIcon />, ]
     }
 ];
+
+const absoluteLinks = {
+    "12.ratingComponent" : "https://12-rating-component.vercel.app/"
+};
 
 const MenuListFull = () => (
     <>
@@ -100,7 +110,7 @@ const MenuListFull = () => (
           <List>
             {items.map((text, index) => (
               <ListItem key={text} disablePadding>
-                <StyledA href={`/frontend-mentor/${text}`}>
+                <StyledA href={Object.keys(absoluteLinks).includes(text) ? absoluteLinks.text : `/frontend-mentor/${text}`}>
                   <ListItemButton sx={{ justifyContent: 'initial', px: 2.5 }}>
                     <ListItemIcon sx={{ minWidth: 0, mr: 3, justifyContent: 'center' }}>
                       {icons[index]}
@@ -122,7 +132,7 @@ const MenuListMini = ({ showText }) => (
         <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: showText ? 'flex-start' : 'center' }}>
           {items.map((text, idx) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <StyledA href={`/frontend-mentor/${text}`}>
+              <StyledA href={Object.keys(absoluteLinks).includes(text) ? absoluteLinks.text : `/frontend-mentor/${text}`}>
                 <ListItemButton sx={{ justifyContent: showText ? 'initial' : 'center', px: 2.5 }}>
                   <ListItemIcon sx={{ minWidth: 0, mr: showText ? 3 : 'auto', justifyContent: 'center' }}>
                     {icons[idx]}
