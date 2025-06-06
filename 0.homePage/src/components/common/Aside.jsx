@@ -110,7 +110,7 @@ const MenuListFull = () => (
           <List>
             {items.map((text, index) => (
               <ListItem key={text} disablePadding>
-                <StyledA href={Object.keys(absoluteLinks).includes(text) ? absoluteLinks.text : `/frontend-mentor/${text}`}>
+                <StyledA href={Object.keys(absoluteLinks).includes(text) ? absoluteLinks[text] : `/frontend-mentor/${text}`}>
                   <ListItemButton sx={{ justifyContent: 'initial', px: 2.5 }}>
                     <ListItemIcon sx={{ minWidth: 0, mr: 3, justifyContent: 'center' }}>
                       {icons[index]}
@@ -132,7 +132,7 @@ const MenuListMini = ({ showText }) => (
         <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: showText ? 'flex-start' : 'center' }}>
           {items.map((text, idx) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <StyledA href={Object.keys(absoluteLinks).includes(text) ? absoluteLinks.text : `/frontend-mentor/${text}`}>
+              <StyledA href={Object.keys(absoluteLinks).includes(text) ? absoluteLinks[text] : `/frontend-mentor/${text}`}>
                 <ListItemButton sx={{ justifyContent: showText ? 'initial' : 'center', px: 2.5 }}>
                   <ListItemIcon sx={{ minWidth: 0, mr: showText ? 3 : 'auto', justifyContent: 'center' }}>
                     {icons[idx]}
