@@ -1,17 +1,51 @@
-/*@use '@angular/material' as mat;
-@import "tailwindcss";
+@use '@angular/material' as mat;
+@use "./theme-colors" as theme;
+@use "tailwindcss";
+@use "sass:map";
 
+$font_weights: (400, 600, 700);
+
+@each $space in $font_weights {
+    @font-face {
+        font-family: "WorkSans";
+        src: url("/fonts/static/WorkSans-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+    }
+}
+
+@supports (font-variation-settings: normal) {
+    @font-face {
+        font-family: 'WorkSans';
+        src: url('/fonts/dynamic/WorkSans-VariableFont_wght.ttf') format('truetype-variations');
+        font-weight: 100 900;
+        font-display: swap;
+    }
+}
+
+$colors: (
+  "purple-100": hsl(275, 100%, 97%),
+  "purple-600": hsl(292, 16%, 49%),
+  "purple-950": hsl(292, 42%, 14%)
+);
+
+@each $name, $value in $colors {
+    .bg-#{$name} {
+        background-color: $value !important;
+    }
+    .text-#{$name} {
+        color: $value !important;
+    }
+}
+
+//ignore following error, since its related to vscode itself, no problem with MUI theme system
 html {
+  font-family: "WorkSans";
   @include mat.theme((
     color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: theme.$primary-palette,
+      tertiary: theme.$tertiary-palette
     ),
-    typography: Roboto,
-    density: 0,
+    typography: "WorkSans",
   ));
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-*/
