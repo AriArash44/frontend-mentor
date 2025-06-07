@@ -1,4 +1,3 @@
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -13,7 +12,7 @@ dist-test
 dist-ssr
 *.local
 
-# Editor directories and files
+.vscode
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -30,3 +29,27 @@ dist-ssr
 *.pfx
 *.pem
 .next
+.angular
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
