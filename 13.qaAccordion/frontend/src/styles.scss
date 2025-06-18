@@ -38,7 +38,6 @@ $colors: (
     }
 }
 
-//ignore following error, since its related to vscode itself, no problem with MUI theme system
 html {
   font-family: "WorkSans";
   @include mat.theme((
