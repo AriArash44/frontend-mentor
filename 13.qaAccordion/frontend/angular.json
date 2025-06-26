@@ -32,7 +32,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.purged.scss"
             ],
             "scripts": []
           },

@@ -29,18 +29,6 @@ $colors: (
     "purple-950": hsl(292, 42%, 14%)
 );
 
-@each $name, $value in $colors {
-    .bg-#{$name} {
-        background-color: $value !important;
-    }
-    .text-#{$name} {
-        color: $value !important;
-    }
-    .border-#{$name} {
-        border-color: $value;
-    }
-}
-
 $spacing_sizes: ();
 @for $i from 0 through 48 {
     $spacing_sizes: list.append($spacing_sizes, #{$i}px);
@@ -65,11 +53,6 @@ $utilities: (
 
 @mixin generate-utilities($utilities, $values) {
     @each $abbr, $property in $utilities {
-        @each $value in $values {
-            .#{$abbr}-#{$value} {
-                #{$property}: $value;
-            }
-        }
     }
 }
 
