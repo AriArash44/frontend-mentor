@@ -3,7 +3,7 @@ import { QaLayoutComponent } from '../../layouts/qa-layout/qa-layout.component';
 import { AccordionComponent } from '../../components/atoms/accordion/accordion.component';
 
 @Component({
-  selector: 'app-qa-page',
+  selector: 'qa-page',
   imports: [QaLayoutComponent, AccordionComponent],
   templateUrl: './qa-page.component.html',
   styleUrl: './qa-page.component.scss'

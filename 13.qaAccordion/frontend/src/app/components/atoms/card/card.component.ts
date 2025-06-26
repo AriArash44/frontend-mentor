@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-card',
-  imports: [],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  selector: 'card',
+  imports: [NgClass],
+  templateUrl: './card.component.html'
 })
-export class CardComponent {
-  
+
+export class CardComponent implements OnInit {
+  hostClasses = '';
+  constructor(private hostRef: ElementRef) {}
+  ngOnInit() {
+    this.hostClasses = this.hostRef.nativeElement.className;
+  }
 }

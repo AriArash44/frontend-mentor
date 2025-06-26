@@ -1,11 +1,10 @@
-<div class="card">
-  <div class="header">
-    <ng-content select="[card-title]"></ng-content>
-  </div>
-  <div class="body">
-    <ng-content select="[card-content]"></ng-content>
-  </div>
-  <div class="footer">
-    <ng-content select="[card-footer]"></ng-content>
-  </div>
+<div class="d-flex d-center bg-purple-600 h-100">
+  <card class="faq-card">
+    <header>
+      <ng-content select="[card-title]"></ng-content>
+    </header>
+    <main>
+      <ng-content select="[card-content]"></ng-content>
+    </main>
+  </card>
 </div>
