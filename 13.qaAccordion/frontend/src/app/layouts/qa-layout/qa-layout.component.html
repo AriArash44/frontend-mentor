@@ -1,1 +1,11 @@
-<p>qa-layout works!</p>
+<div class="card">
+  <div class="header">
+    <ng-content select="[card-title]"></ng-content>
+  </div>
+  <div class="body">
+    <ng-content select="[card-content]"></ng-content>
+  </div>
+  <div class="footer">
+    <ng-content select="[card-footer]"></ng-content>
+  </div>
+</div>

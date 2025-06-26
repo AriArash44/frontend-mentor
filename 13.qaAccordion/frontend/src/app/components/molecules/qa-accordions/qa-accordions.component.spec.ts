@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OpenButtonComponent } from './open-button.component';
+import { QaAccordionsComponent } from './qa-accordions.component';
 
-describe('OpenButtonComponent', () => {
-  let component: OpenButtonComponent;
-  let fixture: ComponentFixture<OpenButtonComponent>;
+describe('QaAccordionsComponent', () => {
+  let component: QaAccordionsComponent;
+  let fixture: ComponentFixture<QaAccordionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OpenButtonComponent]
+      imports: [QaAccordionsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OpenButtonComponent);
+    fixture = TestBed.createComponent(QaAccordionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
