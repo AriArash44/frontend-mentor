@@ -1,4 +1,14 @@
-<qa-layout>
-  <p card-title>test</p>
-  <accordion [header]="'test2'" [description]="'tets3'" card-content></accordion>
-</qa-layout>
+@if (!loading()) {
+  <qa-layout>
+    <div class="flex" card-title>
+      <img src="/images/icon-star.svg" alt="star" />
+      <h1>FAQs</h1>
+    </div>
+    @for (faq of faqs(); track faq.key) {
+      <accordion [header]="faq.key" [description]="faq.value" card-content></accordion>
+    }
+  </qa-layout>
+}
+@else {
+  <div class="loader m-center" card-content></div>
+}

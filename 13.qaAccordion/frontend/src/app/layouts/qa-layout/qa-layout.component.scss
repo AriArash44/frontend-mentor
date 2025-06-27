@@ -12,5 +12,25 @@
 }
 
 .faq-card {
-    width: 500px; //must changed
+    width: min(90%, 600px);
+}
+
+.absolute {
+    position: absolute;
+} 
+
+.top-0 {
+    top: 0;
+}
+
+.left-0 {
+    left: 0;
+}
+
+.under-other {
+    z-index: -9999;
+}
+
+.w-screen {
+    width: 100vw;
 }

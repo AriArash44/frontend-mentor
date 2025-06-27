@@ -1,4 +1,8 @@
-<div class="d-flex d-center bg-purple-600 h-screen">
+<div class="d-flex d-center h-screen">
+  <picture class="absolute top-0 left-0 under-other">
+    <source media="(min-width: 665px)" srcset="/images/background-pattern-desktop.svg" />
+    <img src="/images/background-pattern-mobile.svg" alt="pattern image" class="w-screen" />
+  </picture>
   <card class="faq-card">
     <header>
       <ng-content select="[card-title]"></ng-content>
