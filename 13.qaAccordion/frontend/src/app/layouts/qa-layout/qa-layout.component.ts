@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { CardComponent } from '../../components/atoms/card/card.component';
+import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'qa-layout',

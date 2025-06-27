@@ -1,8 +1,8 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QaLayoutComponent } from '../../layouts/qa-layout/qa-layout.component';
-import { AccordionComponent } from '../../components/atoms/accordion/accordion.component';
-import { ApiService } from '../../Injectables/fetch-data.service';
+import { AccordionComponent } from '../../components/accordion/accordion.component';
+import { ApiService } from '../../Injectables/fetchData/fetch-data.service';
 
 @Component({
   selector: 'qa-page',
