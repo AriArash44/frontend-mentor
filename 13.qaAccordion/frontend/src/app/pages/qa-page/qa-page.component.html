@@ -5,7 +5,12 @@
       <h1>FAQs</h1>
     </div>
     @for (faq of faqs(); track faq.key) {
-      <accordion [header]="faq.key" [description]="faq.value" card-content></accordion>
+      <div card-content>
+        <accordion [header]="faq.key" [description]="faq.value"></accordion>
+        @if ($index < $count - 1) {
+          <hr class="devider" />
+        }
+      </div>
     }
   </qa-layout>
 }

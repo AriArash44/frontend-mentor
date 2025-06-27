@@ -1,0 +1,13 @@
+::ng-deep .mat-expansion-indicator {
+  transform: none !important;
+  transition: none !important;
+  display: none !important;
+}
+
+::ng-deep .mat-content {
+    align-items: center !important;
+}
+
+::ng-deep .mat-expansion-panel {
+    box-shadow: none !important;
+}

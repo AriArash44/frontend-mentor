@@ -1,7 +1,15 @@
 <mat-accordion>
-  <mat-expansion-panel  class="bg-white" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+  <mat-expansion-panel class="bg-white" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
     <mat-expansion-panel-header>
       <mat-panel-title> {{ header() }} </mat-panel-title>
+      <ng-container matExpansionPanelIndicator>
+        @if(!panelOpenState()){
+          <img src="/images/icon-plus.svg" width="20" height="20" alt="open" />
+        }
+        @else {
+          <img src="/images/icon-minus.svg" width="20" height="20" alt="close" />
+        }
+      </ng-container>
     </mat-expansion-panel-header>
     <p>{{ description() }}</p>
   </mat-expansion-panel>
