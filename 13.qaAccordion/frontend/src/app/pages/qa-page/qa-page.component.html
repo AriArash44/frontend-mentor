@@ -6,7 +6,7 @@
     </div>
     @for (faq of faqs(); track faq.key) {
       <div card-content>
-        <accordion [header]="faq.key" [description]="faq.value"></accordion>
+        <accordion [header]="faq.key" [description]="faq.value" [index]="$index"></accordion>
         @if ($index < $count - 1) {
           <hr class="devider" />
         }

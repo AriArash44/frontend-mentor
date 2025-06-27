@@ -1,5 +1,6 @@
-import { Component, input, signal } from '@angular/core';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { Component, input, signal, computed, inject } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { AccordionStateService } from '../../Injectables/accordionState/accordion-state.service';
 
 @Component({
   selector: 'accordion',
@@ -9,6 +10,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 })
 export class AccordionComponent {
   readonly panelOpenState = signal(false);
+  index = input.required<number>();
   header = input("");
   description = input("");
+  accordion = inject(AccordionStateService);
+  isOpen = computed(() => this.accordion.openIndex() === this.index());
+  toggle() {
+    this.accordion.toggle(this.index());
+  }
 }
