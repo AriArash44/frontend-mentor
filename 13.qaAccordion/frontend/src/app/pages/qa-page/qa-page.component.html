@@ -1,8 +1,8 @@
 @if (!loading()) {
   <qa-layout>
     <div class="flex" card-title>
-      <img src="/images/icon-star.svg" alt="star" />
-      <h1>FAQs</h1>
+      <img src="/images/icon-star.svg" alt="star" width="30" />
+      <h1 class="ml-20px text-purple-950">FAQs</h1>
     </div>
     @for (faq of faqs(); track faq.key) {
       <div card-content>

@@ -11,3 +11,28 @@
 ::ng-deep .mat-expansion-panel {
     box-shadow: none !important;
 }
+
+::ng-deep .mat-expansion-panel-header {
+    padding: 0 !important;
+    margin: 8px 0px;
+    color: hsl(292, 42%, 14%);
+}
+
+::ng-deep .mat-expansion-panel-header:hover {
+    background-color: inherit !important;
+    color: #ad28eb !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 !important;
+    margin: 8px 0px;
+}
+
+::ng-deep .mat-expansion-panel-header-title {
+    font-weight: 600 !important;
+    color: inherit !important;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
