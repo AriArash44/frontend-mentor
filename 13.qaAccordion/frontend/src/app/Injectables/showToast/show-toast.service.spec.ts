@@ -1,16 +1,29 @@
-import { TestBed } from '@angular/core/testing';
-
 import { ShowToastService } from './show-toast.service';
 
 describe('ShowToastService', () => {
-  let service: ShowToastService;
+  it('should call Toastify with the correct config and then showToast()', () => {
+    const showSpy = jasmine.createSpy('showToast');
+    const toastifySpy= jasmine.createSpy('Toastify').and.returnValue({ showToast: showSpy });
+    const svc = new ShowToastService();
+    (svc as any).toastify = toastifySpy;
+    svc.show('Hello world!');
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ShowToastService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(toastifySpy).toHaveBeenCalledWith(jasmine.objectContaining({
+      text: 'Hello world!',
+      duration: 2000,
+      newWindow: true,
+      close: false,
+      gravity: 'top',
+      position: 'left',
+      stopOnFocus: true,
+      style: jasmine.objectContaining({
+        background: '#FFFFFF',
+        border: '1px solid #FF0000',
+        color: '#FF0000',
+        direction: 'rtl',
+        'border-radius': '5px'
+      })
+    }));
+    expect(showSpy).toHaveBeenCalled();
   });
 });
