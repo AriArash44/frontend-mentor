@@ -1,7 +1,7 @@
 ::ng-deep .mat-expansion-indicator {
-  transform: none !important;
-  transition: none !important;
-  display: none !important;
+    transform: none !important;
+    transition: none !important;
+    display: none !important;
 }
 
 ::ng-deep .mat-content {
@@ -25,14 +25,10 @@
 
 ::ng-deep .mat-expansion-panel-body {
     padding: 0 !important;
-    margin: 8px 0px;
+    margin: 4px 0px;
 }
 
 ::ng-deep .mat-expansion-panel-header-title {
     font-weight: 600 !important;
     color: inherit !important;
-}
-
-.fw-300 {
-    font-weight: 300;
 }

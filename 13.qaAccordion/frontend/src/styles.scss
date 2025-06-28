@@ -90,3 +90,14 @@ html {
 html, body { min-height: 100%; }
 body { margin: 0; font-family: "WorkSans" }
 h1 { font-size: 44px; }
+
+.d-flex { display: flex; }
+.d-center { justify-content: center; align-items: center; }
+.m-center { margin: auto;  margin-top: 40vh; }
+.h-screen { height: 100vh; }
+.w-screen { width: 100vw; }
+.absolute { position: absolute; } 
+.top-0 { top: 0; }
+.left-0 { left: 0; }
+.under-other { z-index: -9999; }
+.fw-300 { font-weight: 300; }

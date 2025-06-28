@@ -1,36 +1,3 @@
-.d-flex {
-    display: flex;
-}
-
-.d-center {
-    justify-content: center;
-    align-items: center;
-}
-
-.h-screen {
-    height: 100vh;
-}
-
 .faq-card {
     width: min(90%, 600px);
-}
-
-.absolute {
-    position: absolute;
-} 
-
-.top-0 {
-    top: 0;
-}
-
-.left-0 {
-    left: 0;
-}
-
-.under-other {
-    z-index: -9999;
-}
-
-.w-screen {
-    width: 100vw;
 }
