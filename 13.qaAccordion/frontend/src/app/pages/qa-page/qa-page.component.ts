@@ -1,8 +1,9 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QaLayoutComponent } from '../../layouts/qa-layout/qa-layout.component';
 import { AccordionComponent } from '../../components/accordion/accordion.component';
 import { ApiService } from '../../Injectables/fetchData/fetch-data.service';
+import { ShowToastService } from '../../Injectables/showToast/show-toast.service';
 
 @Component({
   selector: 'qa-page',
@@ -13,12 +14,21 @@ import { ApiService } from '../../Injectables/fetchData/fetch-data.service';
 })
 export class QaPageComponent {
   private api = inject(ApiService);
+  private toast = inject(ShowToastService);
   loading = signal(true);
   error = signal<string|null>(null);
   data = signal<Record<string,string>>({});
   faqs = computed(() =>
     Object.entries(this.data()).map(([key, value]) => ({ key, value }))
   );
+  constructor() {
+    effect(() => {
+      const errMsg = this.error();
+      if (errMsg) {
+        this.toast.show(errMsg);
+      }
+    });
+  }
   async ngOnInit() {
     try {
       this.data.set(await this.api.fetchData('qa'));
