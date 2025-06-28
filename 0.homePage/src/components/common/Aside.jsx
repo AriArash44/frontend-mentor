@@ -26,6 +26,7 @@ import Newspaper from '@mui/icons-material/Newspaper';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 
 const drawerWidth = 275;
 
@@ -94,8 +95,8 @@ const menuItems = [
     },
     {
         header: "Chapter 4",
-        items: ["12.ratingComponent", ],
-        icons: [<RateReviewIcon />, ]
+        items: ["12.ratingComponent", "13.qaAccordion" ],
+        icons: [<RateReviewIcon />, <LiveHelpIcon /> ]
     }
 ];
 
