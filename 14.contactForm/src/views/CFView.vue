@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import CFLayout from '../layouts/CFLayout.vue';
-    // import Input from '../components/Input.vue';
+    import Input from '../components/Input.vue';
     import { showToast } from '../utils/showToast';
     import throttle from 'lodash/throttle';
 
