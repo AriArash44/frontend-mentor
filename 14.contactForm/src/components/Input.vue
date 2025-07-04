@@ -1,22 +1,36 @@
 <script setup lang="ts">
-    import { ref, defineModel, defineProps, watch } from 'vue';
+    import { useId, ref, computed, watch } from 'vue';
     const props = withDefaults(defineProps<{
         title?: string
         type?: string
-        regex?: string
+        regex?: RegExp
         error?: string
     }>(), {
         type: 'text'
-    })
-    const inputValue = ref('')
-    const isCorrectModel = defineModel<boolean>()
+    });
+    const inputValue = ref('');
+    const isCorrect = defineModel<boolean>();
     watch(inputValue, (newVal) => {
         const pattern = props.regex ? new RegExp(props.regex) : null
-        isCorrectModel.value = pattern ? pattern.test(newVal) : false
+        isCorrect.value = pattern ? pattern.test(newVal) : false
+    });
+    const inputId = useId();
+    const isBlurred = ref(false)
+    const borderClass = computed(() => {
+        if (!isBlurred.value) return 'border-gray-500'
+        return isCorrect.value ? 'border-green-600' : 'border-red'
     })
 </script>
 
 <template>
-  <input :type="props.type" v-model="inputValue" @blur="" @focus=""
-  class="p-1.5 border-1 border-gray-500 rounded-lg"/>
+  <div>
+    <div class="flex gap-1">
+      <label :for="inputId">{{ props.title }}</label>
+      <p class="text-green-600">*</p>
+    </div>
+    <input :type="props.type" v-model="inputValue" :id="inputId"
+    @blur="isBlurred = true" @focus="isBlurred = false"
+    :class="['w-full p-1.5 border-1 rounded-lg outline-none', borderClass]"/>
+    <p v-if="isBlurred && !isCorrect" class="text-red">{{ props.error }}</p>
+  </div>
 </template> 
