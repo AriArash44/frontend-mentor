@@ -2,6 +2,7 @@
     import { reactive } from 'vue';
     import CFLayout from '../layouts/CFLayout.vue';
     import Input from '../components/Input.vue';
+    import RadioButton from '../components/RadioButton.vue';
     import { showToast } from '../utils/showToast';
     import throttle from 'lodash/throttle';
     const toastOnce = throttle(
@@ -13,7 +14,8 @@
         isFirstNameValid: false,
         isLastNameValid: false,
         isEmailValid: false,
-    });
+        isQyeryTypeSelected: '',    
+    })
 </script>
 
 <template>
@@ -28,6 +30,8 @@
         <Input title="Last Name" :regex="/^(?!\s*$).+/" error="This feild is required" v-model:isCorrect="isFormValid.isLastNameValid" />
         <Input title="Email Address" :regex="/^[^\s@]+@[^\s@]+\.[^\s@]+$/" error="Please enter a valid email address" 
         v-model:isCorrect="isFormValid.isEmailValid" class="md:col-span-2 md:mt-2" />
+        <RadioButton v-model="isFormValid.isQyeryTypeSelected" label="General Enquiry" value="General Enquiry" />
+        <RadioButton v-model="isFormValid.isQyeryTypeSelected" label="Support Request" value="Support Request" />
         <button class="bg-green-600 text-white py-2 rounded-md cursor-pointer md:col-span-2" 
           @click.prevent="toastOnce">Submit</button>
       </div>

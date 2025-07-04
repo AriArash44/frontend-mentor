@@ -41,3 +41,19 @@
 * {
     font-family: Karla;
 }
+
+input[type="radio"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    outline: 2px solid var(--color-green-600);
+    border: 3px solid white;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+    background-color: var(--color-green-600);
+    outline-color: var(--color-green-600);
+}
