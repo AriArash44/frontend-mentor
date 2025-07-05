@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import { reactive, ref, computed } from 'vue';
+    import { reactive, ref } from 'vue';
     import CFLayout from '../layouts/CFLayout.vue';
-    import Input from '../components/Input.vue';
+    import Field from '../components/Field.vue';
     import RadioButton from '../components/RadioButton.vue';
     import { showToast } from '../utils/showToast';
     import throttle from 'lodash/throttle';
@@ -29,14 +29,6 @@
             toastOnce();
         }
     };
-    const textAreaIsBlurred = ref(false);
-    const textAreaShowError = computed(() => {
-        return submitAttempted.value || textAreaIsBlurred.value;
-    });
-    const borderClass = computed(() => {
-        if (!textAreaShowError.value) return 'border-gray-500';
-        return isFormValid.isMessageWritten ? 'border-green-600' : 'border-red'
-    })
 </script>
 
 <template>
@@ -47,10 +39,9 @@
     <template #main>
       <h1 class="font-bold text-gray-900">Contact Us</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Input title="First Name" :regex="/^(?!\s*$).+/" error="This feild is required" v-model:isCorrect="isFormValid.isFirstNameValid" :forceShowErrors="submitAttempted" />
-        <Input title="Last Name" :regex="/^(?!\s*$).+/" error="This feild is required" v-model:isCorrect="isFormValid.isLastNameValid" :forceShowErrors="submitAttempted" />
-        <Input title="Email Address" :regex="/^[^\s@]+@[^\s@]+\.[^\s@]+$/" error="Please enter a valid email address" 
-        v-model:isCorrect="isFormValid.isEmailValid" class="md:col-span-2 md:mt-2" :forceShowErrors="submitAttempted" />
+        <Field tag="input" title="First Name" error="This feild is required" v-model:isCorrect="isFormValid.isFirstNameValid" :forceShowErrors="submitAttempted" />
+        <Field tag="input" title="Last Name" error="This feild is required" v-model:isCorrect="isFormValid.isLastNameValid" :forceShowErrors="submitAttempted" />
+        <Field tag="input" title="Email Address" :regex="/^[^\s@]+@[^\s@]+\.[^\s@]+$/" error="Please enter a valid email address" v-model:isCorrect="isFormValid.isEmailValid" class="md:col-span-2 md:mt-2" :forceShowErrors="submitAttempted" />
         <div class="flex gap-1 md:col-span-2">
           <p>Query Type</p>
           <p class="text-green-600">*</p>
@@ -58,13 +49,7 @@
         <RadioButton v-model="isFormValid.isQyeryTypeSelected" label="General Enquiry" value="General Enquiry" />
         <RadioButton v-model="isFormValid.isQyeryTypeSelected" label="Support Request" value="Support Request" />
         <p v-if="submitAttempted && isFormValid.isQyeryTypeSelected === ''" class="text-red">Please select a query type</p>
-        <div class="flex gap-1 md:col-span-2">
-          <p>Message</p>
-          <p class="text-green-600">*</p>
-        </div>
-        <textarea :class="['border-1 md:col-span-2 outline-0 p-1 rounded-lg resize-none h-25', borderClass]"
-        @blur="textAreaIsBlurred = true" @focus="textAreaIsBlurred = false" v-model="isFormValid.isMessageWritten"></textarea>
-        <p v-if="textAreaShowError && !isFormValid.isMessageWritten" class="text-red">This field is required</p>
+        <Field tag="textarea" title="Message" error="This field is required" v-model:isCorrect="isFormValid.isMessageWritten" class="md:col-span-2" :forceShowErrors="submitAttempted" />
         <div class="flex justify-start gap-2 md:col-span-2">
           <input id="consentCheckbox" type="checkbox" v-model="isFormValid.isConsented"/>
           <label for="consentCheckbox">I consent to being contacted by the team</label>
