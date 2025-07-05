@@ -5,8 +5,10 @@
         type?: string
         regex?: RegExp
         error?: string
+        forceShowErrors?: boolean
     }>(), {
-        type: 'text'
+        type: 'text',
+        forceShowErrors: false
     });
     const inputValue = ref('');
     const isCorrect = defineModel<boolean>();
@@ -15,9 +17,12 @@
         isCorrect.value = pattern ? pattern.test(newVal) : false
     });
     const inputId = useId();
-    const isBlurred = ref(false)
+    const isBlurred = ref(false);
+    const showError = computed(() => {
+        return props.forceShowErrors || isBlurred.value;
+    });
     const borderClass = computed(() => {
-        if (!isBlurred.value) return 'border-gray-500'
+        if (!showError.value) return 'border-gray-500';
         return isCorrect.value ? 'border-green-600' : 'border-red'
     })
 </script>
@@ -31,6 +36,6 @@
     <input :type="props.type" v-model="inputValue" :id="inputId"
     @blur="isBlurred = true" @focus="isBlurred = false"
     :class="['w-full p-1.5 border-1 rounded-lg outline-none', borderClass]"/>
-    <p v-if="isBlurred && !isCorrect" class="text-red">{{ props.error }}</p>
+    <p v-if="showError && !isCorrect" class="text-red">{{ props.error }}</p>
   </div>
 </template> 
