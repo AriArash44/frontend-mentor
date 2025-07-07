@@ -9,8 +9,8 @@
 </script>
 
 <template>
-  <div :class="['flex items-center gap-2 border-1 border-gray-500 rounded-lg p-2 px-4',
-  selected === value ? 'bg-green-200 border-green-600' : '']">
+  <button :class="['flex items-center gap-2 border-1 border-gray-500 rounded-lg p-2 px-4 cursor-pointer',
+  selected === value ? 'bg-green-200 border-green-600' : '']" @click="selected = value">
     <input
       :id="radioId"
       type="radio"
@@ -21,5 +21,5 @@
     <label :for="radioId" class="cursor-pointer">
       {{ props.label }}
     </label>
-  </div>
+  </button>
 </template>

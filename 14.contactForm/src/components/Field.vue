@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineProps, computed, unref, useId, watch, type PropType, type Ref } from 'vue';
+    import { computed, unref, useId, watch, type PropType, type Ref } from 'vue';
     import { useFieldValidation } from '../composables/useFieldValidation';
     const props = defineProps({
         tag: {
@@ -27,7 +27,7 @@
         set: () => {}
     });
     const inputId  = useId();
-    const isCorrect = defineModel<boolean>();
+    const isCorrect = defineModel<boolean>('isCorrect');
     const {
         value,
         isValid,
