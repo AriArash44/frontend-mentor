@@ -42,10 +42,7 @@
 
 <template>
   <div class="mb-1">
-    <div class="flex gap-1 mb-1">
-      <label :for="inputId" class="text-gray-900">{{ props.title }}</label>
-      <span class="text-green-600">*</span>
-    </div>
+    <label :for="inputId" class="text-gray-900">{{ props.title }}<span class="text-green-600"> *</span></label>
     <component
       :is="props.tag"
       :id="inputId"
@@ -53,15 +50,18 @@
       @input="value = $event.target.value"
       :type="props.tag === 'input' ? props.type : undefined"
       :rows="props.tag === 'textarea' ? props.rows : undefined"
+      :autocomplete="props.tag === 'input' ? 'on' : undefined"
       @blur="isBlurred = true"
       @focus="isBlurred = false"
       :class="[
-        'w-full p-2 border-2 rounded-lg outline-none',
+        'w-full p-2 border-2 rounded-lg outline-none mt-1',
         props.tag === 'textarea' ? 'resize-none h-24' : '',
         borderClass
       ]"
+      aria-required="true"
+      :aria-describedby="showError && !isValid ? `error-${inputId}` : undefined"
     />
-    <p v-if="showError && !isValid" class="mt-1 text-red">
+    <p v-if="showError && !isValid" :id="`error-${inputId}`" class="mt-1 text-red">
       {{ props.error }}
     </p>
   </div>

@@ -43,21 +43,21 @@
           <Field tag="input" title="First Name" error="This feild is required" v-model:isCorrect="isFormValid.isFirstNameValid.value" :forceShowErrors="submitAttempted" />
           <Field tag="input" title="Last Name" error="This feild is required" v-model:isCorrect="isFormValid.isLastNameValid.value" :forceShowErrors="submitAttempted" />
           <Field tag="input" title="Email Address" :regex="/^[^\s@]+@[^\s@]+\.[^\s@]+$/" error="Please enter a valid email address" v-model:isCorrect="isFormValid.isEmailValid.value" class="md:col-span-2 md:mt-2" :forceShowErrors="submitAttempted" />
-          <div class="flex gap-1 md:col-span-2">
-            <p class="text-gray-900">Query Type</p>
-            <p class="text-green-600">*</p>
-          </div>
-          <RadioButton v-model="isFormValid.isQyeryTypeSelected.value" label="General Enquiry" value="General Enquiry" />
-          <RadioButton v-model="isFormValid.isQyeryTypeSelected.value" label="Support Request" value="Support Request" />
-          <p v-if="submitAttempted && isFormValid.isQyeryTypeSelected.value === ''" class="text-red">Please select a query type</p>
-          <Field tag="textarea" title="Message" error="This field is required" v-model:isCorrect="isFormValid.isMessageWritten.value" class="md:col-span-2" :forceShowErrors="submitAttempted" />
-          <div class="flex justify-start gap-1 md:col-span-2 mt-3">
+          <fieldset class="md:col-span-2">
+            <legend class="text-gray-900">Query Type<span class="text-green-600"> *</span></legend>
+            <div class="flex justify-between gap-3 flex-col md:flex-row mt-3">
+              <RadioButton v-model="isFormValid.isQyeryTypeSelected.value" label="General Enquiry" value="General Enquiry" class="basis-full md:basis-1/2"/>
+              <RadioButton v-model="isFormValid.isQyeryTypeSelected.value" label="Support Request" value="Support Request" class="basis-full md:basis-1/2"/>
+            </div>
+            <p v-if="submitAttempted && isFormValid.isQyeryTypeSelected.value === ''" class="text-red mt-2">Please select a query type</p>
+          </fieldset>
+          <Field tag="textarea" title="Message" error="This field is required" v-model:isCorrect="isFormValid.isMessageWritten.value" class="md:col-span-2 mt-2" :forceShowErrors="submitAttempted" />
+          <div class="flex justify-start gap-2 md:col-span-2 mt-3">
             <input id="consentCheckbox" type="checkbox" v-model="isFormValid.isConsented.value" class="cursor-pointer"/>
-            <label for="consentCheckbox" class="cursor-pointer text-gray-900 ml-1">I consent to being contacted by the team</label>
-            <p class="text-green-600">*</p>
+            <label for="consentCheckbox" class="cursor-pointer text-gray-900">I consent to being contacted by the team<span class="text-green-600"> *</span></label>
           </div>
           <p v-if="submitAttempted && !isFormValid.isConsented.value" class="text-red md:col-span-2">To submit this form, please consent to be contacted</p>
-          <button type="submit" class="bg-green-600 text-white py-2 rounded-md cursor-pointer md:col-span-2 hover:bg-gray-900 animated-button mt-3">Submit</button>
+          <button type="submit" class="bg-green-600 text-white py-3 rounded-md cursor-pointer md:col-span-2 hover:bg-gray-900 animated-button mt-3 font-bold">Submit</button>
         </div>
       </form>
     </template>
