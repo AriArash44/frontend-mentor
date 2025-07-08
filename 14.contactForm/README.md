@@ -32,7 +32,7 @@ Live Project:
 
 | Mobile View | Desktop View |
 |-------------|--------------|
-| ![Mobile Demo](/images/mobile-demo.png) | ![Desktop Demo](/images/desktop-demo.png) |
+| ![Mobile Demo](./public/images/mobile-demo.png) | ![Desktop Demo](./public/images/desktop-demo.png) |
 | *Optimized for smaller screens* | *Wide-screen layout with enhanced spacing and feedback* |
 
 
