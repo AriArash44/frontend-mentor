@@ -41,9 +41,9 @@
 </script>
 
 <template>
-  <div class="mb-4">
+  <div class="mb-1">
     <div class="flex gap-1 mb-1">
-      <label :for="inputId">{{ props.title }}</label>
+      <label :for="inputId" class="text-gray-900">{{ props.title }}</label>
       <span class="text-green-600">*</span>
     </div>
     <component
@@ -56,7 +56,7 @@
       @blur="isBlurred = true"
       @focus="isBlurred = false"
       :class="[
-        'w-full p-2 border rounded-lg outline-none',
+        'w-full p-2 border-2 rounded-lg outline-none',
         props.tag === 'textarea' ? 'resize-none h-24' : '',
         borderClass
       ]"

@@ -34,7 +34,7 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-2xl);
+        font-size: var(--text-3xl);
     }
 }
 
@@ -46,7 +46,7 @@ input[type="radio"] {
     appearance: none;
     width: 15px;
     height: 15px;
-    outline: 2px solid var(--color-green-600);
+    outline: 2px solid var(--color-gray-300);
     border: 3px solid white;
     border-radius: 50%;
     background-color: white;
@@ -60,4 +60,16 @@ input[type="radio"]:checked {
 
 input[type="checkbox"] {
     accent-color: var(--color-green-600);
+}
+
+.animated-button {
+    transition: transform 0.2s ease;
+}
+
+.animated-button:hover {
+    transform: scale(1.01);
+}
+
+.animated-button:active {
+    transform: scale(0.99);
 }
