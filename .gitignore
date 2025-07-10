@@ -53,3 +53,11 @@ testem.log
 *.launch
 .settings/
 *.sublime-workspace
+
+.data
+.nuxt
+.nitro
+.cache
+.fleet
+.env.*
+!.env.example
