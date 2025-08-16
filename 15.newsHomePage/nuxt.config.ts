@@ -1,14 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  modules: ['@nuxtjs/tailwindcss'],
+  css: ['~/assets/css/main.css'],
+  tailwindcss: {
+    exposeConfig: true,
+    viewer: true,
+  },
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@nuxt/scripts',
-    '@nuxt/content'
-  ]
+  app: {
+    head: {
+      title: 'newsHomePage | Frontend-mentor',
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ],
+      meta: []
+    }
+  }
 })
