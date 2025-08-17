@@ -1,3 +1,9 @@
+<script setup>
+  import Main from '~/layouts/Main.vue'
+</script>
+
 <template>
-    <div class="bg-blue-100">hello world!</div>
+  <Main>
+    
+  </Main>
 </template>
