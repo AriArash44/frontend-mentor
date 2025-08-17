@@ -1,13 +1,35 @@
 <script setup lang="ts">
   import Main from '~/layouts/Main.vue'
-  const { data, error } = await useGet<{ title: string; id: number }[]>('/news')
+  type MainNews = {
+    title: string
+    caption: string
+    desktop_figure: string
+    mobile_figure: string
+    alt: string
+  }
+  type CardNews = {
+    title: string
+    caption: string
+    figure: string
+    alt: string
+  }
+  type NewNewsItem = {
+    title: string
+    caption: string
+  }
+  interface NewsResponse {
+    main: MainNews
+    card: CardNews[]
+    new: NewNewsItem[]
+  }
+  const { data, error } = await useGet<NewsResponse>('/news')
 </script>
 
 <template>
   <Main>
-    <!-- <div v-else-if="error">Error: {{ error.message }}</div>
-    <ul v-else>
-      <li v-for="item in data" :key="item.id">{{ item.title }}</li>
-    </ul> -->
+    <NewNews v-if="data?.new" :news="data.new" />
+    <div class="mt-2" v-if="data?.card" v-for="(item, idx) in data.card" :key="idx">
+      <CardNews v-bind="{ ...item, id: idx + 1 }" />
+    </div>
   </Main>
 </template>
