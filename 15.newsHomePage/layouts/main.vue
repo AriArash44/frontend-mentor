@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen w-screen p-3 md:p-10">
+  <div class="flex flex-col min-h-screen w-screen p-3 md:p-10 gap-5">
     <header class="flex justify-between items-center w-full">
       <h1>W.</h1>
       <nav class="hidden md:block">

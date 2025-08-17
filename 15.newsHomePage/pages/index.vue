@@ -27,8 +27,14 @@
 
 <template>
   <Main>
+    <div class="md:hidden">
+      <img v-if="data?.main?.mobile_figure" :src="data?.main.mobile_figure" :alt="data?.main.alt"/>
+      <h1 class="mt-4" v-if="data?.main?.title">{{ data?.main?.title }}</h1>
+      <p class="text-neutral-dark-grayish-blue mt-2" v-if="data?.main?.caption">{{ data?.main?.caption }}</p>
+      <button class="px-4 py-2 mt-3 mb-5 text-neutral-very-dark-blue bg-soft-red hover:bg-neutral-very-dark-blue hover:text-neutral-off-white cursor-pointer">R E A D <span class="ml-2">M O R E</span></button>
+    </div>
     <NewNews v-if="data?.new" :news="data.new" />
-    <div class="mt-2" v-if="data?.card" v-for="(item, idx) in data.card" :key="idx">
+    <div class="mt-4" v-if="data?.card" v-for="(item, idx) in data.card" :key="idx">
       <CardNews v-bind="{ ...item, id: idx + 1 }" />
     </div>
   </Main>
