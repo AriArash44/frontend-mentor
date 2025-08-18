@@ -4,9 +4,9 @@
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen w-screen p-3 md:p-10 gap-5">
+  <div class="flex flex-col min-h-screen w-screen p-6 md:p-24 gap-5">
     <header class="flex justify-between items-center w-full">
-      <h1>W.</h1>
+      <h1 class="font-serif font-black">W.</h1>
       <nav class="hidden md:block">
         <ul class="flex gap-2">
           <li class="navItem">Home</li>

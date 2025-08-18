@@ -3,15 +3,19 @@
 @tailwind utilities;
 
 .navItem {
-    @apply appearance-none block px-6 py-3 text-neutral-dark-grayish-blue hover:text-soft-red cursor-pointer font-bold;
+    @apply appearance-none block px-6 py-3 text-neutral-very-dark-blue
+    md:text-neutral-dark-grayish-blue hover:text-soft-red cursor-pointer md:font-bold;
 }
 
 h1 {
-    @apply font-extrabold text-3xl text-neutral-very-dark-blue;
+    @apply font-bold md:font-extrabold text-[2.5rem] md:text-6xl text-neutral-very-dark-blue;
+    @media screen and (width < 768px) {
+        line-height: 1;
+    }
 }
 
 h2 {
-    @apply font-bold text-xl text-neutral-off-white;
+    @apply font-bold text-lg md:text-xl text-neutral-off-white;
 }
 
 h3 {
