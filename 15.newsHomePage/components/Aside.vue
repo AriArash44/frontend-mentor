@@ -30,10 +30,12 @@
 <template>
   <div v-if="showBackdrop" @click="controler = false" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
   <aside v-if="showSidebar" ref="sidebarRef" class=" fixed inset-y-0 right-0 w-64 bg-white z-50 overflow-y-auto animate__animated animate__slideInRight">
-    <button @click="controler = false" class="absolute top-5 right-5 cursor-pointer"><img src="/images/icon-menu-close.svg" alt="close" class="w-6 h-6" /></button>
+    <button @click="controler = false" class="absolute top-5 right-5 cursor-pointer"><img src="/images/icon-menu-close.svg" alt="close menu" class="w-6 h-6" /></button>
     <ul class="mt-32">
       <li v-for="(item, idx) in items" :key="idx" class="navItem">
-        <p>{{item}}</p>
+        <button class="w-full text-left px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <p>{{item}}</p>
+        </button>
       </li>
     </ul>
   </aside>

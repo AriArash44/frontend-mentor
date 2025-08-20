@@ -14,7 +14,11 @@
     <img class="w-[28%]" :src="props.figure" :alt="props.alt" />
     <div class="w-[72%]">
       <h2 class="text-soft-red text-4xl font-semibold">{{ String(props.id).padStart(2, '0') }}</h2>
-      <h3 class="mt-2 hover:text-soft-red cursor-pointer">{{ props.title }}</h3>
+      <h3 class="mt-2">
+        <button class="hover:text-soft-red cursor-pointer focus:outline-none focus:ring-2 focus:ring-soft-red text-left w-full">
+          {{ props.title }}
+        </button>
+      </h3>
       <p class="text-neutral-dark-grayish-blue mt-2">{{ props.caption }}</p>
     </div>
   </div>

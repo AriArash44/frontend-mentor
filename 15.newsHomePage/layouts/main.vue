@@ -9,14 +9,14 @@
       <h1 class="font-serif font-black">W.</h1>
       <nav class="hidden md:block">
         <ul class="flex gap-2">
-          <li class="navItem">Home</li>
-          <li class="navItem">New</li>
-          <li class="navItem">Popular</li>
-          <li class="navItem">Trending</li>
-          <li class="navItem">Categories</li>
+          <button class="px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"><li class="navItem">Home</li></button>
+          <button class="px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"><li class="navItem">New</li></button>
+          <button class="px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"><li class="navItem">Popular</li></button>
+          <button class="px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"><li class="navItem">Trending</li></button>
+          <button class="px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"><li class="navItem">Categories</li></button>
         </ul>
       </nav>
-      <button @click="asideOpened = true" v-if="!asideOpened" class="md:hidden cursor-pointer"><img src="/images/icon-menu.svg" alt="menu" class="w-6 h-4"/></button>
+      <button @click="asideOpened = true" v-if="!asideOpened" class="md:hidden cursor-pointer"><img src="/images/icon-menu.svg" alt="open menu" class="w-6 h-4"/></button>
       <Aside v-model:controler="asideOpened" :items="['Home', 'New', 'Popular', 'Trending', 'Categories']" ></Aside>
     </header>
     <main>
