@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
+  ssr: true,
+  nitro: { preset: 'static' },
   modules: ['@nuxtjs/tailwindcss'],
   css: [
     '~/assets/css/tailwind.css',
@@ -13,7 +15,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NODE_ENV === 'development'
       ? '/'
-      : '/frontend-mentor/15.newsHomePage/',
+      : '/frontend-mentor/15.newsHomePage',
     head: {
       title: 'newsHomePage | Frontend-mentor',
       link: [
@@ -41,7 +43,7 @@ export default defineNuxtConfig({
     public: {
       API_BASE_URL: process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000/api'
-        : 'https://ariarash44.github.io/frontend-mentor/15.newsHomePage/'
+        : '/api'
     }
   }
 })

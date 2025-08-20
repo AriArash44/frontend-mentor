@@ -28,6 +28,7 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 const drawerWidth = 275;
 
@@ -96,8 +97,8 @@ const menuItems = [
     },
     {
         header: "Chapter 4",
-        items: ["12.ratingComponent", "13.qaAccordion", "14.contactForm" ],
-        icons: [<RateReviewIcon />, <LiveHelpIcon />, <ContactPhoneIcon /> ]
+        items: ["12.ratingComponent", "13.qaAccordion", "14.contactForm", "15.newsHomePage" ],
+        icons: [<RateReviewIcon />, <LiveHelpIcon />, <ContactPhoneIcon />, <NewspaperIcon /> ]
     }
 ];
 
