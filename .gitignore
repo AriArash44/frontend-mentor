@@ -63,3 +63,15 @@ testem.log
 !.env.example
 
 .output
+
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+.DS_Store
+Thumbs.db
+
+.netlify
+.wrangler
+/.svelte-kit
+/build
+.svelte-kit

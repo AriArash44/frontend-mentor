@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+    --color-c-orange: hsl(26, 100%, 55%);
+    --color-c-pale-orange: hsl(25, 100%, 94%);
+    --color-very-dark-blue: hsl(220, 13%, 13%);
+    --color-dark-grayish-blue: hsl(219, 9%, 45%);
+    --color-grayish-blue: hsl(220, 14%, 75%);
+    --color-light-grayish-blue: hsl(223, 64%, 98%);
+}
+
+
+@supports (font-variation-settings: normal) {
+    @font-face {
+        font-family: 'kumbh';
+        src: url('/fonts/KumbhSans-VariableFont_YOPQ,wght.ttf') format('truetype-variations');
+        font-weight: 100 900;
+        font-display: swap;
+    }
+}
+
+@layer base {
+    h1 {
+        font-size: var(--text-3xl);
+    }
+}
+
+* {
+    font-family: kumbh;
+}
