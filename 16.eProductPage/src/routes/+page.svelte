@@ -31,7 +31,7 @@
     {/if}
     <img src="/icons/cart.svg" alt="cart" />
 </button>
-<Basket basketIsOpen/>
+<Basket basketIsOpen={basketIsOpen} bind:cartNumber productName="Fall Limited Edition Sneakers" price={125.00}/>
 <div class="flex items-center justify-center gap-2">
     <div class="flex items-center justify-center bg-light-grayish-blue rounded-lg w-1/3 h-12">
         <button class="w-1/4 cursor-pointer" on:click={() => {productNumber = productNumber + 1;}}>
