@@ -25,9 +25,9 @@
     </button>
 {/if}
 <Aside bind:asideIsOpen items={menuItems}/>
-<button class="relative cursor-pointer" on:click={() => {basketIsOpen = !basketIsOpen}}>
+<button class="cursor-pointer" on:click={() => {basketIsOpen = !basketIsOpen}}>
     {#if cartNumber !== 0}
-        <p class="text-white bg-c-orange px-1.5 text-[8px] rounded-full absolute top-[-4px] right-[-4px]">{cartNumber}</p>
+        <p class="text-white bg-c-orange px-1.5 text-[8px] rounded-full absolute mt-[-4px] ml-[10px] z-10">{cartNumber}</p>
     {/if}
     <img src="/icons/cart.svg" alt="cart" />
 </button>
@@ -42,9 +42,9 @@
             <img class="m-auto" src="/icons/minus.svg" alt="increase" />
         </button>
     </div>
-    <button class="w-2/3 h-12 cursor-pointer flex justify-center items-center gap-2 bg-c-orange rounded-lg"
+    <button class="w-2/3 h-12 cursor-pointer flex justify-center items-center gap-2 bg-c-orange hover:bg-c-pale-orange rounded-lg"
         on:click={() => {cartNumber = productNumber;}}>
-        <img src="/icons/cart.svg" alt="cart" />
+        <img src="/icons/BCart.svg" alt="cart" />
         <p class="font-bold text-very-dark-blue-grayish">Add to Cart</p>
     </button>
 </div>
