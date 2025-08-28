@@ -9,7 +9,6 @@
     --color-light-grayish-blue: hsl(223, 64%, 98%);
 }
 
-
 @supports (font-variation-settings: normal) {
     @font-face {
         font-family: 'kumbh';
