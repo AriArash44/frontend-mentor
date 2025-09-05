@@ -6,11 +6,14 @@
 </script>
 
 {#if basketIsOpen}
-    <div class="w-[20rem] h-[14rem] absolute flex flex-col bg-white shadow-2xl rounded-2xl">
+    <div class="w-[20rem] h-[14rem] absolute right-2 xl:right-[calc((100vw-1330px)/2)] 
+    top-10 md:top-15 flex flex-col bg-white shadow-2xl rounded-2xl">
         <p class="px-5 py-4 font-bold text-sm">Cart</p>
         <hr class="border-t border-grayish-blue mt-2"/>
         {#if $cartNumber === 0}
-            <p class="flex-1 flex justify-center items-center text-center text-dark-grayish-blue font-bold">Your cart is empty.</p>
+            <p class="flex-1 flex justify-center items-center text-center text-dark-grayish-blue font-bold">
+                Your cart is empty.
+            </p>
         {:else}
             <div class="p-5 mt-0.5">
                 <div class="flex justify-center items-center gap-3">

@@ -34,7 +34,7 @@
 		<Basket basketIsOpen={basketIsOpen} productName="Fall Limited Edition Sneakers" price={125.00}/>
 		<button class="cursor-pointer" onclick={() => {basketIsOpen = !basketIsOpen}}>
 			{#if $cartNumber !== 0}
-				<p class="text-white bg-c-orange px-1.5 text-[8px] rounded-full absolute mt-[-4px] ml-[10px] z-10">{cartNumber}</p>
+				<p class="text-white bg-c-orange px-1.5 text-[8px] rounded-full absolute mt-[-4px] ml-[10px] z-10">{$cartNumber}</p>
 			{/if}
 			<img src="/icons/cart.svg" alt="cart" />
 		</button>
