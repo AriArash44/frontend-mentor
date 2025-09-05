@@ -14,22 +14,23 @@
 	<title>Frontend mentor | 16.eProductPage</title>
 </svelte:head>
 
-<header class="flex justify-around">
-	<div class="flex gap-3">
-		{#if !asideIsOpen}
-			<button class="cursor-pointer md:hidden m-4" onclick={() => asideIsOpen = true}>
-				<img src="/icons/menu.svg" alt="menu" />
-			</button>
-		{/if}
+<header class="flex justify-between items-center px-4 md:px-10 xl:px-0 xl:w-6xl mx-auto md:border-b border-grayish-blue">
+	<div class="flex items-center">
+		<button class="cursor-pointer md:hidden m-3 h-6 w-6 mt-4" onclick={() => asideIsOpen = true}>
+			<img src="/icons/menu.svg" alt="menu" />
+		</button>
 		<Aside bind:asideIsOpen items={menuItems}/>
-		<img src="/icons/logo.svg" alt="SNEAKERS" class="w-36 h-10"/>
-		<nav class="hidden md:flex gap-4">
+		<img src="/icons/logo.svg" alt="SNEAKERS" class="w-32 h-5 mr-8 "/>
+		<nav class="hidden md:flex gap-4 h-full">
 			{#each menuItems as menuItem}
-				<p>{menuItem}</p>
+				<p class="flex items-end h-full text-dark-grayish-blue cursor-pointer hover:text-c-orange 
+				pb-6 mt-6 border-b-2 border-transparent hover:border-c-orange translate-[1px]">
+					{menuItem}
+				</p>
 			{/each}
 		</nav>
 	</div>
-	<div class="flex">
+	<div class="flex gap-4">
 		<Basket basketIsOpen={basketIsOpen} productName="Fall Limited Edition Sneakers" price={125.00}/>
 		<button class="cursor-pointer" onclick={() => {basketIsOpen = !basketIsOpen}}>
 			{#if $cartNumber !== 0}
@@ -37,9 +38,9 @@
 			{/if}
 			<img src="/icons/cart.svg" alt="cart" />
 		</button>
-		<img src="/images/avatar.png" alt="avater" />
+		<img class="w-6 h-6 md:w-12 md:h-12" src="/images/avatar.png" alt="avater" />
 	</div>
 </header>
-<main>
+<main class="mx-auto xl:w-6xl">
 	{@render children?.()}
 </main>
