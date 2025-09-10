@@ -23,7 +23,7 @@
 
 <div class="flex items-center md:cursor-pointer" role="button" on:click={handleClick} on:keydown={(e) => e.key === 'Enter' && handleClick()} tabindex="0">
     <button
-        class={"bg-white rounded-full py-4 px-[1.2rem] translate-x-6 cursor-pointer z-10" + (index === 0 || !hasController ? " invisible" : "")}
+        class={"bg-white rounded-full py-4 px-[1.2rem] translate-x-6 cursor-pointer z-10 absolute md:static" + (index === 0 || !hasController ? " invisible" : "")}
         aria-label="Previous"
         on:click={() => changeIndex(-1)}
         on:mouseover={() => setHoverState(true, 'prev')}
@@ -39,12 +39,12 @@
             style={`transform: translateX(-${index * 100}%);`}
         >
             {#each images as img, i}
-                <img src={img} alt={`product-img-${i}`} class="w-full flex-shrink-0 rounded-2xl" />
+                <img src={img} alt={`product-img-${i}`} class="w-full flex-shrink-0 md:rounded-2xl" />
             {/each}
         </div>
     </div>
     <button
-        class={"bg-white rounded-full py-4 px-[1.15rem] translate-x-[-1.5rem] cursor-pointer z-10" + (index === images.length - 1 || !hasController ? " invisible" : "")}
+        class={"bg-white rounded-full py-4 px-[1.15rem] translate-x-[-1.5rem] cursor-pointer z-10 absolute right-0 md:static" + (index === images.length - 1 || !hasController ? " invisible" : "")}
         aria-label="Next"
         on:click={() => changeIndex(1)}
         on:mouseover={() => setHoverState(true, 'next')}

@@ -41,6 +41,6 @@
 		<img class="w-6 h-6 md:w-12 md:h-12" src="/images/avatar.png" alt="avater" />
 	</div>
 </header>
-<main class="mx-auto xl:w-6xl flex p-6 py-16 gap-16">
+<main class="mx-auto xl:w-6xl flex flex-col md:flex-row md:p-6 md:py-16 md:gap-16">
 	{@render children?.()}
 </main>
