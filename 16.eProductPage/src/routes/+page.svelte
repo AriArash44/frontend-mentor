@@ -32,12 +32,12 @@
     <p class="text-dark-grayish-blue mt-8 text-lg">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
     <div class="flex md:flex-col justify-between items-center md:items-start w-full">
         <div class="flex mt-4 gap-4">
-            <h2 class="text-very-dark-blue font-bold">$125.00</h2>
+            <h2 class="text-very-dark-blue font-bold leading-7">$125.00</h2>
             <p class="font-semibold text-white px-2 py-0.5 bg-very-dark-blue rounded">50%</p>
         </div>
         <p class="text-dark-grayish-blue font-bold line-through mt-2">$250.00</p>
     </div>
-    <div class="flex flex-col md:flex-row items-center justify-center gap-2 mt-8 w-full">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-3 mt-8 w-full">
         <div class="flex items-center justify-center bg-light-grayish-blue rounded-lg w-full md:w-1/3 h-12">
             <button class="w-1/4 cursor-pointer" onclick={() => {productNumber = Math.max(productNumber - 1, 0)}}>
                 <img class="m-auto" src="/icons/minus.svg" alt="decrease" />
