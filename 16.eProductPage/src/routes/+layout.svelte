@@ -20,25 +20,29 @@
 			<img src="/icons/menu.svg" alt="menu" />
 		</button>
 		<Aside bind:asideIsOpen items={menuItems}/>
-		<img src="/icons/logo.svg" alt="SNEAKERS" class="w-32 h-5 mr-8 "/>
+		<img src="/icons/logo.svg" alt="SNEAKERS" class="w-32 h-5 mr-8 md:mb-4 md:mt-3"/>
 		<nav class="hidden md:flex gap-4 h-full">
 			{#each menuItems as menuItem}
 				<p class="flex items-end h-full text-dark-grayish-blue cursor-pointer hover:text-c-orange 
-				pb-6 mt-6 border-b-2 border-transparent hover:border-c-orange translate-[1px]">
+				pb-10 mt-10 border-b-3 border-transparent hover:border-c-orange translate-[1px]">
 					{menuItem}
 				</p>
 			{/each}
 		</nav>
 	</div>
-	<div class="flex gap-4">
-		<Basket basketIsOpen={basketIsOpen} productName="Fall Limited Edition Sneakers" price={125.00}/>
-		<button class="cursor-pointer" onclick={() => {basketIsOpen = !basketIsOpen}}>
+	<div class="flex gap-6">
+		<Basket bind:basketIsOpen productName="Fall Limited Edition Sneakers" price={125.00}/>
+		<button class="cursor-pointer" onclick={(e) => {e.stopPropagation(); basketIsOpen = !basketIsOpen}}>
 			{#if $cartNumber !== 0}
-				<p class="text-white bg-c-orange px-1.5 text-[8px] rounded-full absolute mt-[-4px] ml-[10px] z-10">{$cartNumber}</p>
+				<p class="text-c-pale-orange bg-c-orange px-1.5 text-[8px] rounded-full absolute mt-[-4px] ml-[10px] z-10">{$cartNumber}</p>
 			{/if}
-			<img src="/icons/cart.svg" alt="cart" />
+			<img src="/icons/cart.svg" alt="cart" onmouseenter={(e: MouseEvent) => {
+    			(e.currentTarget as HTMLImageElement).src = "/icons/BCart.svg";
+  			}} onmouseleave={(e: MouseEvent) => {
+    			(e.currentTarget as HTMLImageElement).src = "/icons/cart.svg";
+  			}}/>
 		</button>
-		<img class="w-6 h-6 md:w-12 md:h-12" src="/images/avatar.png" alt="avater" />
+		<img class="w-8 h-8 md:w-12 md:h-12 cursor-pointer rounded-full hover:border-2 hover:border-c-orange" src="/images/avatar.png" alt="avater" />
 	</div>
 </header>
 <main class="mx-auto xl:w-6xl flex flex-col md:flex-row md:p-6 md:py-16 md:gap-16">

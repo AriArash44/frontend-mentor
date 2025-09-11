@@ -47,7 +47,7 @@
                 <img class="m-auto" src="/icons/plus.svg" alt="increase" />
             </button>
         </div>
-        <button class="w-full md:w-2/3 h-12 cursor-pointer flex justify-center items-center gap-2 bg-c-orange hover:bg-c-pale-orange rounded-lg"
+        <button class="w-full md:w-2/3 h-12 cursor-pointer flex justify-center items-center gap-2 bg-c-orange hover:bg-c-orange/60 rounded-lg"
             onclick={() => {cartNumber.set(productNumber)}}>
             <img src="/icons/BCart.svg" alt="cart" />
             <p class="font-bold text-very-dark-blue-grayish">Add to Cart</p>
