@@ -14,7 +14,7 @@
 	<title>Frontend mentor | 16.eProductPage</title>
 </svelte:head>
 
-<header class="flex justify-between items-center px-4 md:px-10 xl:px-0 xl:w-6xl mx-auto md:border-b border-grayish-blue">
+<header class="flex justify-between items-center px-4 md:px-10 xl:px-0 xl:w-6xl mx-auto md:border-b border-c-light-grayish-blue">
 	<div class="flex items-center">
 		<button class="cursor-pointer md:hidden m-3 h-6 w-6 mt-4" onclick={() => asideIsOpen = true}>
 			<img src="/icons/menu.svg" alt="menu" />
@@ -23,8 +23,8 @@
 		<img src="/icons/logo.svg" alt="SNEAKERS" class="w-32 h-5 mr-8 md:mb-4 md:mt-3"/>
 		<nav class="hidden md:flex gap-4 h-full">
 			{#each menuItems as menuItem}
-				<p class="flex items-end h-full text-dark-grayish-blue cursor-pointer hover:text-c-orange 
-				pb-10 mt-10 border-b-3 border-transparent hover:border-c-orange translate-[1px]">
+				<p class="flex items-end h-full text-dark-grayish-blue cursor-pointer hover:text-black hover:font-semibold 
+				font-medium pb-10 mt-10 border-b-3 border-transparent hover:border-c-orange translate-[1px]">
 					{menuItem}
 				</p>
 			{/each}

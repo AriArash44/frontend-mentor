@@ -23,9 +23,9 @@
 
 {#if basketIsOpen}
     <div class="w-[20rem] h-[14rem] absolute right-2 xl:right-[calc((100vw-1330px)/2)] 
-    top-10 md:top-15 flex flex-col bg-white shadow-2xl rounded-2xl" bind:this={cartRef}>
+    top-18 md:top-16 flex flex-col bg-white shadow-2xl rounded-2xl z-100" bind:this={cartRef}>
         <p class="px-5 py-4 font-bold text-sm">Cart</p>
-        <hr class="border-t border-grayish-blue mt-2"/>
+        <hr class="border-t border-c-light-grayish-blue mt-2"/>
         {#if $cartNumber === 0}
             <p class="flex-1 flex justify-center items-center text-center text-dark-grayish-blue font-bold">
                 Your cart is empty.

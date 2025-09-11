@@ -7,6 +7,7 @@
     --color-dark-grayish-blue: hsl(219, 9%, 45%);
     --color-grayish-blue: hsl(220, 14%, 75%);
     --color-light-grayish-blue: hsl(223, 64%, 98%);
+    --color-c-light-grayish-blue: hsl(234, 22%, 88%);
 }
 
 @supports (font-variation-settings: normal) {

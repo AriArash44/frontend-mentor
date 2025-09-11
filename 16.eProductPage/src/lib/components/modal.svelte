@@ -8,9 +8,9 @@
 
 {#if $modalIsOpen}
     <div class="bg-black/75 fixed inset-0 w-screen h-screen flex justify-center items-center">
-        <div class="w-1/3 relative flex flex-col gap-6">
+        <div class="w-1/3 relative flex flex-col gap-8">
             <button
-                class="cursor-pointer mr-12" dir="rtl"
+                class="cursor-pointer mr-10" dir="rtl"
                 aria-label="Close modal"
                 on:click={() => modalIsOpen.set(false)}
                 on:mouseover={() => setHoverState(true)}
@@ -18,7 +18,7 @@
                 on:focus={() => setHoverState(true)}
                 on:blur={() => setHoverState(false)}
             >
-                <img src={iconSrc} alt="close" />
+                <img src={iconSrc} alt="close"/>
             </button>
             <slot />
         </div>
