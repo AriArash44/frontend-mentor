@@ -10,7 +10,7 @@
     <div class="bg-black/75 fixed inset-0 w-screen h-screen flex justify-center items-center">
         <div class="w-1/3 relative flex flex-col gap-8">
             <button
-                class="cursor-pointer mr-10" dir="rtl"
+                class="cursor-pointer w-4 self-end mr-10" dir="rtl"
                 aria-label="Close modal"
                 on:click={() => modalIsOpen.set(false)}
                 on:mouseover={() => setHoverState(true)}
@@ -18,7 +18,7 @@
                 on:focus={() => setHoverState(true)}
                 on:blur={() => setHoverState(false)}
             >
-                <img src={iconSrc} alt="close"/>
+                <img src={iconSrc} alt="close" class="w-4"/>
             </button>
             <slot />
         </div>

@@ -25,10 +25,10 @@
     }} hasController="{!isMdUp}"/>
     <Thumbnail bind:index images={thumbnailImages} classes="w-full px-10 hidden md:flex gap-8"/>
 </div>
-<div class="w-full md:w-1/2 flex flex-col justify-center items-start p-6 md:p-0">
+<section aria-labelledby="product-title" aria-describedby="product-description" class="w-full md:w-1/2 flex flex-col justify-center items-start p-6 md:p-0">
     <p class="text-dark-grayish-blue font-mono tracking-widest font-semibold text-sm">SNEAKERS COMPANY</p>
-    <h1 class="text-very-dark-blue font-bold leading-8 md:leading-12 mt-4">Fall Limited Edition Sneakers</h1>
-    <p class="text-dark-grayish-blue mt-6 md:mt-10 text-base md:text-lg">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
+    <h1 id="product-title" class="text-very-dark-blue font-bold leading-8 md:leading-12 mt-4">Fall Limited Edition Sneakers</h1>
+    <p id="product-description" class="text-dark-grayish-blue mt-6 md:mt-10 text-base md:text-lg">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
     <div class="flex md:flex-col justify-between gap-2 items-center md:items-start w-full">
         <div class="flex mt-6 md:mt-8 gap-4 items-baseline md:items-center">
             <h2 class="text-very-dark-blue font-bold leading-7">$125.00</h2>
@@ -38,11 +38,11 @@
     </div>
     <div class="flex flex-col md:flex-row items-center justify-center gap-3 mt-8 w-full">
         <div class="flex items-center justify-center bg-light-grayish-blue rounded-lg w-full md:w-1/3 h-12">
-            <button class="w-1/4 cursor-pointer" onclick={() => {productNumber = Math.max(productNumber - 1, 0)}}>
+            <button class="w-1/4 cursor-pointer p-2" onclick={() => {productNumber = Math.max(productNumber - 1, 0)}}>
                 <img class="m-auto" src="/icons/minus.svg" alt="decrease" />
             </button>
             <p class="w-1/2 text-center font-semibold">{productNumber}</p>
-            <button class="w-1/4 cursor-pointer" onclick={() => {productNumber += 1;}}>
+            <button class="w-1/4 cursor-pointer p-2" onclick={() => {productNumber += 1;}}>
                 <img class="m-auto" src="/icons/plus.svg" alt="increase" />
             </button>
         </div>
@@ -52,7 +52,7 @@
             <p class="font-bold text-very-dark-blue-grayish">Add to Cart</p>
         </button>
     </div>
-</div>
+</section>
 <Modal>
     <Carousel bind:index images={productImages} />
     <Thumbnail bind:index images={thumbnailImages} />
