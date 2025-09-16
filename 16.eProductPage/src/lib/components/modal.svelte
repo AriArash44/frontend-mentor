@@ -1,8 +1,9 @@
 <script lang="ts">
     import { modalIsOpen } from '$lib/store';
-    let iconSrc = '/icons/close.svg';
+    import {base} from '$app/paths';
+    let iconSrc = `${base}/icons/close.svg`;
     function setHoverState(isHover: boolean) {
-        iconSrc = isHover ? '/icons/OClose.svg' : '/icons/close.svg';
+        iconSrc = isHover ? `${base}/icons/OClose.svg` : `${base}/icons/close.svg`;
     }
 </script>
 

@@ -2,6 +2,7 @@
     import { browser } from '$app/environment';
     import { onMount, onDestroy } from 'svelte';
     import { cartNumber } from "$lib/store";
+    import {base} from '$app/paths';
     export let basketIsOpen = false;
     export let productName: string = "";
     export let price = 0.00;
@@ -33,7 +34,7 @@
         {:else}
             <div class="p-5 mt-0.5">
                 <div class="flex justify-center items-center gap-3">
-                    <img class="w-[18%] rounded" src="/images/product-1-thumbnail.jpg" alt="product" />
+                    <img class="w-[18%] rounded" src="{base}/images/product-1-thumbnail.jpg" alt="product" />
                     <div class="w-[80%]">
                         <p class="text-dark-grayish-blue text-sm">{productName}</p>
                         <p class="text-dark-grayish-blue text-sm mt-2">${price.toFixed(2)} x {$cartNumber}
@@ -41,7 +42,7 @@
                         </p>
                     </div>
                     <button class="cursor-pointer" onclick={() => {cartNumber.set(0)}}>
-                        <img src="/icons/delete.svg" alt="remove" />
+                        <img src="{base}/icons/delete.svg" alt="remove" />
                     </button>
                 </div>
                 <button class="w-full text-very-dark-blue bg-c-orange rounded mt-5 py-3 

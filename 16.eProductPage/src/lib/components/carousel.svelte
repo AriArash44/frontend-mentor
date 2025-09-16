@@ -1,18 +1,19 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
+    import {base} from '$app/paths';
     export let images: string[] = [];
     export let index = 0;
     export let hasController = true;
-    let prevSrc = '/icons/previous.svg';
-    let nextSrc = '/icons/next.svg';
+    let prevSrc = `${base}/icons/previous.svg`;
+    let nextSrc = `${base}/icons/next.svg`;
     function changeIndex(step: number) {
         index = Math.min(Math.max(index + step, 0), images.length - 1);
     }
     const setHoverState = (isHover: boolean, type: 'prev' | 'next') => {
         if (type === 'prev') {
-            prevSrc = isHover ? '/icons/OPrevious.svg' : '/icons/previous.svg';
+            prevSrc = isHover ? `${base}/icons/OPrevious.svg` : `${base}/icons/previous.svg`;
         } else {
-            nextSrc = isHover ? '/icons/ONext.svg' : '/icons/next.svg';
+            nextSrc = isHover ? `${base}/icons/ONext.svg` : `${base}/icons/next.svg`;
         }
     };
     const dispatch = createEventDispatcher();

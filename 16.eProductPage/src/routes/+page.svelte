@@ -4,10 +4,11 @@
     import Carousel from "$lib/components/carousel.svelte";
     import Thumbnail from "$lib/components/thumbnail.svelte";
     import { modalIsOpen, cartNumber } from '$lib/store';
+    import {base} from '$app/paths';
     let index = 0;
     let productNumber = 0;
-    const productImages = ["/images/product-1.jpg", "/images/product-2.jpg", "/images/product-3.jpg", "/images/product-4.jpg"];
-    const thumbnailImages = ["/images/product-1-thumbnail.jpg", "/images/product-2-thumbnail.jpg", "/images/product-3-thumbnail.jpg", "/images/product-4-thumbnail.jpg"];
+    const productImages = [`${base}/images/product-1.jpg`, `${base}/images/product-2.jpg`, `${base}/images/product-3.jpg`, `${base}/images/product-4.jpg`];
+    const thumbnailImages = [`${base}/images/product-1-thumbnail.jpg`, `${base}/images/product-2-thumbnail.jpg`, `${base}/images/product-3-thumbnail.jpg`, `${base}/images/product-4-thumbnail.jpg`];
     let isMdUp = false;
     onMount(() => {
         isMdUp = window.innerWidth >= 768;
@@ -39,16 +40,16 @@
     <div class="flex flex-col md:flex-row items-center justify-center gap-3 mt-8 w-full">
         <div class="flex items-center justify-center bg-light-grayish-blue rounded-lg w-full md:w-1/3 h-12">
             <button class="w-1/4 cursor-pointer p-2" onclick={() => {productNumber = Math.max(productNumber - 1, 0)}}>
-                <img class="m-auto" src="/icons/minus.svg" alt="decrease" />
+                <img class="m-auto" src="{base}/icons/minus.svg" alt="decrease" />
             </button>
             <p class="w-1/2 text-center font-semibold">{productNumber}</p>
             <button class="w-1/4 cursor-pointer p-2" onclick={() => {productNumber += 1;}}>
-                <img class="m-auto" src="/icons/plus.svg" alt="increase" />
+                <img class="m-auto" src="{base}/icons/plus.svg" alt="increase" />
             </button>
         </div>
         <button class="w-full md:w-2/3 h-12 cursor-pointer flex justify-center items-center gap-2 bg-c-orange
         hover:bg-c-orange/60 rounded-lg shadow-c-orange/30 shadow-2xl" onclick={() => {cartNumber.set(productNumber)}}>
-            <img src="/icons/BCart.svg" alt="cart" />
+            <img src="{base}/icons/BCart.svg" alt="cart" />
             <p class="font-bold text-very-dark-blue-grayish">Add to Cart</p>
         </button>
     </div>
