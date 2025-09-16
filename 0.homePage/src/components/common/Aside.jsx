@@ -97,8 +97,8 @@ const menuItems = [
     },
     {
         header: "Chapter 4",
-        items: ["12.ratingComponent", "13.qaAccordion", "14.contactForm", "15.newsHomePage" ],
-        icons: [<RateReviewIcon />, <LiveHelpIcon />, <ContactPhoneIcon />, <NewspaperIcon /> ]
+        items: ["12.ratingComponent", "13.qaAccordion", "14.contactForm", "15.newsHomePage", "16.eProductPage" ],
+        icons: [<RateReviewIcon />, <LiveHelpIcon />, <ContactPhoneIcon />, <NewspaperIcon />, <Cart /> ]
     }
 ];
 
