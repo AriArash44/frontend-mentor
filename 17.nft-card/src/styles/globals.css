@@ -4,10 +4,46 @@
     --color-blue-500: hsl(215, 51%, 70%);
     --color-cyan-400: hsl(178, 100%, 50%);
     --color-neutral-blue-950: hsl(217, 54%, 11%);
-    --color-neutral-blue-950: hsl(216, 50%, 16%);
-    --color-neutral-blue-950: hsl(215, 32%, 27%);
+    --color-neutral-blue-900: hsl(216, 50%, 16%);
+    --color-neutral-blue-800: hsl(215, 32%, 27%);
 }
 
-* {
+.body {
     font-family: outfit;
+    @apply flex justify-center items-center w-screen min-h-screen bg-neutral-blue-950;
+}
+
+.card {
+    @apply w-80 p-4 bg-neutral-blue-900 rounded-xl;
+}
+
+.card__header {
+    @apply relative rounded-xl overflow-hidden hover:cursor-pointer;
+}
+
+.card__header-overlay::before {
+    content: '';
+    @apply absolute inset-0 bg-cyan-400/40 opacity-0 transition-opacity;
+}
+
+.card__header-overlay:hover::before {
+    @apply opacity-100;
+}
+
+.card__header-overlay__icon {
+    @apply absolute inset-0 flex justify-center items-center opacity-0 transition-opacity;
+}
+
+.card__header-overlay:hover .card__header-overlay__icon {
+    @apply opacity-100;
+}
+/* 
+
+.card__header-overlay {
+    @apply relative overflow-hidden before:content-[''] before:absolute before:inset-0
+        before:bg-cyan-400/40 before:opacity-0 before:transition-opacity hover:before:opacity-100;
+} */
+
+.card__header__image {
+    @apply w-full;
 }
