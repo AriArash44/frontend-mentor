@@ -38,9 +38,25 @@ export default function Home({ code }: { code: number[] }) {
                 </div>
               </header>
               <main className='card__main'>
-                <p className='text-white'>{ code }</p>
+                <section className='card__main__section'>
+                  <h1 className='card__title'>Equilibrium #{ code }</h1>
+                  <p className='card__description'>Our Equilibrium collection promotes balance and calm.</p>
+                </section>
+                <div className='card__main__details'>
+                  <div className='card__details__detail card__details__detail-bold'>
+                    <Image src='/icons/ethereum.svg' alt='ethereum' width={0} height={0} sizes="100vw" className='card__details__icon'/>
+                    <p>0.041 ETH</p>
+                  </div>
+                  <div className='card__details__detail'>
+                    <Image src='/icons/clock.svg' alt='clock' width={0} height={0} sizes="100vw" className='card__details__icon card__detail__icon-square'/>
+                    <p className='card__details__title-blue'>3 days left</p>
+                  </div>
+                </div>
               </main>
-              <footer className='card__footer'></footer>
+              <footer className='card__footer'>
+                <Image src='/images/avatar.jpg' alt='avatar' width={0} height={0} sizes="100vw" className='card__footer__avatar'/>
+                <p className='card__footer__description'>Creation of <span className='card__footer__author'>Arash Asghari</span></p>
+              </footer>
             </div>
           </div> 
         }

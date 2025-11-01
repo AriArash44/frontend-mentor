@@ -76,3 +76,5 @@ Thumbs.db
 /.svelte-kit
 /build
 .svelte-kit
+
+next-env.d.ts

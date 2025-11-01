@@ -14,11 +14,16 @@
 }
 
 .card {
-    @apply w-80 p-4 bg-neutral-blue-900 rounded-xl;
+    @apply w-80 p-5 bg-neutral-blue-900 rounded-xl shadow-[0px_0px_12px_8px_rgba(0,0,0,0.15)];
 }
 
 .card__header {
     @apply relative rounded-xl overflow-hidden hover:cursor-pointer;
+}
+
+.card__header-overlay {
+    @apply relative overflow-hidden before:content-[''] before:absolute before:inset-0
+        before:bg-cyan-400/40 before:opacity-0 before:transition-opacity hover:before:opacity-100;
 }
 
 .card__header-overlay::before {
@@ -37,13 +42,63 @@
 .card__header-overlay:hover .card__header-overlay__icon {
     @apply opacity-100;
 }
-/* 
-
-.card__header-overlay {
-    @apply relative overflow-hidden before:content-[''] before:absolute before:inset-0
-        before:bg-cyan-400/40 before:opacity-0 before:transition-opacity hover:before:opacity-100;
-} */
 
 .card__header__image {
     @apply w-full;
+}
+
+.card__main {
+    @apply my-6;
+}
+
+.card__main__section {
+    @apply mb-4;
+}
+
+.card__title {
+    @apply font-semibold text-2xl text-white cursor-pointer hover:text-cyan-400;
+}
+
+.card__description {
+    @apply mt-3 font-light text-blue-500;
+}
+
+.card__main__details {
+    @apply flex justify-between;
+}
+
+.card__details__detail {
+    @apply flex items-center gap-2;
+}
+
+.card__details__detail-bold {
+    @apply font-semibold text-cyan-400;
+}
+
+.card__details__icon {
+    @apply w-3 h-5;
+}
+
+.card__detail__icon-square {
+    @apply w-4.5 h-4.5;
+}
+
+.card__details__title-blue {
+    @apply text-blue-500;
+}
+
+.card__footer {
+    @apply flex items-center gap-4 pt-3 border-t-1 border-neutral-blue-800;
+}
+
+.card__footer__avatar {
+    @apply w-10 h-10 border-2 border-white rounded-full;
+}
+
+.card__footer__description {
+    @apply text-blue-500;
+}
+
+.card__footer__author {
+    @apply text-white cursor-pointer hover:text-cyan-400;
 }
