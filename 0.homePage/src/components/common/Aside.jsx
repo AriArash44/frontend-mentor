@@ -29,6 +29,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 
 const drawerWidth = 275;
 
@@ -99,11 +100,17 @@ const menuItems = [
         header: "Chapter 4",
         items: ["12.ratingComponent", "13.qaAccordion", "14.contactForm", "15.newsHomePage", "16.eProductPage" ],
         icons: [<RateReviewIcon />, <LiveHelpIcon />, <ContactPhoneIcon />, <NewspaperIcon />, <Cart /> ]
+    },
+    {
+        header: "Chapter 5",
+        items: ["17.nftCard",],
+        icons: [<LocalAtmIcon />,]
     }
 ];
 
 const absoluteLinks = {
-    "12.ratingComponent" : "https://12-rating-component.vercel.app/"
+    "12.ratingComponent" : "https://12-rating-component.vercel.app/",
+    "17.nftCard" : "https://17-nft-card-dx3uxju4m-arashs-projects-9cfaceed.vercel.app/"
 };
 
 const MenuListFull = () => (
