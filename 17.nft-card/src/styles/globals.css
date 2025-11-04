@@ -28,7 +28,7 @@
 
 .card__header-overlay::before {
     content: '';
-    @apply absolute inset-0 bg-cyan-400/40 opacity-0 transition-opacity;
+    @apply absolute inset-0 z-10 bg-cyan-400/40 opacity-0 transition-opacity;
 }
 
 .card__header-overlay:hover::before {

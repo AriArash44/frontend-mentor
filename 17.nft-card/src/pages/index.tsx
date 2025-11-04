@@ -48,14 +48,14 @@ export default function Home({ code, ampCss }: { code: number[], ampCss: string;
                   <amp-img src="/icons/view.svg" alt="view" width="48" height="48" className=""></amp-img>
                 </div>
               </header>
-              <main className="card__main">
+              <main className="card__main" style={{ marginBlock: "0rem" }}>
                 <section className="card__main__section">
                   <amp-fit-text width="320" height="60" layout="responsive">
                     <h1 className="card__title">Equilibrium #{code?.[0]}</h1>
                   </amp-fit-text>
                   <p className="card__description">Our Equilibrium collection promotes balance and calm.</p>
                 </section>
-                <div className="card__main__details">
+                <div className="card__main__details" style={{ transform: "translateY(-0.75rem)" }}>
                   <div className="card__details__detail card__details__detail-bold">
                     <amp-img src="/icons/ethereum.svg" alt="ethereum" width="12" height="20" className="card__details__icon"></amp-img>
                     <p>0.041 ETH</p>
@@ -113,7 +113,7 @@ export default function Home({ code, ampCss }: { code: number[], ampCss: string;
         --color-neutral-blue-900: hsl(216, 50%, 16%);
         --color-neutral-blue-800: hsl(215, 32%, 27%);
         --color-white: hsl(0, 100%, 100%);
-        --spacing: 0.25rem;
+        --spacing: 0.225rem;
         --tw-border-style: solid;
         --radius-xl: 0.75rem;
         --tw-duration: 150ms;
