@@ -25,11 +25,17 @@ export default function Home({ code, ampCss }: { code: number[], ampCss: string;
       <Head>
         <title>Frontend Mentor | 17.nftCard</title>
         {isAmp && (
-          <script
-            async
-            custom-element="amp-fit-text"
-            src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"
-          ></script>
+          <>
+            <script
+              async
+              custom-element="amp-fit-text"
+              src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"
+            ></script>
+            <link
+              href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+              rel="stylesheet"
+            />
+          </>
         )}
       </Head>
       {isAmp ? (
@@ -99,7 +105,32 @@ export default function Home({ code, ampCss }: { code: number[], ampCss: string;
           </div>
         </div> 
       }
-      {isAmp && <style jsx global>{ampCss}</style>}
+      {isAmp && <style jsx global>{`${ampCss}
+      :root {
+        --color-blue-500: hsl(215, 51%, 70%);
+        --color-cyan-400: hsl(178, 100%, 50%);
+        --color-neutral-blue-950: hsl(217, 54%, 11%);
+        --color-neutral-blue-900: hsl(216, 50%, 16%);
+        --color-neutral-blue-800: hsl(215, 32%, 27%);
+        --color-white: hsl(0, 100%, 100%);
+        --spacing: 0.25rem;
+        --tw-border-style: solid;
+        --radius-xl: 0.75rem;
+        --tw-duration: 150ms;
+        --default-transition-duration: 150ms;
+        --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        --tw-ease: cubic-bezier(0.4, 0, 0.2, 1);
+        --tw-shadow-color: rgb(0 0 0 / 0.1);
+        --tw-inset-shadow: 0 0 #0000;
+        --tw-inset-ring-shadow: 0 0 #0000;
+        --tw-ring-offset-shadow: 0 0 #0000;
+        --tw-ring-shadow: 0 0 #0000;
+        --text-2xl: 1.5rem;
+        --tw-leading: 2rem;
+        --text-2xl--line-height: 2rem;
+        --font-weight-semibold: 600;
+        --font-weight-light: 300;
+      }`}</style>}
     </>
   );
 }
