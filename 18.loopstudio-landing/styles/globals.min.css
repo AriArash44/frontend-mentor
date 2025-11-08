@@ -1,0 +1,11 @@
+.p-2 {
+  padding: 0.5em;
+}
+
+.m-5 {
+  margin: 1.25em;
+}
+
+.bg-grey-200 {
+  background-color: hsl(0, 0%, 85%);
+}
