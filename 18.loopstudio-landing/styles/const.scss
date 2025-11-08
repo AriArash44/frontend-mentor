@@ -1,0 +1,37 @@
+@use "sass:list";
+
+$colors: (
+    "white": hsl(0, 0%, 100%),
+    "black": hsl(0, 0%, 0%),
+    "grey-200": hsl(0, 0%, 85%),
+);
+
+$sizes: ();
+@for $i from 1 through 24 {
+    $sizes: list.append($sizes, $i);
+}
+
+$default_spacing: 0.25em;
+$space_utilities: (
+    'p': "padding",
+    'pt': "padding-top",
+    'pr': "padding-right",
+    'pb': "padding-bottom",
+    'pl': "padding-left",
+    'm': "margin",
+    'mt': "margin-top",
+    'mr': "margin-right",
+    'mb': "margin-bottom",
+    'ml': "margin-left",
+    'fs': "font-size",
+    'br': "border-radius",
+    'h': "height",
+    'gap': "gap"
+);
+
+$fractional_utilities: (
+    'w': "width",
+    'h': "height",
+    'w-screen': "width",
+    'h-screen': "height"
+);

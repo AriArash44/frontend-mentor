@@ -1,5 +1,44 @@
-$colors: (
-    "whitet": hsl(0, 0%, 100%),
-    "black": hsl(0, 0%, 0%),
-    "grey-200": hsl(0, 0%, 85%),
-);
+@use "./const.scss" as consts;
+@use "sass:string";
+@use "sass:math";
+
+@mixin generate-specing-utilities($utilities, $values) {
+    @each $abbr, $property in $utilities {
+        @each $value in $values {
+            .#{$abbr}-#{$value} {
+                #{$property}: consts.$default_spacing * $value;
+            }
+        }
+    }
+}
+
+@mixin generate-fractional-utilities($utilities, $values) {
+    @each $abbr, $property in $utilities {
+        @each $value in $values {
+            .#{$abbr}-#{$value}\/24 {
+                @if string.index($abbr, "screen") {             
+                    $dash-pos: string.index($abbr, "-");
+                    $prefix: string.slice($abbr, 1, $dash-pos - 1);
+                    #{$property}: #{$value}v#{$prefix};
+                } @else {
+                    #{$property}: #{math.floor(math.div($value, 24) * 100)}#{'%'};
+                }
+            }
+        }
+    }
+}
+
+@include generate-specing-utilities(consts.$space_utilities, consts.$sizes);
+@include generate-fractional-utilities(consts.$fractional_utilities, consts.$sizes);
+
+@each $name, $value in consts.$colors {
+    .bg-#{$name} {
+        background-color: $value;
+    }
+    .color-#{$name} {
+        color: $value;
+    }
+    .bcolor-#{$name} {
+        border-color: $value;
+    }
+}
