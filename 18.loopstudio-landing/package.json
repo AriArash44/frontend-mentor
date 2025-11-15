@@ -11,6 +11,7 @@
     "optimize-css": "node .\\purge-exact.js"
   },
   "dependencies": {
+    "axios": "^1.13.2",
     "next": "16.0.1",
     "purgecss": "^7.0.2",
     "react": "19.2.0",
