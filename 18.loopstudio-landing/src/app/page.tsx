@@ -1,7 +1,7 @@
-import DynamicAvatar from "../components/DynamicAvatar";
+import UserProfile from "../components/UserProfile";
 
 export default function Home() {
     return (
-      <DynamicAvatar/>
+      <UserProfile />
     );
 }
