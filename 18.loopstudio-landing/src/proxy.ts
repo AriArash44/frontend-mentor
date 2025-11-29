@@ -19,12 +19,12 @@ export default async function proxy(req: NextRequest) {
                 },
             });
         }
+        return NextResponse.json({
+            userImage: "/images/unknown.png",
+            userName: "Unknon",
+            action: "login",
+        });
     }
-    return NextResponse.json({
-        userImage: "/images/unknown.png",
-        userName: "Unknon",
-        action: "login",
-    });
 }
 
 export const config = {

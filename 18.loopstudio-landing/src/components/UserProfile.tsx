@@ -2,7 +2,7 @@ import Image from "next/image";
 import { doAction } from "../lib/doAction";
 
 export default async function UserProfile() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/data`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/get-profile-data`, {
         cache: "no-store"
     });
     const data = await res.json();
