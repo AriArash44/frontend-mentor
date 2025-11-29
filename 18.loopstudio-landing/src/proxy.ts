@@ -21,7 +21,7 @@ export default async function proxy(req: NextRequest) {
         }
         return NextResponse.json({
             userImage: "/images/unknown.png",
-            userName: "Unknon",
+            userName: "Unknown",
             action: "login",
         });
     }

@@ -8,8 +8,8 @@ export default async function UserProfile() {
     const data = await res.json();
     return (
       <div>
-        <Image src={data.src} alt="user" width={100} height={100} />
-        <p>{data.username}</p>
+        <Image src={data.userImage} alt="user" width={100} height={100} />
+        <p>{data.userName}</p>
         <form action={async () => {
             "use server";
             await doAction(data.action);
