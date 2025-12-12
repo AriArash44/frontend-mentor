@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
                 { status: 400 }
             );
         }
+        console.log(userId)
         const user = await db.collection("users").findOne(
             { userId },
             { projection: { userImage: 1, userName: 1 } }

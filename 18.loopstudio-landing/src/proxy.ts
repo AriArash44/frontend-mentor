@@ -4,10 +4,11 @@ import clientPromise from "./lib/mongodb";
 export default async function proxy(req: NextRequest) {
     const url = req.nextUrl.clone();
     if (url.pathname.startsWith("/api/get-profile-data")) {
-        const sessionToken = req.cookies.get("sessionToken")?.value;
+        const sessionToken = req.cookies.get("next-auth.session-token")?.value;
         const client = await clientPromise;
         const db = client.db("proj-18");
-        const session = await db.collection("sessions").findOne({ sessionToken });
+        const session = await db.collection("sessions").findOne({sessionToken});
+        console.log(session)
         if (session) {
             const userId = session.userId;
             const requestHeaders = new Headers(req.headers);
